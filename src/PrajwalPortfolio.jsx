@@ -863,6 +863,38 @@ const allProjects = [
   ["Queries over Distributed Time-Series Data", "Distributed time-series query processing concepts.", "Distributed Systems"],
 ];
 
+const publications = [
+  {
+    title: "CodeTheGenome: Machine Learning-Based Prediction of Genetic Variant Conflicts Using Ensemble Learning",
+    status: "Research Paper | In Progress",
+    venue: "Kent State University",
+    period: "2025 – 2026",
+    authors: "Prajwal Devaraj, Research Team",
+    description:
+      "Developed ensemble ML models using XGBoost, LightGBM, and CatBoost to predict conflicting genetic variant interpretations from ClinVar datasets, achieving 93.3% accuracy with SHAP-based explainability.",
+  },
+
+  {
+    title: "Endoscopy Image Analysis for Gastrointestinal Applications",
+    status: "Research Work | Ongoing",
+    venue: "Kent State University",
+    period: "2025 – 2026",
+    authors: "Prajwal Devaraj, Faculty Research Team",
+    description:
+      "Conducting AI-driven medical imaging research for blood clot pattern detection before and after gastric cancer surgery using real-world multi-center clinical datasets.",
+  },
+
+  {
+    title: "Edge-Cloud Collaborative Anomaly Detection for CNC Machining",
+    status: "Research Project",
+    venue: "Academic Research",
+    period: "2025",
+    authors: "Prajwal Devaraj",
+    description:
+      "Built anomaly detection pipelines on industrial multi-sensor CNC machining datasets using LSTM models, drift detection, and edge preprocessing techniques.",
+  },
+];
+
 const courses = [
      {
     role: "Corporate Training & Compliance",
@@ -1039,49 +1071,54 @@ const courses = [
 
 const activities = [
   {
-    group: "Graduate Leadership & Campus Involvement",
+    group: "Graduate Leadership & Technical Involvement",
     items: [
       "Graduate Research Assistant — Kent State University (May 2025 – Present)",
       "Undergraduate Teaching Assistant — Computer Science (Sep 2025 – Present)",
       "Student Ambassador — Barnes & Noble College (2025–2026)",
-      "HACKSU Member — Hackathons & Technical Workshops (2025 – Present)",
-      "Kent Indian Association Member — Cultural & Community Engagement (Dec 2025 – Present)",
-      "Technical Club Member — CS & Software Development (May 2025 – Present)",
+      "HACKSU Member — Hackathons, Engineering Events & Technical Workshops",
+      "Technical Club Member — Software Development & System Design",
+      "Kent Indian Association Member — Community & Cultural Engagement",
+      "Research Contributor — AI/ML, Healthcare AI & Database Systems",
     ],
   },
+
   {
-    group: "Undergraduate Leadership & Achievements",
+    group: "Undergraduate Leadership & Campus Contributions",
     items: [
       "CSE Coordinator — JSS Academy of Technical Education (2019 – 2023)",
-      "Student Project Coordinator & Head (2022 – 2023)",
-      "Sudo Club (Technical Club) — Head (2020 – 2023)",
-      "JSS Anveshan — CSE Department Head (2022 – 2023)",
-      "VTU Pratibhotsava — Team Lead & Coordinator (2022 – 2023)",
-      "Event Anchor & Host — 20+ Academic & Cultural Events",
-      "Debate & Public Speaking Team — Coordinator & Head",
-      "Meraki Drama Team — Stage Actor",
-      "Mr. & Mrs. JSS — Event Coordinator & Head",
-      "JSS Verve Cultural Fest — Sponsorship Team Member",
-      "Yodha NSS — Community Service Member",
+      "Student Project Coordinator & Technical Lead (2022 – 2023)",
+      "Sudo Club (Technical Club) — Head & Event Organizer",
+      "JSS Anveshan — CSE Department Head",
+      "VTU Pratibhotsava — Team Lead & Event Coordinator",
+      "Technical Event Organizer — Workshops, Coding Events & Student Activities",
+      "JSS Verve Cultural Fest — Sponsorship & Operations Team",
+      "Yodha NSS — Community Service & Student Volunteer",
     ],
   },
+
   {
-    group: "Recognition & Awards",
+    group: "Awards, Recognition & Achievements",
     items: [
+      "Best Employee Award — RenuDev Traders",
+      "Best Employee Recognition — Culinary Services, Kent State University",
+      "Student Ambassador Recognition — Barnes & Noble College",
+      "Campus Ambassador — JSS Academy of Technical Education (2021, 2022)",
       "Mr. JSS Talented Winner (2020)",
       "Pick & Speak Winner (2021)",
-      "Campus Ambassador — JSS (2021, 2022)",
-      "Student Ambassador — Barnes & Noble College (2025–2026)",
+      "Academic & Technical Leadership Recognition across multiple student organizations",
     ],
   },
+
   {
-    group: "Creative & Communication",
+    group: "Creative, Communication & Public Engagement",
     items: [
       "Novel Writing & Storytelling",
       "Poetry & Songwriting",
-      "Stage Acting & Drama",
+      "Stage Acting & Theatre Performance",
       "Debate & Public Speaking",
-      "Event Anchoring & Hosting",
+      "Event Anchoring & Hosting (20+ Academic & Cultural Events)",
+      "Student Mentorship & Team Coordination",
     ],
   },
 ];
@@ -1127,18 +1164,19 @@ export default function PrajwalPortfolio() {
       </div>
 
       <main className="wrap">
-        <nav className="nav glass">
-          <b>Prajwal Devaraj</b>
-          <div>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#courses">Courses</a>
-            <a href="#activities">Activities</a>
-          </div>
-        </nav>
+  <nav className="nav glass">
+    <b>Prajwal Devaraj</b>
+    <div>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#courses">Courses</a>
+      <a href="#activities">Activities</a>
+    </div>
+  </nav>
 
         <section className="hero glass reveal">
           <div>
@@ -1287,6 +1325,7 @@ export default function PrajwalPortfolio() {
   </div>
 </section>
 
+
       <section id="projects" className="section glass reveal">
   <Header small="Projects" title="Featured software engineering projects" />
 
@@ -1392,6 +1431,52 @@ export default function PrajwalPortfolio() {
     </div>
   </div>
 </section>
+
+<section id="publications" className="section glass reveal">
+  <Header
+    small="Publications & Research"
+    title="Research publications, papers, and ongoing work"
+  />
+
+  <div className="timeline">
+    {publications.map((item, i) => (
+      <details
+        className="timelineItem hoverGlow"
+        key={item.title}
+      >
+        <summary>
+          <b>{String(i + 1).padStart(2, "0")}</b>
+
+          <div>
+            <h3>{item.title}</h3>
+            <p>
+              {item.venue} • {item.period}
+            </p>
+          </div>
+
+          <em>View Details</em>
+        </summary>
+
+        <ul className="mainList">
+          <li>
+            <strong>Status:</strong> {item.status}
+          </li>
+
+          <li>
+            <strong>Authors:</strong> {item.authors}
+          </li>
+
+          <li>{item.description}</li>
+
+          <li>
+            <strong>Tech Stack:</strong> {item.tech}
+          </li>
+        </ul>
+      </details>
+    ))}
+  </div>
+</section>
+
 
 <section id="courses" className="section glass reveal">
   <Header small="Courses" title="Certifications, training, and technical foundations" />
