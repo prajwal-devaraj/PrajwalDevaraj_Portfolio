@@ -56,6 +56,43 @@ const skills = {
 
 const experience = [
   {
+  role: "Junior Software Engineer",
+  org: "RenuDev Traders",
+  location: "Bengaluru, Karnataka, India",
+  period: "May 2023 – Jun 2024",
+  points: [
+    {
+      text: "Worked as a Backend Software Engineer developing internal business applications and operational systems for inventory, billing, and workflow management.",
+    },
+    {
+      text: "Designed and developed backend services and APIs:",
+      subPoints: [
+        "Built RESTful APIs and server-side functionalities using Python, Flask, and SQL-based databases.",
+        "Implemented authentication, validation, and secure backend logic for internal systems.",
+        "Developed scalable modules supporting billing, inventory tracking, and operational workflows.",
+      ],
+    },
+    {
+      text: "Optimized backend performance and database operations:",
+      subPoints: [
+        "Designed and optimized SQL queries improving operational efficiency by 30%.",
+        "Reduced manual processing efforts through workflow automation and backend-driven reporting systems.",
+        "Improved application reliability through debugging, testing, and backend performance tuning.",
+      ],
+    },
+    {
+      text: "Collaborated with business stakeholders to gather requirements and deliver reliable technical solutions aligned with operational needs.",
+    },
+    {
+      text: "Worked extensively on deployment support, issue resolution, and maintenance of production business applications.",
+    },
+    {
+      text: "Recognized with the Best Employee Award for outstanding technical contribution, performance, and operational impact.",
+    },
+  ],
+},
+
+  {
     role: "Research Assistant",
     org: "Kent State University",
     location: "Kent, OH, USA",
@@ -181,7 +218,7 @@ const experience = [
   ],
 },
 {
-  role: "Full-Stack Developer Intern",
+  role: "Backend Developer Intern",
   org: "Technofly Solutions",
   location: "Bangalore, Karnataka, India",
   period: "Aug 2022 – Sep 2022",
@@ -213,49 +250,58 @@ const experience = [
   ],
 },
  {
-  role: "Student Employee / Head Cashier / Student Ambassador",
+  role: "Student Technical Operations Associate / Head Cashier / Student Ambassador",
   org: "Kent State University Bookstore, Barnes & Noble College",
   location: "Kent, OH, USA",
   period: "Aug 2024 – May 2026",
   points: [
     {
-      text: "Promoted to Head Cashier & Administrative Support based on performance and reliability.",
+      text: "Promoted to Head Cashier & Administrative Support based on operational performance, technical adaptability, leadership, and reliability in a high-volume enterprise retail environment.",
     },
     {
-      text: "Managed daily front-end operations:",
+      text: "Worked extensively with enterprise retail and operational platforms:",
       subPoints: [
-        "Handled POS transactions, cash reconciliation, and reporting.",
-        "Ensured efficient service during peak hours by supervising cashier team.",
-        "Managed store operations independently during manager absence.",
+        "Operated Oracle-based systems including TA2, OMS, KIOSK, POS, and textbook management applications.",
+        "Managed and monitored 500+ daily transactions with 99%+ processing accuracy across integrated retail systems.",
+        "Supported transaction processing, inventory synchronization, order tracking, reporting, and operational workflows.",
       ],
     },
     {
-      text: "Trained and onboarded new employees:",
+      text: "Handled technical operations and enterprise system coordination:",
       subPoints: [
-        "Provided guidance on POS systems, customer handling, and store operations.",
-        "Improved team efficiency and onboarding experience.",
+        "Troubleshot real-time POS, transaction, and operational system issues reducing service interruptions by 25%.",
+        "Improved front-end operational efficiency during peak academic periods through workflow optimization and rapid issue resolution.",
+        "Managed reconciliation, operational reporting, and backend workflow coordination across multiple enterprise applications.",
       ],
     },
     {
-      text: "Handled customer interaction and support:",
+      text: "Worked with Oracle-based enterprise applications supporting large-scale bookstore and academic operations:",
       subPoints: [
-        "Resolved customer queries, calls, and issues as a primary point of contact.",
-        "Maintained high service quality and customer satisfaction.",
+        "Handled inventory coordination, textbook workflows, transaction systems, and operational reporting tools.",
+        "Supported thousands of students and faculty through integrated academic retail platforms and operational systems.",
+        "Assisted in maintaining workflow continuity and system reliability during high-volume semester operations.",
       ],
     },
     {
-      text: "Operated bookstore systems and academic platforms:",
+      text: "Led operational and technical training initiatives:",
       subPoints: [
-        "Worked with TA2, OMS, and textbook management systems.",
-        "Assisted students and faculty with textbooks, merchandise, and academic resources.",
+        "Trained and onboarded 15+ employees on TA2, OMS, Oracle retail systems, POS workflows, and operational procedures.",
+        "Improved onboarding efficiency and operational consistency through hands-on system training and workflow guidance.",
+      ],
+    },
+    {
+      text: "Managed leadership and operational responsibilities:",
+      subPoints: [
+        "Independently handled store operations, technical coordination, and customer issue resolution during manager absence.",
+        "Collaborated with management teams to maintain workflow continuity, operational reliability, and service efficiency.",
       ],
     },
     {
       text: "Selected as Student Ambassador (2025–2026):",
       subPoints: [
-        "Represented bookstore in student engagement and campus outreach initiatives.",
-        "Featured on official bookstore platforms for performance recognition.",
-        "Supported promotions, events, and communication between students and bookstore operations.",
+        "Represented bookstore operations in student engagement initiatives and campus outreach programs.",
+        "Recognized on official bookstore platforms for technical contribution, leadership, and operational excellence.",
+        "Supported promotions, large-scale events, and communication workflows between students and bookstore operations.",
       ],
     },
   ],
