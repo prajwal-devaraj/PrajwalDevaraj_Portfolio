@@ -30,7 +30,7 @@ const education = [
     website: "https://www.kent.edu/",
     degree: "M.S. in Computer Science",
     period: "Aug 2024 – May 2026",
-    gpa: "3.97",
+    gpa: "3.966",
     details:
       "Advanced Database Systems, Data Mining, Social & Graph Networks, AI, ML & Deep Learning, Data Security & Privacy, Advanced Computer Graphics, IoT Integration, AI for Robotics.",
   },
@@ -650,6 +650,7 @@ function Chatbot() {
   const [greetShown, setGreetShown] = useState(false);
   const [greetDismissed, setGreetDismissed] = useState(false);
   const [typing, setTyping] = useState(false);
+  const [confetti, setConfetti] = useState([]);
   const [messages, setMessages] = useState([
     {
       from: "bot",
@@ -658,6 +659,7 @@ function Chatbot() {
   ]);
   const [input, setInput] = useState("");
   const listRef = useRef(null);
+  const firedConfetti = useRef(false);
 
   useEffect(() => {
     const t = setTimeout(() => setGreetShown(true), 2200);
@@ -667,6 +669,22 @@ function Chatbot() {
   useEffect(() => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, open, typing]);
+
+  const fireConfetti = () => {
+    if (firedConfetti.current) return;
+    firedConfetti.current = true;
+    const colors = ["#4f46e5", "#9333ea", "#ec4899", "#22c55e", "#f59e0b"];
+    const pieces = Array.from({ length: 16 }).map((_, i) => ({
+      id: i,
+      x: (Math.random() - 0.5) * 160,
+      y: -Math.random() * 130 - 20,
+      r: Math.random() * 360,
+      c: colors[i % colors.length],
+      delay: Math.random() * 0.12,
+    }));
+    setConfetti(pieces);
+    setTimeout(() => setConfetti([]), 900);
+  };
 
   const send = (raw) => {
     const q = raw.trim();
@@ -689,10 +707,28 @@ function Chatbot() {
   const openChat = () => {
     setOpen(true);
     setGreetDismissed(true);
+    fireConfetti();
   };
 
   return (
     <div className={`chatWidget ${open ? "open" : ""}`}>
+      {confetti.length > 0 && (
+        <div className="confettiBurst" aria-hidden="true">
+          {confetti.map((p) => (
+            <span
+              key={p.id}
+              style={{
+                "--x": `${p.x}px`,
+                "--y": `${p.y}px`,
+                "--r": `${p.r}deg`,
+                background: p.c,
+                animationDelay: `${p.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
       {!open && greetShown && !greetDismissed && (
         <div className="chatGreetBubble" onClick={openChat}>
           <button
@@ -763,7 +799,10 @@ function Chatbot() {
       <button
         className="chatToggle"
         onClick={() => {
-          setOpen((v) => !v);
+          setOpen((v) => {
+            if (!v) fireConfetti();
+            return !v;
+          });
           setGreetDismissed(true);
         }}
         aria-label="Toggle chat with assistant"
@@ -849,6 +888,34 @@ function useMagnet(strength = 0.35) {
   return { onMouseMove, onMouseLeave };
 }
 
+const HERO_ROLES = ["Software Engineer", "AI/ML Engineer", "Full-Stack Developer", "Problem Solver"];
+
+/** Types out, pauses, deletes, and moves to the next word — forever. */
+function useTypewriter(words, typingSpeed = 65, deletingSpeed = 38, pause = 1500) {
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length];
+    let timeout;
+    if (!deleting && text === current) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && text === "") {
+      setDeleting(false);
+      setWordIndex((i) => i + 1);
+    } else {
+      timeout = setTimeout(
+        () => setText((t) => (deleting ? current.slice(0, t.length - 1) : current.slice(0, t.length + 1))),
+        deleting ? deletingSpeed : typingSpeed
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [text, deleting, wordIndex, words, typingSpeed, deletingSpeed, pause]);
+
+  return text;
+}
+
 /* ============================================================
    MAIN COMPONENT
    ============================================================ */
@@ -870,6 +937,17 @@ export default function PrajwalPortfolio() {
   const heroRef = useRef(null);
   const tilt = useTilt(7);
   const magnet = useMagnet(0.3);
+  const typedRole = useTypewriter(HERO_ROLES);
+  const [introPhase, setIntroPhase] = useState("show");
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setIntroPhase("hide"), 1000);
+    const t2 = setTimeout(() => setIntroPhase("gone"), 1600);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -934,6 +1012,13 @@ export default function PrajwalPortfolio() {
 
   return (
     <div className="site" data-theme={theme}>
+      {introPhase !== "gone" && (
+        <div className={`introOverlay ${introPhase === "hide" ? "hide" : ""}`} aria-hidden="true">
+          <div className="introMark">PD</div>
+          <div className="introName">Prajwal Devaraj</div>
+        </div>
+      )}
+
       <div className="progressBar"><span ref={progressRef} /></div>
 
       <header className={`nav ${navScrolled ? "scrolled" : ""}`}>
@@ -977,7 +1062,10 @@ export default function PrajwalPortfolio() {
           <span className="heroSpot" aria-hidden="true" />
 
           <div className={`heroInner ${loaded ? "loaded" : ""}`}>
-            <p className="heroKicker" style={{ "--d": 0 }}>Software Engineer · AI/ML · Full-Stack</p>
+            <p className="heroKicker" style={{ "--d": 0 }}>
+              {typedRole}
+              <span className="caret" aria-hidden="true">|</span>
+            </p>
             <h1 style={{ "--d": 1 }}>Hi, I'm <span className="gradText">Prajwal Devaraj</span>.</h1>
             <p className="heroLede" style={{ "--d": 2 }}>
               I build backend systems, AI models, and full-stack apps — I recently completed my
@@ -1113,6 +1201,15 @@ export default function PrajwalPortfolio() {
           {/* ---------- SKILLS ---------- */}
           <section id="skills" className="section">
             <SectionHead eyebrow="Skills" title="What I work with" />
+
+            <div className="skillMarquee" aria-hidden="true">
+              <div className="skillMarqueeTrack">
+                {[...Object.values(skills).flat(), ...Object.values(skills).flat()].map((s, i) => (
+                  <span key={i}>{s}</span>
+                ))}
+              </div>
+            </div>
+
             <div className="skillGrid">
               {Object.entries(skills).map(([group, items], gi) => (
                 <div className="skillGroup reveal" key={group} style={{ "--d": gi }}>
@@ -1378,7 +1475,9 @@ export default function PrajwalPortfolio() {
         }
         .heroInner.loaded > * { opacity: 1; transform: none; }
 
-        .heroKicker { font-size: 13.5px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 16px; }
+        .heroKicker { font-size: 13.5px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 16px; min-height: 1.2em; }
+        .caret { display: inline-block; margin-left: 2px; color: var(--accent); animation: caretBlink 0.9s steps(1) infinite; }
+        @keyframes caretBlink { 50% { opacity: 0; } }
         .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; margin: 0 0 20px; }
         .gradText {
           background: var(--brand-gradient); background-size: 200% auto;
@@ -1395,7 +1494,7 @@ export default function PrajwalPortfolio() {
         .btnPrimary:hover { background-position: 100% 0; box-shadow: 0 12px 28px var(--accent-glow); transform: translateY(-2px); }
         .btnSecondary { background: var(--card); border-color: var(--border); color: var(--text); }
         .btnSecondary:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 8px 20px rgba(20,22,31,0.06); transform: translateY(-2px); }
-        .heroFacts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; border-top: 1px solid var(--border); padding-top: 28px; }
+        .heroFacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; border-top: 1px solid var(--border); padding-top: 28px; }
         .heroFacts div { display: flex; flex-direction: column; gap: 4px; }
         .heroFacts span { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); font-weight: 600; }
         .heroFacts b { font-size: 14.5px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
@@ -1506,6 +1605,15 @@ export default function PrajwalPortfolio() {
         .catalogEmpty { background: var(--card); padding: 24px; text-align: center; color: var(--text-faint); font-size: 13.5px; }
 
         /* ---------- Skills ---------- */
+        .skillMarquee {
+          overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+          padding: 14px 0; margin-bottom: 32px;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+        .skillMarqueeTrack { display: flex; gap: 30px; width: max-content; animation: marquee 32s linear infinite; }
+        .skillMarqueeTrack span { font-family: "Inter Tight", sans-serif; font-weight: 600; font-size: 14px; color: var(--text-faint); white-space: nowrap; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .skillGrid { display: grid; gap: 22px; }
         .skillGroupLabel { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
         .chipRow { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1577,8 +1685,38 @@ export default function PrajwalPortfolio() {
         .footerLinks a { transition: color .2s; }
         .footerLinks a:hover { color: var(--accent-dark); }
 
+        /* ---------- Intro splash ---------- */
+        .introOverlay {
+          position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column;
+          align-items: center; justify-content: center; gap: 16px; background: var(--bg);
+          transition: opacity .5s ease, visibility .5s ease;
+        }
+        .introOverlay.hide { opacity: 0; pointer-events: none; }
+        .introMark {
+          width: 84px; height: 84px; border-radius: 22px; color: #fff;
+          background: var(--brand-gradient); background-size: 200% 200%;
+          font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 30px;
+          display: flex; align-items: center; justify-content: center;
+          animation: introPulse 1.1s ease-in-out infinite, gradientShift 3s linear infinite;
+          box-shadow: 0 16px 40px var(--accent-glow);
+        }
+        @keyframes introPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        .introName {
+          font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 13px; color: var(--text-faint);
+          letter-spacing: 0.14em; text-transform: uppercase; animation: fadeIn .6s ease;
+        }
+
         /* ---------- Chat widget ---------- */
         .chatWidget { position: fixed; right: 22px; bottom: 22px; z-index: 70; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+        .confettiBurst { position: absolute; right: 26px; bottom: 30px; width: 0; height: 0; pointer-events: none; }
+        .confettiBurst span {
+          position: absolute; width: 7px; height: 7px; border-radius: 2px;
+          animation: confettiPop .85s ease-out forwards;
+        }
+        @keyframes confettiPop {
+          0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+          100% { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; }
+        }
         .chatToggle {
           position: relative; width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
           background: var(--brand-gradient); background-size: 200% 200%; color: #fff; font-size: 24px; line-height: 1;
@@ -1685,7 +1823,8 @@ export default function PrajwalPortfolio() {
 
         @media (prefers-reduced-motion: reduce) {
           .reveal, .heroInner > * { opacity: 1; transform: none; transition: none; }
-          .blob, .expDot::after { animation: none; }
+          .blob, .expDot::after, .caret, .skillMarqueeTrack, .chatToggle, .chatToggleIcon, .introMark { animation: none; }
+          .introOverlay { transition: none; }
           html { scroll-behavior: auto; }
         }
       `}</style>
