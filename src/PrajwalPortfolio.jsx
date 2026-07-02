@@ -26,17 +26,15 @@ const aboutParagraphs = [
 const education = [
   {
     school: "Kent State University",
-    location: "Kent, OH, USA",
     website: "https://www.kent.edu/",
     degree: "M.S. in Computer Science",
     period: "Aug 2024 – May 2026",
-    gpa: "3.966",
+    gpa: "3.97",
     details:
       "Advanced Database Systems, Data Mining, Social & Graph Networks, AI, ML & Deep Learning, Data Security & Privacy, Advanced Computer Graphics, IoT Integration, AI for Robotics.",
   },
   {
     school: "JSS Academy of Technical Education, VTU",
-    location: "Bangalore, Karnataka, India",
     website: "https://www.jssateb.ac.in/",
     degree: "B.E. in Computer Science",
     period: "Aug 2019 – Jun 2023",
@@ -62,7 +60,6 @@ const experience = [
   {
     role: "Junior Software Engineer",
     org: "RenuDev Traders",
-    location: "Bengaluru, Karnataka, India",
     period: "May 2023 – Jun 2024",
     points: [
       "My first engineering job out of school — built backend systems for inventory, billing, and internal workflow management using Python, Flask, and SQL.",
@@ -76,7 +73,6 @@ const experience = [
   {
     role: "Research Assistant",
     org: "Kent State University",
-    location: "Kent, OH, USA",
     period: "May 2025 – May 2026",
     points: [
       "Doing AI/ML research on medical data, training models on a GPU cluster (4+ GPUs) alongside faculty and a small research team.",
@@ -89,7 +85,6 @@ const experience = [
   {
     role: "Undergraduate Teaching Assistant",
     org: "Kent State University",
-    location: "Kent, OH, USA",
     period: "Sep 2025 – May 2026",
     points: [
       "TA for Operating Systems and Intro to Database System Design, supporting 120+ students across honors and regular sections.",
@@ -103,7 +98,6 @@ const experience = [
   {
     role: "Full-Stack Developer Intern",
     org: "BETSOL",
-    location: "Bangalore, Karnataka, India",
     period: "May 2022 – Dec 2022",
     points: [
       "Built and shipped full-stack web apps on a Python backend, working in an agile team alongside full-time engineers.",
@@ -116,7 +110,6 @@ const experience = [
   {
     role: "Backend Developer Intern",
     org: "Technofly Solutions",
-    location: "Bangalore, Karnataka, India",
     period: "Aug 2022 – Sep 2022",
     points: [
       "Worked on a government transportation project — a bus transport management system.",
@@ -127,7 +120,6 @@ const experience = [
   {
     role: "Student Technical Operations Associate / Head Cashier / Student Ambassador",
     org: "Kent State University Bookstore, Barnes & Noble College",
-    location: "Kent, OH, USA",
     period: "Aug 2024 – May 2026",
     points: [
       "Started as a regular associate, got promoted to Head Cashier & Administrative Support based on how I handled the job.",
@@ -143,7 +135,6 @@ const experience = [
   {
     role: "Student Employee",
     org: "Commerce Café, Culinary Services, Kent State University",
-    location: "Kent, OH, USA",
     period: "Aug 2024 – Jan 2026",
     points: [
       "Opened and closed the café, kept inventory stocked, and made sure health and safety standards were actually followed, not just posted on a wall.",
@@ -155,7 +146,6 @@ const experience = [
   {
     role: "Student Catering Employee",
     org: "Culinary Services, Kent State University",
-    location: "Kent, OH, USA",
     period: "May 2025 – Aug 2025",
     points: [
       "Consistently picked for the university's higher-profile events — 50+ of them, including VIP gatherings and functions at the President's Residence.",
@@ -168,7 +158,6 @@ const experience = [
   {
     role: "Administrator",
     org: "Sri Guruvandana Global Pre-School",
-    location: "Bangalore, Karnataka, India",
     period: "Mar 2020 – Jul 2023",
     points: [
       "Ran day-to-day operations for a school of 2,500+ students — scheduling, attendance, timetables, the whole administrative backbone.",
@@ -182,7 +171,6 @@ const experience = [
   {
     role: "Teacher Training Intern",
     org: "Edsmart Edu Services Pvt Ltd",
-    location: "Bangalore, Karnataka, India",
     period: "May 2022",
     points: [
       "Went through a hands-on teacher training program across several partner schools.",
@@ -971,7 +959,7 @@ export default function PrajwalPortfolio() {
             </div>
             <div className="heroFacts" style={{ "--d": 4 }}>
               <div><span>Location</span><b>{contact.location}</b></div>
-              <div><span>Degree</span><b>M.S. Computer Science</b></div>
+              <div><span>Degree</span><b>B.E., M.S. Computer Science</b></div>
               <div><span>GPA</span><b><Counter to={3.97} decimals={2} /> / 4.0</b></div>
               <div><span>Projects Shipped</span><b><Counter to={40} suffix="+" /></b></div>
             </div>
