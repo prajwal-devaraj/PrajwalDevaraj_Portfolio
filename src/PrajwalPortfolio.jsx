@@ -26,15 +26,17 @@ const aboutParagraphs = [
 const education = [
   {
     school: "Kent State University",
+    location: "Kent, OH, USA",
     website: "https://www.kent.edu/",
     degree: "M.S. in Computer Science",
     period: "Aug 2024 – May 2026",
-    gpa: "3.97",
+    gpa: "3.966",
     details:
       "Advanced Database Systems, Data Mining, Social & Graph Networks, AI, ML & Deep Learning, Data Security & Privacy, Advanced Computer Graphics, IoT Integration, AI for Robotics.",
   },
   {
     school: "JSS Academy of Technical Education, VTU",
+    location: "Bangalore, Karnataka, India",
     website: "https://www.jssateb.ac.in/",
     degree: "B.E. in Computer Science",
     period: "Aug 2019 – Jun 2023",
@@ -60,6 +62,7 @@ const experience = [
   {
     role: "Junior Software Engineer",
     org: "RenuDev Traders",
+    location: "Bengaluru, Karnataka, India",
     period: "May 2023 – Jun 2024",
     points: [
       "My first engineering job out of school — built backend systems for inventory, billing, and internal workflow management using Python, Flask, and SQL.",
@@ -73,6 +76,7 @@ const experience = [
   {
     role: "Research Assistant",
     org: "Kent State University",
+    location: "Kent, OH, USA",
     period: "May 2025 – May 2026",
     points: [
       "Doing AI/ML research on medical data, training models on a GPU cluster (4+ GPUs) alongside faculty and a small research team.",
@@ -85,6 +89,7 @@ const experience = [
   {
     role: "Undergraduate Teaching Assistant",
     org: "Kent State University",
+    location: "Kent, OH, USA",
     period: "Sep 2025 – May 2026",
     points: [
       "TA for Operating Systems and Intro to Database System Design, supporting 120+ students across honors and regular sections.",
@@ -98,6 +103,7 @@ const experience = [
   {
     role: "Full-Stack Developer Intern",
     org: "BETSOL",
+    location: "Bangalore, Karnataka, India",
     period: "May 2022 – Dec 2022",
     points: [
       "Built and shipped full-stack web apps on a Python backend, working in an agile team alongside full-time engineers.",
@@ -110,6 +116,7 @@ const experience = [
   {
     role: "Backend Developer Intern",
     org: "Technofly Solutions",
+    location: "Bangalore, Karnataka, India",
     period: "Aug 2022 – Sep 2022",
     points: [
       "Worked on a government transportation project — a bus transport management system.",
@@ -120,6 +127,7 @@ const experience = [
   {
     role: "Student Technical Operations Associate / Head Cashier / Student Ambassador",
     org: "Kent State University Bookstore, Barnes & Noble College",
+    location: "Kent, OH, USA",
     period: "Aug 2024 – May 2026",
     points: [
       "Started as a regular associate, got promoted to Head Cashier & Administrative Support based on how I handled the job.",
@@ -135,6 +143,7 @@ const experience = [
   {
     role: "Student Employee",
     org: "Commerce Café, Culinary Services, Kent State University",
+    location: "Kent, OH, USA",
     period: "Aug 2024 – Jan 2026",
     points: [
       "Opened and closed the café, kept inventory stocked, and made sure health and safety standards were actually followed, not just posted on a wall.",
@@ -146,6 +155,7 @@ const experience = [
   {
     role: "Student Catering Employee",
     org: "Culinary Services, Kent State University",
+    location: "Kent, OH, USA",
     period: "May 2025 – Aug 2025",
     points: [
       "Consistently picked for the university's higher-profile events — 50+ of them, including VIP gatherings and functions at the President's Residence.",
@@ -158,6 +168,7 @@ const experience = [
   {
     role: "Administrator",
     org: "Sri Guruvandana Global Pre-School",
+    location: "Bangalore, Karnataka, India",
     period: "Mar 2020 – Jul 2023",
     points: [
       "Ran day-to-day operations for a school of 2,500+ students — scheduling, attendance, timetables, the whole administrative backbone.",
@@ -171,6 +182,7 @@ const experience = [
   {
     role: "Teacher Training Intern",
     org: "Edsmart Edu Services Pvt Ltd",
+    location: "Bangalore, Karnataka, India",
     period: "May 2022",
     points: [
       "Went through a hands-on teacher training program across several partner schools.",
@@ -847,10 +859,23 @@ export default function PrajwalPortfolio() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem("pd-theme");
+      if (saved === "light" || saved === "dark") return saved;
+    } catch (e) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
   const progressRef = useRef(null);
   const heroRef = useRef(null);
   const tilt = useTilt(7);
   const magnet = useMagnet(0.3);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("pd-theme", theme);
+    } catch (e) {}
+  }, [theme]);
 
   useEffect(() => {
     const t = requestAnimationFrame(() => setLoaded(true));
@@ -908,7 +933,7 @@ export default function PrajwalPortfolio() {
   }, [query]);
 
   return (
-    <div className="site">
+    <div className="site" data-theme={theme}>
       <div className="progressBar"><span ref={progressRef} /></div>
 
       <header className={`nav ${navScrolled ? "scrolled" : ""}`}>
@@ -928,6 +953,14 @@ export default function PrajwalPortfolio() {
             {SHEETS.map((s) => (
               <a key={s.id} href={`#${s.id}`} onClick={() => setNavOpen(false)}>{s.label}</a>
             ))}
+            <button
+              className="themeToggle"
+              onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
             <a className="navCta" href={`mailto:${contact.email}`} onClick={() => setNavOpen(false)} {...magnet}>
               Contact
             </a>
@@ -959,7 +992,7 @@ export default function PrajwalPortfolio() {
             </div>
             <div className="heroFacts" style={{ "--d": 4 }}>
               <div><span>Location</span><b>{contact.location}</b></div>
-              <div><span>Degree</span><b>B.E., M.S. Computer Science</b></div>
+              <div><span>Degree</span><b>M.S. Computer Science</b></div>
               <div><span>GPA</span><b><Counter to={3.97} decimals={2} /> / 4.0</b></div>
               <div><span>Projects Shipped</span><b><Counter to={40} suffix="+" /></b></div>
             </div>
@@ -1205,8 +1238,27 @@ export default function PrajwalPortfolio() {
           --violet: #9333ea;
           --pink: #ec4899;
           --brand-gradient: linear-gradient(120deg, var(--accent), var(--violet) 55%, var(--pink));
+          --nav-bg: rgba(255,255,255,0.86);
+          --nav-bg-scrolled: rgba(255,255,255,0.96);
           --radius: 14px;
         }
+
+        .site[data-theme="dark"] {
+          --bg: #0f1117;
+          --bg-soft: #161922;
+          --card: #1a1e29;
+          --border: #2b3040;
+          --text: #f1f2f6;
+          --text-soft: #b8bccb;
+          --text-faint: #82879b;
+          --accent: #818cf8;
+          --accent-dark: #a5b4fc;
+          --accent-soft: rgba(129,140,248,0.16);
+          --accent-glow: rgba(129,140,248,0.3);
+          --nav-bg: rgba(15,17,23,0.86);
+          --nav-bg-scrolled: rgba(15,17,23,0.96);
+        }
+        .site { transition: background-color .3s ease, color .3s ease; }
 
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -1240,11 +1292,11 @@ export default function PrajwalPortfolio() {
         /* ---------- Nav ---------- */
         .nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-          background: rgba(255,255,255,0.86); backdrop-filter: blur(10px);
+          background: var(--nav-bg); backdrop-filter: blur(10px);
           border-bottom: 1px solid transparent;
           transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
         }
-        .nav.scrolled { border-color: var(--border); box-shadow: 0 4px 24px rgba(20,22,31,0.08); background: rgba(255,255,255,0.96); }
+        .nav.scrolled { border-color: var(--border); box-shadow: 0 4px 24px rgba(20,22,31,0.08); background: var(--nav-bg-scrolled); }
         #top { padding-top: 66px; }
         .navInner {
           max-width: 1120px; margin: 0 auto; padding: 16px 24px;
@@ -1264,6 +1316,12 @@ export default function PrajwalPortfolio() {
         }
         .navLinks a:not(.navCta):hover { color: var(--text); }
         .navLinks a:not(.navCta):hover::after { right: 0; }
+        .themeToggle {
+          width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border);
+          background: var(--bg-soft); cursor: pointer; font-size: 15px; display: flex;
+          align-items: center; justify-content: center; transition: border-color .2s, transform .2s;
+        }
+        .themeToggle:hover { border-color: var(--accent); transform: rotate(15deg); }
         .navCta {
           background: var(--brand-gradient); background-size: 200% 100%; color: #fff !important;
           padding: 8px 16px; border-radius: 999px;
@@ -1336,7 +1394,7 @@ export default function PrajwalPortfolio() {
         }
         .btnPrimary { background: var(--brand-gradient); background-size: 200% 100%; color: #fff; }
         .btnPrimary:hover { background-position: 100% 0; box-shadow: 0 12px 28px var(--accent-glow); transform: translateY(-2px); }
-        .btnSecondary { background: #fff; border-color: var(--border); color: var(--text); }
+        .btnSecondary { background: var(--card); border-color: var(--border); color: var(--text); }
         .btnSecondary:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 8px 20px rgba(20,22,31,0.06); transform: translateY(-2px); }
         .heroFacts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; border-top: 1px solid var(--border); padding-top: 28px; }
         .heroFacts div { display: flex; flex-direction: column; gap: 4px; }
@@ -1614,7 +1672,7 @@ export default function PrajwalPortfolio() {
           .navToggle { display: flex; }
           .navLinks {
             display: none; position: absolute; top: 100%; left: 0; right: 0;
-            background: #fff; border-bottom: 1px solid var(--border);
+            background: var(--card); border-bottom: 1px solid var(--border);
             flex-direction: column; align-items: flex-start; padding: 12px 20px 20px; gap: 14px;
           }
           .navLinks.open { display: flex; }
