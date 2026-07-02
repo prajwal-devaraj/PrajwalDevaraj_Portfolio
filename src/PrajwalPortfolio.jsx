@@ -597,7 +597,7 @@ const CHAT_TOPICS = [
   {
     id: "location",
     keywords: ["location", "based", "where is he", "relocate", "remote", "live"],
-    respond: () => `He's based in ${contact.location} — Kent, Ohio. 📍`,
+    respond: () => `He's based in ${contact.location} — United States. 📍`,
   },
   {
     id: "publications",
@@ -1208,7 +1208,7 @@ export default function PrajwalPortfolio() {
           <div className="footerInner">
             <div>
               <div className="footerName">Prajwal Devaraj</div>
-              <div className="footerTag">Kent, Ohio · Open to Software Engineering & AI/ML roles</div>
+              <div className="footerTag">United States · Open to Software Engineering & AI/ML roles</div>
             </div>
             <div className="footerLinks">
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
