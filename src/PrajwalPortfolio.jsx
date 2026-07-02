@@ -30,7 +30,7 @@ const education = [
     website: "https://www.kent.edu/",
     degree: "M.S. in Computer Science",
     period: "Aug 2024 – May 2026",
-    gpa: "3.966",
+    gpa: "3.97",
     details:
       "Advanced Database Systems, Data Mining, Social & Graph Networks, AI, ML & Deep Learning, Data Security & Privacy, Advanced Computer Graphics, IoT Integration, AI for Robotics.",
   },
@@ -992,8 +992,7 @@ export default function PrajwalPortfolio() {
             </div>
             <div className="heroFacts" style={{ "--d": 4 }}>
               <div><span>Location</span><b>{contact.location}</b></div>
-              <div><span>Degree</span><b>M.S. Computer Science</b></div>
-              <div><span>GPA</span><b><Counter to={3.97} decimals={2} /> / 4.0</b></div>
+              <div><span>Degree</span><b>B.E., M.Sc. Computer Science</b></div>
               <div><span>Projects Shipped</span><b><Counter to={40} suffix="+" /></b></div>
             </div>
           </div>
