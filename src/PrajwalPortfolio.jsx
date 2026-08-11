@@ -1965,7 +1965,7 @@ export default function PrajwalPortfolio() {
           -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
         }
-        .skillMarqueeTrack { display: flex; gap: 30px; width: max-content; animation: marquee 32s linear infinite; }
+        .skillMarqueeTrack { display: flex; gap: 30px; width: max-content; animation: marquee 200s linear infinite; }
         .skillMarqueeTrack span { font-family: "Inter Tight", sans-serif; font-weight: 600; font-size: 14px; color: var(--text-faint); white-space: nowrap; }
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .skillGrid { display: grid; gap: 22px; }
