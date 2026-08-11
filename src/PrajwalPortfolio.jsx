@@ -46,42 +46,366 @@ const education = [
 ];
 
 const skills = {
-  "Programming Languages": ["Python", "Java", "C", "C++", "JavaScript", "SQL", "PHP", "Kotlin", "Shell", "Bash", "Go", "Rust"],
-  "Frontend / Web": ["React", "HTML5", "CSS3", "Responsive Design", "Jinja2", "Bootstrap", "Tailwind", "Framer Motion", "Recharts", "UI/UX", "Design Systems"],
-  "Backend / APIs": ["Flask", "Django", "Node.js", "Express.js", "REST APIs", "API Design", "JWT", "OAuth", "RBAC", "GraphQL", "WebSockets"],
-  "AI / ML": ["Machine Learning", "Deep Learning", "CNNs", "MLPs", "MoE", "Computer Vision", "Feature Engineering", "Model Evaluation", "Drift Detection", "Explainable AI", "Model Deployment"],
-  "Libraries": ["PyTorch", "TensorFlow", "Keras", "scikit-learn", "OpenCV", "SHAP", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly", "Librosa", "NetworkX", "Gensim"],
-  "Databases": ["MongoDB", "MySQL", "PostgreSQL", "SQLite", "SQL Server", "Database Design", "Query Optimization", "Indexing", "Transactions", "ACID", "Sharding", "Replication", "GeoJSON"],
-  "Cloud / DevOps": ["AWS EC2", "AWS S3", "Docker", "Docker Compose", "Kubernetes", "Render", "Git", "GitHub", "GitHub Actions", "CI/CD", "Linux", "Nginx", "MLflow", "Postman"],
-  "Core CS / FAANG Skills": ["DSA", "Problem Solving", "Time Complexity", "Space Complexity", "Dynamic Programming", "Graphs", "Trees", "Heaps", "Hashing", "Sliding Window", "System Design"],
-  "System Design": ["Distributed Systems", "CAP Theorem", "Load Balancing", "Caching", "Redis", "Rate Limiting", "Fault Tolerance", "High Availability", "Logging", "Monitoring", "Retry Systems"],
-  "Security": ["AES-GCM", "HMAC", "bcrypt", "JWT", "RBAC", "Cryptography", "Web Security", "Authentication", "Authorization"],
+  "Programming Languages": [
+    "Python",
+    "Java",
+    "C",
+    "C++",
+    "C#",
+    "JavaScript",
+    "TypeScript",
+    "SQL",
+    "Go",
+    "Kotlin",
+    "PHP",
+    "Rust",
+    "Shell",
+    "Bash"
+  ],
+
+  "Frontend / Web": [
+    "React",
+    "Next.js",
+    "React Native",
+    "Vue.js",
+    "Angular",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
+    "Bootstrap",
+    "Framer Motion",
+    "Responsive Design",
+    "Jinja2",
+    "Recharts",
+    "UI/UX",
+    "Design Systems",
+    "Accessibility"
+  ],
+
+  "Backend / APIs": [
+    "FastAPI",
+    "Flask",
+    "Django",
+    "Django REST Framework",
+    "Node.js",
+    "Express.js",
+    "ASP.NET",
+    "REST APIs",
+    "GraphQL",
+    "WebSockets",
+    "API Design",
+    "Microservices",
+    "Event-Driven Architecture",
+    "JWT",
+    "OAuth",
+    "RBAC",
+    "Background Jobs",
+    "Retry Queues"
+  ],
+
+  "Artificial Intelligence / Machine Learning": [
+    "Machine Learning",
+    "Deep Learning",
+    "Neural Networks",
+    "CNNs",
+    "MLPs",
+    "Mixture of Experts (MoE)",
+    "Computer Vision",
+    "Classification",
+    "Feature Engineering",
+    "Model Evaluation",
+    "Hyperparameter Tuning",
+    "Drift Detection",
+    "Explainable AI",
+    "Model Deployment",
+    "Inference Pipelines",
+    "Multi-GPU Training",
+    "Anomaly Detection",
+    "Time-Series Analysis"
+  ],
+
+  "Generative AI / LLM Engineering": [
+    "Generative AI",
+    "Large Language Models (LLMs)",
+    "Retrieval-Augmented Generation (RAG)",
+    "Prompt Engineering",
+    "LLM APIs",
+    "AI Agents",
+    "Agentic Workflows",
+    "Tool Calling",
+    "Function Calling",
+    "Semantic Search",
+    "Vector Search",
+    "Embeddings",
+    "Context Engineering",
+    "AI Search",
+    "Citation Mapping",
+    "Confidence Scoring",
+    "LLM Evaluation",
+    "AI-Assisted Development"
+  ],
+
+  "AI Frameworks / Libraries": [
+    "PyTorch",
+    "TensorFlow",
+    "Keras",
+    "scikit-learn",
+    "OpenCV",
+    "SHAP",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "Seaborn",
+    "Plotly",
+    "Librosa",
+    "NetworkX",
+    "Gensim",
+    "LangChain",
+    "LangGraph",
+    "MLflow"
+  ],
+
+  "Data Engineering / Analytics": [
+    "Apache Spark",
+    "PySpark",
+    "Apache Airflow",
+    "Apache Hive",
+    "Trino",
+    "ETL Pipelines",
+    "Data Pipelines",
+    "Big Data Processing",
+    "Data Warehousing",
+    "Data Lakes",
+    "Distributed Data Processing",
+    "Data Modeling",
+    "Analytics Pipelines",
+    "SQL Analytics",
+    "Batch Processing",
+    "Data Validation"
+  ],
+
+  "Databases / Storage": [
+    "PostgreSQL",
+    "PostGIS",
+    "MySQL",
+    "MongoDB",
+    "SQLite",
+    "SQL Server",
+    "Redis",
+    "DynamoDB",
+    "Supabase",
+    "pgvector",
+    "Database Design",
+    "Query Optimization",
+    "Indexing",
+    "Transactions",
+    "ACID",
+    "Sharding",
+    "Replication",
+    "Caching",
+    "Vector Databases",
+    "GeoJSON"
+  ],
+
+  "Cloud Computing": [
+    "AWS",
+    "Microsoft Azure",
+    "Google Cloud Platform (GCP)",
+    "Amazon EC2",
+    "Amazon S3",
+    "Amazon RDS",
+    "AWS Lambda",
+    "Amazon EKS",
+    "Amazon SQS",
+    "Amazon DynamoDB",
+    "AWS IAM",
+    "AWS VPC",
+    "Serverless Computing",
+    "Cloud Architecture",
+    "Cloud-Native Applications"
+  ],
+
+  "DevOps / Infrastructure": [
+    "Docker",
+    "Docker Compose",
+    "Kubernetes",
+    "Terraform",
+    "Git",
+    "GitHub",
+    "GitHub Actions",
+    "GitLab CI/CD",
+    "CI/CD",
+    "Linux",
+    "Nginx",
+    "Infrastructure as Code",
+    "Postman",
+    "Render",
+    "Vercel",
+    "Observability",
+    "Logging",
+    "Monitoring",
+    "Telemetry"
+  ],
+
+  "Distributed Systems / System Design": [
+    "Distributed Systems",
+    "System Design",
+    "Microservices Architecture",
+    "Event-Driven Systems",
+    "CAP Theorem",
+    "Load Balancing",
+    "Caching",
+    "Redis",
+    "Rate Limiting",
+    "Fault Tolerance",
+    "High Availability",
+    "Scalability",
+    "Horizontal Scaling",
+    "Failure Recovery",
+    "Retry Systems",
+    "Queues",
+    "Service Resilience",
+    "Distributed Storage",
+    "API Scalability"
+  ],
+
+  "Core Computer Science": [
+    "Data Structures & Algorithms",
+    "Object-Oriented Programming",
+    "Object-Oriented Design",
+    "Problem Solving",
+    "Time Complexity",
+    "Space Complexity",
+    "Big-O Analysis",
+    "Dynamic Programming",
+    "Graphs",
+    "Trees",
+    "Heaps",
+    "Hashing",
+    "Sliding Window",
+    "Recursion",
+    "Backtracking",
+    "Operating Systems",
+    "Database Management Systems",
+    "Computer Networks",
+    "Software Engineering"
+  ],
+
+  "Security": [
+    "AES-GCM",
+    "HMAC",
+    "bcrypt",
+    "JWT",
+    "OAuth",
+    "RBAC",
+    "Cryptography",
+    "Web Security",
+    "Authentication",
+    "Authorization",
+    "Data Security",
+    "Privacy",
+    "Secure API Design"
+  ],
+
+  "Robotics / Embodied AI": [
+    "ROS 2",
+    "Robot Navigation",
+    "Sensor Fusion",
+    "Perception Systems",
+    "Multimodal Fusion",
+    "World Models",
+    "Edge Inference",
+    "Embodied AI",
+    "First-Person AI",
+    "Action Planning",
+    "Agent Planning",
+    "Memory Systems",
+    "Telemetry Systems"
+  ],
+
+  "Software Engineering Practices": [
+    "Git Workflow",
+    "Code Reviews",
+    "Debugging",
+    "Testing",
+    "Unit Testing",
+    "Integration Testing",
+    "API Testing",
+    "Technical Documentation",
+    "Performance Optimization",
+    "Database Optimization",
+    "Root Cause Analysis",
+    "Automation",
+    "Agile Development"
+  ],
+
+  "Research / Experimentation": [
+    "AI Research",
+    "Experimental Design",
+    "Dataset Preparation",
+    "Model Benchmarking",
+    "Performance Evaluation",
+    "Research Prototyping",
+    "Literature Review",
+    "Reproducible Experiments",
+    "Multimodal AI Research",
+    "Distributed ML Experiments"
+  ],
+
+  "Currently Learning / Researching": [
+    "Agentic AI",
+    "Genetic AI",
+    "Evolutionary Algorithms",
+    "Machine Learning + Genetic AI + Agentic AI",
+    "Advanced Embodied Intelligence",
+    "Multimodal Reasoning",
+    "World Models",
+    "Autonomous AI Agents",
+    "Multi-Agent Systems",
+    "Long-Term Agent Memory",
+    "AI Planning & Reasoning",
+    "Advanced RAG",
+    "AI Search Engines",
+    "Edge AI",
+    "Robotics Intelligence",
+    "Distributed AI Systems",
+    "Generative AI Research"
+  ],
+
+  "Tools / Developer Productivity": [
+    "VS Code",
+    "Claude Code",
+    "GitHub Copilot",
+    "Postman",
+    "Jupyter Notebook",
+    "GitHub",
+    "Linux CLI",
+    "Docker CLI",
+    "MLflow"
+  ]
 };
 
 const experience = [
-  {
-    role: "Junior Software Engineer",
-    org: "RenuDev Traders",
-    location: "Bengaluru, Karnataka, India",
-    period: "May 2023 – Jun 2024",
-    points: [
-      "My first engineering job out of school — built backend systems for inventory, billing, and internal workflow management using Python, Flask, and SQL.",
-      "Wrote the REST APIs the internal tools ran on, along with the auth and validation logic behind them.",
-      "Rewrote a batch of slow SQL queries and automated reporting that used to be done by hand, which sped up day-to-day operations by around 30%.",
-      "Spent a lot of time actually talking to the people using what I built, then adjusting things to match how they really worked.",
-      "Handled deployments and the occasional 'it broke in production' fire drill.",
-      "Got the Best Employee Award, which felt like a good sign for a first job.",
-    ],
+  { role: "Software Engineer Intern", 
+    org: "Kent State University — Greenhouse Research", 
+    location: "Kent, Ohio, USA", 
+    period: "Jun 2026 – Aug 2026", 
+    points: [ 
+      "Worked on an IoT-based environmental monitoring system for greenhouse research and data collection.", 
+      "Integrated sensor data with backend storage to capture and organize environmental measurements for analysis.", 
+      "Supported database, dashboard, and alerting workflows to make greenhouse conditions easier to monitor.", 
+      "Worked with research-driven requirements and helped turn real-world sensor data into a usable monitoring pipeline.", 
+    ], 
   },
   {
-    role: "Research Assistant",
+    role: "Graduate Research Assistant",
     org: "Kent State University",
     location: "Kent, OH, USA",
     period: "May 2025 – May 2026",
     points: [
       "Doing AI/ML research on medical data, training models on a GPU cluster (4+ GPUs) alongside faculty and a small research team.",
       "Main project is CodeTheGenome: predicting when genetic variant interpretations conflict, using the ClinVar dataset. Built the feature pipeline and trained an ensemble of XGBoost, LightGBM, and CatBoost models, landing at 93% accuracy — as far as I know, no one had tackled it quite this way before.",
-      "Also working on endoscopy image analysis for gastrointestinal cases — building models to spot blood clot patterns before and after gastric cancer surgery, using real clinical data from multiple hospitals.",
+      "Also working on endoscopy image analysis for gastrointestinal cases - building models to spot blood clot patterns before and after gastric cancer surgery, using real clinical data from multiple hospitals.",
       "A good chunk of the work is unglamorous: preprocessing pipelines, cleaning noisy data, and evaluating models honestly with precision/recall/F1 rather than just accuracy.",
       "Helped write up the research for documentation and (hopefully, eventually) publication.",
     ],
@@ -101,20 +425,7 @@ const experience = [
     ],
   },
   {
-    role: "Full-Stack Developer Intern",
-    org: "BETSOL",
-    location: "Bangalore, Karnataka, India",
-    period: "May 2022 – Dec 2022",
-    points: [
-      "Built and shipped full-stack web apps on a Python backend, working in an agile team alongside full-time engineers.",
-      "First big project was a workflow automation system — backend services with proper error handling and retry logic, so a failed step didn't take down the whole process.",
-      "Then built a full-stack help desk app: ticket creation and tracking on the frontend, CRUD APIs with role-based auth on the backend, plus real-time notifications for updates.",
-      "Also served as Campus Ambassador, which was a nice change of pace — representing BETSOL on campus and helping other students find their way into internships.",
-      "Stack: Python, React, Node.js/Spring Boot, MySQL, REST APIs.",
-    ],
-  },
-  {
-    role: "Backend Developer Intern",
+    role: "Software Engineer Intern",
     org: "Technofly Solutions",
     location: "Bangalore, Karnataka, India",
     period: "Aug 2022 – Sep 2022",
@@ -123,6 +434,17 @@ const experience = [
       "Built responsive frontend pages with HTML/CSS/JS and backend pieces in Python.",
       "Part of a 7-person dev team running sprints, so I got a real feel for agile development early on.",
     ],
+  },
+  { role: "Software Engineer Intern", 
+    org: "Gowri Software Solutions", 
+    location: "Bangalore, Karnataka, India", 
+    period: "Dec 2020 – Jan 2021", 
+    points: [ 
+      "Worked on software development projects across frontend, backend, and database components.", 
+      "Built and maintained application features using programming, web development, and database fundamentals.", 
+      "Debugged issues, tested functionality, and improved existing application workflows as part of day-to-day development.", 
+      "Collaborated with developers on feature implementation and gained early hands-on experience with the software development lifecycle.", 
+    ], 
   },
   {
     role: "Student Technical Operations Associate / Head Cashier / Student Ambassador",
@@ -192,6 +514,38 @@ const experience = [
 ];
 
 const featuredProjects = [
+  {
+    title: "CivicPulse Bharat",
+    category: "AI-Powered Civic Engagement & Public Issue Platform",
+    impact: "Turns community problems into structured, visible, and actionable civic signals",
+    link: "https://github.com/prajwal-devaraj/CivicPulse-Bharat.git",
+    tech: "Next.js, TypeScript, React, SQLite, REST APIs, Tailwind CSS, AI Moderation, Data Visualization",
+    metrics: ["Issue tracking", "Community voting", "AI-assisted moderation"],
+    points: [
+      "Building a civic-tech platform where citizens can report local problems, support issues through voting, follow their progress, and turn scattered complaints into structured public signals.",
+      "Designed the product around a simple idea: people should not need political connections or viral social-media posts just to make a pothole, safety problem, sanitation issue, or public-service failure visible.",
+      "Built structured issue workflows for submitting reports, categorizing problems, tracking community engagement, and surfacing the issues that deserve attention based on participation and urgency.",
+      "Added AI-assisted moderation and content intelligence to reduce spam, duplicate reports, abusive submissions, and low-quality noise while keeping legitimate citizen voices visible.",
+      "Developing CivicPulse Bharat as a foundation for smarter civic analytics — helping communities understand recurring problems, geographic patterns, public priorities, and where action is actually needed.",
+    ],
+  },
+
+  {
+    title: "CivicLens AI",
+    category: "First-Person Multimodal & Embodied Intelligence Platform",
+    impact: "AI that perceives real-world situations, understands context, and decides when intelligent action may be needed",
+    link: "https://github.com/prajwal-devaraj/CivicLens-AI-First-Person-Multimodal-and-Embodied-Intelligence-Platform.git",
+    tech: "Python, PyTorch, ROS 2, FastAPI, React, PostgreSQL/PostGIS, Redis, Docker, Computer Vision, Multimodal AI, Agentic AI",
+    metrics: ["Multimodal perception", "Agentic reasoning", "Embodied AI architecture"],
+    points: [
+      "Building a first-person multimodal intelligence platform designed to help AI understand what is happening around it instead of waiting for a human to type a prompt.",
+      "Combining visual perception, sensor data, contextual memory, world modeling, and reasoning so the system can interpret real-world situations and distinguish ordinary activity from events that may require attention.",
+      "Designed a modular embodied-AI architecture spanning perception, multimodal fusion, memory, world modeling, reasoning, planning, action runtime, and telemetry rather than treating intelligence as a single black-box model.",
+      "Integrated ROS 2 navigation, sensor fusion, edge inference, FastAPI services, PostGIS-backed spatial context, Redis, Docker, retry queues, observability, and failure recovery for real-world deployment scenarios.",
+      "Exploring a broader question behind CivicLens AI: if technology can recognize faces, recommend videos, and generate content, can we also teach it to notice when a human may genuinely need help — responsibly, contextually, and with human oversight?",
+    ],
+  },
+
   {
     title: "Agentic Search Assistant",
     category: "AI-Powered Search Overview Engine",
@@ -1068,7 +1422,7 @@ export default function PrajwalPortfolio() {
             </p>
             <h1 style={{ "--d": 1 }}>Hi, I'm <span className="gradText">Prajwal Devaraj</span>.</h1>
             <p className="heroLede" style={{ "--d": 2 }}>
-              I build backend systems, AI models, and full-stack apps — I recently completed my
+              I build backend systems, AI models, and full-stack apps - I recently completed my
               M.S. in Computer Science at Kent State University, where I also researched medical AI
               and taught Operating Systems &amp; Databases. I like taking messy problems and turning
               them into something clean, tested, and shipped.
@@ -1081,7 +1435,7 @@ export default function PrajwalPortfolio() {
             <div className="heroFacts" style={{ "--d": 4 }}>
               <div><span>Location</span><b>{contact.location}</b></div>
               <div><span>Degree</span><b>B.E., M.Sc. Computer Science</b></div>
-              <div><span>Projects Shipped</span><b><Counter to={40} suffix="+" /></b></div>
+              <div><span>Projects Shipped</span><b><Counter to={45} suffix="+" /></b></div>
             </div>
           </div>
         </section>
@@ -1128,7 +1482,7 @@ export default function PrajwalPortfolio() {
             <SectionHead
               eyebrow="Projects"
               title="Things I've built"
-              sub="A handful of the projects I'm most proud of — full catalog of 30+ below."
+              sub="A handful of the projects I'm most proud of - full catalog of 30+ below."
             />
             <div className="projectGrid">
               {featuredProjects.map((proj, i) => (
