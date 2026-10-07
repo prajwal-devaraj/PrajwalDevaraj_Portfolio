@@ -708,6 +708,68 @@ function MatrixCanvas() {
   return <canvas className="matrix-canvas" ref={ref} aria-hidden="true" />;
 }
 
+
+function CinemaIntro({ onDone }) {
+  const [stage, setStage] = useState(0);
+  const [leaving, setLeaving] = useState(false);
+
+  useEffect(() => {
+    const timings = [900, 2350, 3950, 5700, 7600];
+    const timers = timings.map((ms, i) => setTimeout(() => setStage(i + 1), ms));
+    const end = setTimeout(() => {
+      setLeaving(true);
+      setTimeout(onDone, 950);
+    }, 9000);
+    return () => { timers.forEach(clearTimeout); clearTimeout(end); };
+  }, [onDone]);
+
+  const skip = () => {
+    setLeaving(true);
+    setTimeout(onDone, 500);
+  };
+
+  return (
+    <div className={`cinema-intro ${leaving ? "leaving" : ""}`} role="dialog" aria-label="Cinematic portfolio intro">
+      <div className="cinema-letterbox top" />
+      <div className="cinema-letterbox bottom" />
+      <div className="cinema-vignette" />
+      <div className="cinema-grain" />
+      <div className="cinema-scan" />
+      <div className="cinema-stars" aria-hidden="true">
+        {Array.from({ length: 34 }, (_, i) => <i key={i} style={{"--i": i}} />)}
+      </div>
+      <button className="cinema-skip" onClick={skip}>SKIP INTRO ↗</button>
+      <div className="cinema-timecode">PD // 00:{String(Math.min(stage * 3 + 1, 24)).padStart(2, "0")}:24</div>
+
+      <div className={`cinema-shot shot-1 ${stage >= 0 ? "active" : ""} ${stage > 0 ? "out" : ""}`}>
+        <p>A DIGITAL FILM BY</p>
+        <h2>PRAJWAL DEVARAJ</h2>
+      </div>
+      <div className={`cinema-shot shot-2 ${stage >= 1 ? "active" : ""} ${stage > 1 ? "out" : ""}`}>
+        <span>ONE STUDENT.</span>
+        <strong>MANY WORLDS.</strong>
+      </div>
+      <div className={`cinema-shot shot-3 ${stage >= 2 ? "active" : ""} ${stage > 2 ? "out" : ""}`}>
+        <div className="cinema-wordwall">
+          <span>ENGINEERING</span><span>AI / ML</span><span>RESEARCH</span><span>TEACHING</span>
+          <span>WRITING</span><span>LEADERSHIP</span><span>CRICKET</span><span>CURIOSITY</span>
+        </div>
+      </div>
+      <div className={`cinema-shot shot-4 ${stage >= 3 ? "active" : ""} ${stage > 3 ? "out" : ""}`}>
+        <small>THIS IS NOT A RÉSUMÉ.</small>
+        <h2>THIS IS THE STORY<br/>OF WHAT I BECAME<br/>BY BUILDING.</h2>
+      </div>
+      <div className={`cinema-shot shot-5 ${stage >= 4 ? "active" : ""}`}>
+        <div className="cinema-mark">PD</div>
+        <h1>PRAJWAL</h1>
+        <p>THE DIGITAL LAB</p>
+        <span>ENTERING CHAPTER ONE</span>
+      </div>
+      <div className="cinema-progress"><span style={{width: `${Math.min((stage + 1) * 20, 100)}%`}} /></div>
+    </div>
+  );
+}
+
 function SectionHead({ kicker, title, copy }) {
   return (
     <div className="section-head" data-reveal>
@@ -745,8 +807,14 @@ export default function PrajwalPortfolio() {
   const [copied, setCopied] = useState(false);
   const [menu, setMenu] = useState(false);
   const [identityIndex, setIdentityIndex] = useState(0);
+  const [introOpen, setIntroOpen] = useState(true);
 
   useReveal();
+
+  useEffect(() => {
+    document.body.style.overflow = introOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [introOpen]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -785,6 +853,7 @@ export default function PrajwalPortfolio() {
   return (
     <>
       <style>{css}</style>
+      {introOpen && <CinemaIntro onDone={() => setIntroOpen(false)} />}
       <MatrixCanvas />
       <CursorGlow />
       <div className="noise" aria-hidden="true" />
@@ -863,6 +932,7 @@ export default function PrajwalPortfolio() {
           </div>
         </section>
 
+        <div className="chapter-slate"><span>CHAPTER 01</span><strong>WHO I AM</strong><i>not a résumé // a life in motion</i></div>
         <section id="about" className="section shell about-section">
           <SectionHead kicker="ABOUT ME" title="More than a résumé. More like a running experiment." copy="I like computer science because it lets me move between abstraction and reality — from an algorithm on paper to a system that is actually useful." />
           <div className="about-grid">
@@ -925,6 +995,7 @@ export default function PrajwalPortfolio() {
           </div>
         </section>
 
+        <div className="chapter-slate"><span>CHAPTER 02</span><strong>THE LAB</strong><i>questions become experiments</i></div>
         <section id="research" className="section research-section">
           <div className="shell">
             <SectionHead kicker="RESEARCH LAB" title="Questions I’m exploring beyond the obvious." copy="Some projects are finished, some are active, and some are ideas waiting for the right experiment." />
@@ -942,6 +1013,7 @@ export default function PrajwalPortfolio() {
           </div>
         </section>
 
+        <div className="chapter-slate"><span>CHAPTER 03</span><strong>THE BUILDS</strong><i>ideas become systems</i></div>
         <section id="projects" className="section shell projects-section">
           <SectionHead kicker="PROJECT ARCHIVE" title="A lot of building. A lot of learning." copy={`Not a curated list of five perfect projects — this is the fuller archive. ${projects.length} builds across AI, systems, full-stack, data, security, graphics, and research.`} />
 
@@ -972,6 +1044,7 @@ export default function PrajwalPortfolio() {
           </div>
         </section>
 
+        <div className="chapter-slate"><span>CHAPTER 04</span><strong>THE JOURNEY</strong><i>every role changed the person</i></div>
         <section id="journey" className="section shell journey-section">
           <SectionHead kicker="JOURNEY" title="The path has never been one straight line." copy="Research, teaching, software, operations, leadership — each one changed how I think about building technology." />
           <div className="timeline">
@@ -1016,6 +1089,7 @@ export default function PrajwalPortfolio() {
           </div>
         </section>
 
+        <div className="chapter-slate finale"><span>FINAL CHAPTER</span><strong>STILL BECOMING</strong><i>the story continues</i></div>
         <section id="connect" className="section connect-section">
           <div className="shell">
             <SectionHead kicker="THE INTERNET VERSION OF ME" title="Code here. Research there. Chaos everywhere." copy="These are the places where different pieces of my work live." />
@@ -1083,4 +1157,12 @@ const css = String.raw`
 @media(max-width:980px){.hero-grid{grid-template-columns:1fr}.profile-layout{grid-template-columns:1fr}.human-grid,.achievement-track{grid-template-columns:repeat(2,1fr)}.hero-visual{width:min(520px,90vw);margin:20px auto 0}.research-grid,.project-grid{grid-template-columns:repeat(2,1fr)}.social-grid{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}.terminal-card{position:relative;top:0}.contact-panel{grid-template-columns:1fr;align-items:start}.footer-grid{grid-template-columns:1fr;text-align:center}.footer-grid>div{justify-content:center}.footer-grid>a{text-align:center}.footer-code{justify-content:center}}
 @media(max-width:760px){.shell{width:min(100% - 28px,1180px)}.profile-id-card{grid-template-columns:1fr}.id-hologram{width:180px}.facts-grid,.human-grid,.achievement-track{grid-template-columns:1fr}.languages-card{grid-column:auto}.identity-switcher{font-size:10px;flex-wrap:wrap}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:20px;flex-direction:column;gap:18px}.nav-links.open{display:flex}.menu-btn{display:grid}.brand-text{display:none}.hero{padding-top:120px}.hero h1{font-size:clamp(46px,14vw,70px)}.hero-lead{font-size:16px}.hero-visual{width:100%}.ticker{margin-top:50px}.stats-grid{grid-template-columns:1fr 1fr}.stat:nth-child(odd){border-left:1px solid var(--line)}.section{padding:90px 0}.research-grid,.project-grid,.education-grid{grid-template-columns:1fr}.project-controls{align-items:stretch;flex-direction:column}.search-box{min-width:0}.filter-row{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter-row button{white-space:nowrap}.timeline-meta{align-items:flex-start;flex-direction:column;gap:5px}.social-grid{grid-template-columns:1fr}.contact-panel{margin-top:60px}.big-mail{white-space:normal}.footer-code{font-size:8px}.floating-chip{font-size:8px}.chip-2{right:0}.chip-4{right:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition-duration:.01ms!important}[data-reveal]{opacity:1;transform:none}.matrix-canvas{display:none}}
+
+/* ===================== CINEMATIC MODE ===================== */
+.cinema-intro{position:fixed;inset:0;z-index:99999;background:#020306;color:#f8fafc;display:grid;place-items:center;overflow:hidden;opacity:1;transition:opacity .9s ease,filter .9s ease;isolation:isolate}.cinema-intro.leaving{opacity:0;filter:blur(18px);pointer-events:none}.cinema-intro::before{content:"";position:absolute;inset:-25%;background:radial-gradient(circle at 50% 45%,rgba(103,232,249,.12),transparent 30%),radial-gradient(circle at 70% 30%,rgba(167,139,250,.1),transparent 23%);animation:cinemaDrift 7s ease-in-out infinite alternate;z-index:-3}.cinema-letterbox{position:absolute;left:0;right:0;height:7vh;background:#000;z-index:30;box-shadow:0 0 40px #000}.cinema-letterbox.top{top:0;animation:letterboxIn .8s ease both}.cinema-letterbox.bottom{bottom:0;animation:letterboxIn .8s ease both}.cinema-vignette{position:absolute;inset:0;background:radial-gradient(circle,transparent 36%,rgba(0,0,0,.45) 72%,#000 115%);z-index:16;pointer-events:none}.cinema-grain{position:absolute;inset:-50%;z-index:20;opacity:.13;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");animation:grain .18s steps(2) infinite}.cinema-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(103,232,249,.45),transparent);top:-2px;z-index:21;box-shadow:0 0 18px rgba(103,232,249,.35);animation:scanFilm 4s linear infinite}.cinema-stars{position:absolute;inset:0;z-index:-1}.cinema-stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.1;left:calc((var(--i)*37 + 11)*1% / 14);top:calc((var(--i)*53 + 17)*1% / 19);animation:starPulse calc(2.4s + (var(--i)*.05s)) ease-in-out infinite}.cinema-skip{position:absolute;right:5vw;top:10vh;z-index:40;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.25);color:#dbeafe;padding:10px 13px;font:600 9px 'JetBrains Mono';letter-spacing:.14em;cursor:pointer;backdrop-filter:blur(8px);transition:.25s}.cinema-skip:hover{border-color:rgba(103,232,249,.65);color:#67e8f9;transform:translateY(-2px)}.cinema-timecode{position:absolute;left:5vw;bottom:10vh;z-index:40;font:500 9px 'JetBrains Mono';letter-spacing:.16em;color:rgba(255,255,255,.35)}.cinema-shot{position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:10vw;opacity:0;transform:scale(.94) translateY(20px);filter:blur(16px);transition:opacity .8s ease,transform 1.1s cubic-bezier(.16,.84,.25,1),filter .8s ease;z-index:10}.cinema-shot.active{opacity:1;transform:scale(1) translateY(0);filter:none}.cinema-shot.out{opacity:0;transform:scale(1.08) translateY(-14px);filter:blur(10px)}.shot-1 p{font:600 10px 'JetBrains Mono';letter-spacing:.5em;color:#67e8f9;margin:0 0 18px}.shot-1 h2{font:700 clamp(44px,8vw,124px) 'Space Grotesk';letter-spacing:-.065em;margin:0;text-shadow:0 0 70px rgba(103,232,249,.14)}.shot-2 span,.shot-2 strong{display:block}.shot-2 span{font:600 clamp(18px,2.2vw,34px) 'JetBrains Mono';letter-spacing:.22em;color:rgba(255,255,255,.55);margin-bottom:10px}.shot-2 strong{font:800 clamp(56px,10vw,150px)/.9 'Space Grotesk';letter-spacing:-.075em;background:linear-gradient(90deg,#fff,#67e8f9,#a78bfa,#fff);background-size:220% 100%;-webkit-background-clip:text;color:transparent;animation:gradientShift 4s linear infinite}.cinema-wordwall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 50px;transform:rotate(-3deg)}.cinema-wordwall span{font:800 clamp(28px,5vw,80px)/.92 'Space Grotesk';letter-spacing:-.06em;text-align:left;color:rgba(255,255,255,.14);animation:wordFlash 2.2s ease-in-out infinite}.cinema-wordwall span:nth-child(2n){color:rgba(103,232,249,.45);animation-delay:.25s}.cinema-wordwall span:nth-child(3n){color:rgba(167,139,250,.42);animation-delay:.5s}.shot-4 small{font:600 9px 'JetBrains Mono';letter-spacing:.36em;color:#67e8f9;margin-bottom:22px}.shot-4 h2{font:700 clamp(42px,7vw,102px)/.92 'Space Grotesk';letter-spacing:-.07em;margin:0}.shot-5 .cinema-mark{width:78px;height:78px;border:1px solid rgba(103,232,249,.45);border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;font:800 24px 'Space Grotesk';box-shadow:0 0 80px rgba(103,232,249,.18);animation:markPulse 1.8s ease-in-out infinite}.shot-5 h1{font:800 clamp(70px,14vw,220px)/.72 'Space Grotesk';letter-spacing:-.09em;margin:0}.shot-5 p{font:600 clamp(11px,1.5vw,18px) 'JetBrains Mono';letter-spacing:.5em;color:#a78bfa;margin:28px 0 22px}.shot-5>span{font:500 9px 'JetBrains Mono';letter-spacing:.22em;color:rgba(255,255,255,.42)}.cinema-progress{position:absolute;left:5vw;right:5vw;bottom:7.4vh;height:1px;background:rgba(255,255,255,.09);z-index:40}.cinema-progress span{display:block;height:100%;background:linear-gradient(90deg,#67e8f9,#a78bfa);box-shadow:0 0 10px #67e8f9;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.chapter-slate{min-height:52vh;border-block:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at center,rgba(103,232,249,.055),transparent 36%),var(--bg)}.chapter-slate::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49.8%,rgba(255,255,255,.035) 50%,transparent 50.2%);animation:chapterSweep 4.8s ease-in-out infinite}.chapter-slate span{font:600 9px 'JetBrains Mono';letter-spacing:.5em;color:var(--cyan);margin-bottom:18px}.chapter-slate strong{font:800 clamp(54px,10vw,150px)/.8 'Space Grotesk';letter-spacing:-.075em;color:var(--text);text-shadow:0 20px 80px rgba(0,0,0,.18)}.chapter-slate i{font:500 10px 'JetBrains Mono';font-style:normal;color:var(--muted);letter-spacing:.14em;margin-top:26px}.chapter-slate.finale strong{background:linear-gradient(90deg,var(--text),var(--cyan),var(--violet),var(--text));background-size:240% 100%;-webkit-background-clip:text;color:transparent;animation:gradientShift 5s linear infinite}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center}.hero::after{content:"SCENE 01 / ORIGIN";position:absolute;left:max(22px,calc((100vw - 1180px)/2));bottom:28px;font:500 8px 'JetBrains Mono';letter-spacing:.3em;color:var(--muted)}.hero-copy h1{animation:heroFocus 1.2s cubic-bezier(.2,.8,.2,1) both}.hero-visual{transform-style:preserve-3d;animation:cameraFloat 9s ease-in-out infinite}.project-card{transform-style:preserve-3d}.project-card:hover{transform:translateY(-10px) perspective(1000px) rotateX(1.8deg) rotateY(-1.2deg)}
+@keyframes letterboxIn{from{height:0}to{height:7vh}}@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(2%,-3%)}50%{transform:translate(-3%,2%)}75%{transform:translate(3%,4%)}100%{transform:translate(-2%,-2%)}}@keyframes scanFilm{to{top:100%}}@keyframes starPulse{0%,100%{opacity:.06;transform:scale(.5)}50%{opacity:.4;transform:scale(1.8)}}@keyframes cinemaDrift{to{transform:translate3d(4%,-2%,0) scale(1.08)}}@keyframes wordFlash{0%,100%{opacity:.35;transform:translateX(0)}50%{opacity:1;transform:translateX(8px)}}@keyframes markPulse{50%{transform:scale(1.08);box-shadow:0 0 120px rgba(103,232,249,.28)}}@keyframes chapterSweep{0%,100%{transform:translateX(-30%);opacity:.2}50%{transform:translateX(30%);opacity:1}}@keyframes heroFocus{from{opacity:0;filter:blur(18px);transform:scale(1.03)}to{opacity:1;filter:none;transform:none}}@keyframes cameraFloat{0%,100%{transform:translate3d(0,0,0) rotateX(0deg)}50%{transform:translate3d(0,-12px,0) rotateX(1.5deg)}}
+@media(max-width:760px){.cinema-wordwall{grid-template-columns:1fr;gap:7px}.cinema-wordwall span{text-align:center}.shot-4 h2{font-size:clamp(38px,11vw,72px)}.chapter-slate{min-height:40vh}.chapter-slate strong{font-size:clamp(52px,16vw,90px)}.cinema-skip{right:18px}.cinema-timecode{left:18px}.cinema-progress{left:18px;right:18px}.hero::after{left:18px}}
+@media(prefers-reduced-motion:reduce){.cinema-grain,.cinema-scan,.cinema-stars i,.cinema-wordwall span,.chapter-slate::before,.hero-visual{animation:none!important}.cinema-shot{transition:none}.cinema-intro{transition:none}}
 `;

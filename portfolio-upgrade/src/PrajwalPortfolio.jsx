@@ -1,0 +1,2335 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
+/* ============================================================
+   DATA
+   ============================================================ */
+
+const contact = {
+  name: "Prajwal Devaraj",
+  location: "United States",
+  email: "pdevaraj001@gmail.com",
+  linkedin: "https://linkedin.com/in/prajwaldevaraj",
+  github: "https://github.com/prajwal-devaraj",
+  portfolio: "https://prajwal-devaraj.github.io/PrajwalDevaraj_Portfolio/",
+  linktree: "https://linktr.ee/prajwaldevaraj",
+  x: "https://x.com/pdevaraj001",
+  huggingface: "https://huggingface.co/prajwaldevaraj",
+  scholar: "https://scholar.google.com/citations?hl=en&user=D40ny1EAAAAJ",
+  orcid: "https://orcid.org/0009-0006-0069-928X",
+  discord: "prajwaldevaraj",
+};
+
+const aboutParagraphs = [
+  "I’m a software engineer and AI/ML builder with an M.S. in Computer Science from Kent State University. My work spans backend systems, full-stack products, applied machine learning, data engineering, and agentic AI — with a focus on turning technically complex ideas into dependable software people can actually use.",
+  "At Kent State, I worked as a Graduate Research Assistant on healthcare and genomics ML, including ClinVar conflict prediction and gastrointestinal image analysis, while also teaching Operating Systems and Database Systems as a Teaching Assistant.",
+  "I enjoy engineering across the stack: designing APIs and data models, building production-minded services, evaluating ML systems, improving reliability and observability, and creating interfaces that make the underlying technology feel simple.",
+  "My strongest projects sit at the intersection of software engineering and intelligent systems — RAG and agentic search, multimodal and embodied AI, analytics pipelines, enterprise workflows, healthcare ML, and developer-facing platforms.",
+  "I care about ownership, clear communication, thoughtful tradeoffs, and measurable outcomes. I’m currently open to software engineering, backend, full-stack, applied AI/ML, and AI platform opportunities across the United States."
+];
+
+const professionalProfiles = [
+  { label: "GitHub", value: "prajwal-devaraj", href: contact.github, kind: "Code" },
+  { label: "LinkedIn", value: "prajwaldevaraj", href: contact.linkedin, kind: "Professional" },
+  { label: "Hugging Face", value: "prajwaldevaraj", href: contact.huggingface, kind: "AI / ML" },
+  { label: "Google Scholar", value: "Research profile", href: contact.scholar, kind: "Research" },
+  { label: "ORCID", value: "0009-0006-0069-928X", href: contact.orcid, kind: "Research ID" },
+  { label: "X", value: "@pdevaraj001", href: contact.x, kind: "Updates" },
+  { label: "Linktree", value: "All links", href: contact.linktree, kind: "Directory" },
+];
+
+const education = [
+  {
+    school: "Kent State University",
+    location: "Kent, OH, USA",
+    website: "https://www.kent.edu/",
+    degree: "M.S. in Computer Science",
+    period: "Aug 2024 – May 2026",
+    gpa: "3.966",
+    details:
+      "Advanced Database Systems, Data Mining, Social & Graph Networks, AI, ML & Deep Learning, Data Security & Privacy, Advanced Computer Graphics, IoT Integration, AI for Robotics.",
+  },
+  {
+    school: "JSS Academy of Technical Education, VTU",
+    location: "Bangalore, Karnataka, India",
+    website: "https://www.jssateb.ac.in/",
+    degree: "B.E. in Computer Science",
+    period: "Aug 2019 – Jun 2023",
+    details:
+      "Data Structures, Algorithms, DBMS, Web Development, Software Engineering, Operating Systems, OOP, Computer Networks, Computer Graphics, Cloud Computing, Mobile App Development, UI/UX, Cryptography.",
+  },
+];
+
+const skills = {
+  "Programming Languages": [
+    "Python",
+    "Java",
+    "C",
+    "C++",
+    "C#",
+    "JavaScript",
+    "TypeScript",
+    "SQL",
+    "Go",
+    "Kotlin",
+    "PHP",
+    "Rust",
+    "Shell",
+    "Bash"
+  ],
+
+  "Frontend / Web": [
+    "React",
+    "Next.js",
+    "React Native",
+    "Vue.js",
+    "Angular",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
+    "Bootstrap",
+    "Framer Motion",
+    "Responsive Design",
+    "Jinja2",
+    "Recharts",
+    "UI/UX",
+    "Design Systems",
+    "Accessibility"
+  ],
+
+  "Backend / APIs": [
+    "FastAPI",
+    "Flask",
+    "Django",
+    "Django REST Framework",
+    "Node.js",
+    "Express.js",
+    "ASP.NET",
+    "REST APIs",
+    "GraphQL",
+    "WebSockets",
+    "API Design",
+    "Microservices",
+    "Event-Driven Architecture",
+    "JWT",
+    "OAuth",
+    "RBAC",
+    "Background Jobs",
+    "Retry Queues"
+  ],
+
+  "Artificial Intelligence / Machine Learning": [
+    "Machine Learning",
+    "Deep Learning",
+    "Neural Networks",
+    "CNNs",
+    "MLPs",
+    "Mixture of Experts (MoE)",
+    "Computer Vision",
+    "Classification",
+    "Feature Engineering",
+    "Model Evaluation",
+    "Hyperparameter Tuning",
+    "Drift Detection",
+    "Explainable AI",
+    "Model Deployment",
+    "Inference Pipelines",
+    "Multi-GPU Training",
+    "Anomaly Detection",
+    "Time-Series Analysis"
+  ],
+
+  "Generative AI / LLM Engineering": [
+    "Generative AI",
+    "Large Language Models (LLMs)",
+    "Retrieval-Augmented Generation (RAG)",
+    "Prompt Engineering",
+    "LLM APIs",
+    "AI Agents",
+    "Agentic Workflows",
+    "Tool Calling",
+    "Function Calling",
+    "Semantic Search",
+    "Vector Search",
+    "Embeddings",
+    "Context Engineering",
+    "AI Search",
+    "Citation Mapping",
+    "Confidence Scoring",
+    "LLM Evaluation",
+    "AI-Assisted Development"
+  ],
+
+  "AI Frameworks / Libraries": [
+    "PyTorch",
+    "TensorFlow",
+    "Keras",
+    "scikit-learn",
+    "OpenCV",
+    "SHAP",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "Seaborn",
+    "Plotly",
+    "Librosa",
+    "NetworkX",
+    "Gensim",
+    "LangChain",
+    "LangGraph",
+    "MLflow"
+  ],
+
+  "Data Engineering / Analytics": [
+    "Apache Spark",
+    "PySpark",
+    "Apache Airflow",
+    "Apache Hive",
+    "Trino",
+    "ETL Pipelines",
+    "Data Pipelines",
+    "Big Data Processing",
+    "Data Warehousing",
+    "Data Lakes",
+    "Distributed Data Processing",
+    "Data Modeling",
+    "Analytics Pipelines",
+    "SQL Analytics",
+    "Batch Processing",
+    "Data Validation"
+  ],
+
+  "Databases / Storage": [
+    "PostgreSQL",
+    "PostGIS",
+    "MySQL",
+    "MongoDB",
+    "SQLite",
+    "SQL Server",
+    "Redis",
+    "DynamoDB",
+    "Supabase",
+    "pgvector",
+    "Database Design",
+    "Query Optimization",
+    "Indexing",
+    "Transactions",
+    "ACID",
+    "Sharding",
+    "Replication",
+    "Caching",
+    "Vector Databases",
+    "GeoJSON"
+  ],
+
+  "Cloud Computing": [
+    "AWS",
+    "Microsoft Azure",
+    "Google Cloud Platform (GCP)",
+    "Amazon EC2",
+    "Amazon S3",
+    "Amazon RDS",
+    "AWS Lambda",
+    "Amazon EKS",
+    "Amazon SQS",
+    "Amazon DynamoDB",
+    "AWS IAM",
+    "AWS VPC",
+    "Serverless Computing",
+    "Cloud Architecture",
+    "Cloud-Native Applications"
+  ],
+
+  "DevOps / Infrastructure": [
+    "Docker",
+    "Docker Compose",
+    "Kubernetes",
+    "Terraform",
+    "Git",
+    "GitHub",
+    "GitHub Actions",
+    "GitLab CI/CD",
+    "CI/CD",
+    "Linux",
+    "Nginx",
+    "Infrastructure as Code",
+    "Postman",
+    "Render",
+    "Vercel",
+    "Observability",
+    "Logging",
+    "Monitoring",
+    "Telemetry"
+  ],
+
+  "Distributed Systems / System Design": [
+    "Distributed Systems",
+    "System Design",
+    "Microservices Architecture",
+    "Event-Driven Systems",
+    "CAP Theorem",
+    "Load Balancing",
+    "Caching",
+    "Redis",
+    "Rate Limiting",
+    "Fault Tolerance",
+    "High Availability",
+    "Scalability",
+    "Horizontal Scaling",
+    "Failure Recovery",
+    "Retry Systems",
+    "Queues",
+    "Service Resilience",
+    "Distributed Storage",
+    "API Scalability"
+  ],
+
+  "Core Computer Science": [
+    "Data Structures & Algorithms",
+    "Object-Oriented Programming",
+    "Object-Oriented Design",
+    "Problem Solving",
+    "Time Complexity",
+    "Space Complexity",
+    "Big-O Analysis",
+    "Dynamic Programming",
+    "Graphs",
+    "Trees",
+    "Heaps",
+    "Hashing",
+    "Sliding Window",
+    "Recursion",
+    "Backtracking",
+    "Operating Systems",
+    "Database Management Systems",
+    "Computer Networks",
+    "Software Engineering"
+  ],
+
+  "Security": [
+    "AES-GCM",
+    "HMAC",
+    "bcrypt",
+    "JWT",
+    "OAuth",
+    "RBAC",
+    "Cryptography",
+    "Web Security",
+    "Authentication",
+    "Authorization",
+    "Data Security",
+    "Privacy",
+    "Secure API Design"
+  ],
+
+  "Robotics / Embodied AI": [
+    "ROS 2",
+    "Robot Navigation",
+    "Sensor Fusion",
+    "Perception Systems",
+    "Multimodal Fusion",
+    "World Models",
+    "Edge Inference",
+    "Embodied AI",
+    "First-Person AI",
+    "Action Planning",
+    "Agent Planning",
+    "Memory Systems",
+    "Telemetry Systems"
+  ],
+
+  "Software Engineering Practices": [
+    "Git Workflow",
+    "Code Reviews",
+    "Debugging",
+    "Testing",
+    "Unit Testing",
+    "Integration Testing",
+    "API Testing",
+    "Technical Documentation",
+    "Performance Optimization",
+    "Database Optimization",
+    "Root Cause Analysis",
+    "Automation",
+    "Agile Development"
+  ],
+
+  "Research / Experimentation": [
+    "AI Research",
+    "Experimental Design",
+    "Dataset Preparation",
+    "Model Benchmarking",
+    "Performance Evaluation",
+    "Research Prototyping",
+    "Literature Review",
+    "Reproducible Experiments",
+    "Multimodal AI Research",
+    "Distributed ML Experiments"
+  ],
+
+  "Currently Learning / Researching": [
+    "Agentic AI",
+    "Genetic AI",
+    "Evolutionary Algorithms",
+    "Machine Learning + Genetic AI + Agentic AI",
+    "Advanced Embodied Intelligence",
+    "Multimodal Reasoning",
+    "World Models",
+    "Autonomous AI Agents",
+    "Multi-Agent Systems",
+    "Long-Term Agent Memory",
+    "AI Planning & Reasoning",
+    "Advanced RAG",
+    "AI Search Engines",
+    "Edge AI",
+    "Robotics Intelligence",
+    "Distributed AI Systems",
+    "Generative AI Research"
+  ],
+
+  "Tools / Developer Productivity": [
+    "VS Code",
+    "Claude Code",
+    "GitHub Copilot",
+    "Postman",
+    "Jupyter Notebook",
+    "GitHub",
+    "Linux CLI",
+    "Docker CLI",
+    "MLflow"
+  ]
+};
+
+const experience = [
+  { role: "Software Engineer Intern", 
+    org: "Kent State University — Greenhouse Research", 
+    location: "Kent, Ohio, USA", 
+    period: "Jun 2026 – Aug 2026", 
+    points: [ 
+      "Worked on an IoT-based environmental monitoring system for greenhouse research and data collection.", 
+      "Integrated sensor data with backend storage to capture and organize environmental measurements for analysis.", 
+      "Supported database, dashboard, and alerting workflows to make greenhouse conditions easier to monitor.", 
+      "Worked with research-driven requirements and helped turn real-world sensor data into a usable monitoring pipeline.", 
+    ], 
+  },
+  {
+    role: "Graduate Research Assistant",
+    org: "Kent State University",
+    location: "Kent, OH, USA",
+    period: "May 2025 – May 2026",
+    points: [
+      "Doing AI/ML research on medical data, training models on a GPU cluster (4+ GPUs) alongside faculty and a small research team.",
+      "Main project is CodeTheGenome: predicting when genetic variant interpretations conflict, using the ClinVar dataset. Built the feature pipeline and trained an ensemble of XGBoost, LightGBM, and CatBoost models, landing at 93% accuracy — as far as I know, no one had tackled it quite this way before.",
+      "Also working on endoscopy image analysis for gastrointestinal cases - building models to spot blood clot patterns before and after gastric cancer surgery, using real clinical data from multiple hospitals.",
+      "A good chunk of the work is unglamorous: preprocessing pipelines, cleaning noisy data, and evaluating models honestly with precision/recall/F1 rather than just accuracy.",
+      "Helped write up the research for documentation and (hopefully, eventually) publication.",
+    ],
+  },
+  {
+    role: "Undergraduate Teaching Assistant",
+    org: "Kent State University",
+    location: "Kent, OH, USA",
+    period: "Sep 2025 – May 2026",
+    points: [
+      "TA for Operating Systems and Intro to Database System Design, supporting 120+ students across honors and regular sections.",
+      "Ran doubt-clearing sessions on CPU scheduling, memory management, concurrency, database design, and SQL — the stuff that trips most people up.",
+      "Covered full lectures on my own a few times when the professor was out.",
+      "Graded assignments, projects, and exams, and tried to give feedback students could actually use, not just a number.",
+      "Held regular office hours — a lot of it was just helping people get unstuck on their own projects and feel less intimidated by the material.",
+      "Helped with exam logistics and invigilation.",
+    ],
+  },
+  {
+    role: "Software Engineer Intern",
+    org: "Technofly Solutions",
+    location: "Bangalore, Karnataka, India",
+    period: "Aug 2022 – Sep 2022",
+    points: [
+      "Worked on a government transportation project — a bus transport management system.",
+      "Built responsive frontend pages with HTML/CSS/JS and backend pieces in Python.",
+      "Part of a 7-person dev team running sprints, so I got a real feel for agile development early on.",
+    ],
+  },
+  { role: "Software Engineer Intern", 
+    org: "Gowri Software Solutions", 
+    location: "Bangalore, Karnataka, India", 
+    period: "Dec 2020 – Jan 2021", 
+    points: [ 
+      "Worked on software development projects across frontend, backend, and database components.", 
+      "Built and maintained application features using programming, web development, and database fundamentals.", 
+      "Debugged issues, tested functionality, and improved existing application workflows as part of day-to-day development.", 
+      "Collaborated with developers on feature implementation and gained early hands-on experience with the software development lifecycle.", 
+    ], 
+  },
+  {
+    role: "Student Technical Operations Associate / Head Cashier / Student Ambassador",
+    org: "Kent State University Bookstore, Barnes & Noble College",
+    location: "Kent, OH, USA",
+    period: "Aug 2024 – May 2026",
+    points: [
+      "Started as a regular associate, got promoted to Head Cashier & Administrative Support based on how I handled the job.",
+      "Ran the Oracle-based retail stack day to day — TA2, OMS, KIOSK, POS, and the textbook management system — processing 500+ transactions a day with very few errors.",
+      "Became the person people came to when something broke — troubleshot POS and system issues in real time and cut down service interruptions noticeably.",
+      "Handled inventory coordination and textbook workflows during the chaos of semester start, when the store gets slammed by thousands of students at once.",
+      "Trained and onboarded 15+ new employees on the systems and workflows.",
+      "Ran the store solo during manager absences a few times — customer issues, reconciliation, all of it.",
+      "Selected as Student Ambassador for 2025–2026, representing the bookstore in campus outreach and events.",
+      "Ran a customer opt-in push that ended up posting the highest year-over-year increase company-wide — 12,000+ additional opt-ins and a 28% opt-in rate, recognized company-wide.",
+    ],
+  },
+  {
+    role: "Student Employee",
+    org: "Commerce Café, Culinary Services, Kent State University",
+    location: "Kent, OH, USA",
+    period: "Aug 2024 – Jan 2026",
+    points: [
+      "Opened and closed the café, kept inventory stocked, and made sure health and safety standards were actually followed, not just posted on a wall.",
+      "Trained new hires on operations and customer service.",
+      "Got good at staying calm and quick during the morning rush without the quality slipping.",
+      "Ended up taking on more senior responsibilities over time — coordinating the team, not just working the register.",
+    ],
+  },
+  {
+    role: "Student Catering Employee",
+    org: "Culinary Services, Kent State University",
+    location: "Kent, OH, USA",
+    period: "May 2025 – Aug 2025",
+    points: [
+      "Consistently picked for the university's higher-profile events — 50+ of them, including VIP gatherings and functions at the President's Residence.",
+      "Regularly put in charge of a crew of 5–15 staff during peak service, keeping things running when the pressure was highest.",
+      "Handled food prep, setup, and service for large events while keeping to strict food safety standards.",
+      "Got the 'Best Employee Recognition' award for reliability and leadership.",
+      "Trained newer staff on event protocol and service etiquette — this job taught me more about staying calm under pressure than most of my CS classes did.",
+    ],
+  },
+  {
+    role: "Administrator",
+    org: "Sri Guruvandana Global Pre-School",
+    location: "Bangalore, Karnataka, India",
+    period: "Mar 2020 – Jul 2023",
+    points: [
+      "Ran day-to-day operations for a school of 2,500+ students — scheduling, attendance, timetables, the whole administrative backbone.",
+      "Built out curriculum structures and monthly academic plans, and organized school events on top of that.",
+      "Handled admissions and parent communication, which taught me a lot about managing expectations with people who aren't going to read the fine print.",
+      "Also taught basic computer skills to kids aged 3–16, adjusting the approach a lot depending on the age group in front of me.",
+      "Won the Best Employee Award three years running (2021–2023) and an All-Time Best Performance Award.",
+      "Basically ran the place independently a lot of the time — this is where I first learned what it means to actually own something end to end.",
+    ],
+  },
+  {
+    role: "Teacher Training Intern",
+    org: "Edsmart Edu Services Pvt Ltd",
+    location: "Bangalore, Karnataka, India",
+    period: "May 2022",
+    points: [
+      "Went through a hands-on teacher training program across several partner schools.",
+      "Built lesson content around phonics and child development, and adapted my teaching style depending on the kids in the room.",
+    ],
+  },
+];
+
+const featuredProjects = [
+  {
+    title: "CivicPulse Bharat",
+    category: "AI-Powered Civic Engagement & Public Issue Platform",
+    impact: "Turns community problems into structured, visible, and actionable civic signals",
+    link: "https://github.com/prajwal-devaraj/CivicPulse-Bharat.git",
+    tech: "Next.js, TypeScript, React, SQLite, REST APIs, Tailwind CSS, AI Moderation, Data Visualization",
+    metrics: ["Issue tracking", "Community voting", "AI-assisted moderation"],
+    points: [
+      "Building a civic-tech platform where citizens can report local problems, support issues through voting, follow their progress, and turn scattered complaints into structured public signals.",
+      "Designed the product around a simple idea: people should not need political connections or viral social-media posts just to make a pothole, safety problem, sanitation issue, or public-service failure visible.",
+      "Built structured issue workflows for submitting reports, categorizing problems, tracking community engagement, and surfacing the issues that deserve attention based on participation and urgency.",
+      "Added AI-assisted moderation and content intelligence to reduce spam, duplicate reports, abusive submissions, and low-quality noise while keeping legitimate citizen voices visible.",
+      "Developing CivicPulse Bharat as a foundation for smarter civic analytics — helping communities understand recurring problems, geographic patterns, public priorities, and where action is actually needed.",
+    ],
+  },
+
+  {
+    title: "CivicLens AI",
+    category: "First-Person Multimodal & Embodied Intelligence Platform",
+    impact: "AI that perceives real-world situations, understands context, and decides when intelligent action may be needed",
+    link: "https://github.com/prajwal-devaraj/CivicLens-AI-First-Person-Multimodal-and-Embodied-Intelligence-Platform.git",
+    tech: "Python, PyTorch, ROS 2, FastAPI, React, PostgreSQL/PostGIS, Redis, Docker, Computer Vision, Multimodal AI, Agentic AI",
+    metrics: ["Multimodal perception", "Agentic reasoning", "Embodied AI architecture"],
+    points: [
+      "Building a first-person multimodal intelligence platform designed to help AI understand what is happening around it instead of waiting for a human to type a prompt.",
+      "Combining visual perception, sensor data, contextual memory, world modeling, and reasoning so the system can interpret real-world situations and distinguish ordinary activity from events that may require attention.",
+      "Designed a modular embodied-AI architecture spanning perception, multimodal fusion, memory, world modeling, reasoning, planning, action runtime, and telemetry rather than treating intelligence as a single black-box model.",
+      "Integrated ROS 2 navigation, sensor fusion, edge inference, FastAPI services, PostGIS-backed spatial context, Redis, Docker, retry queues, observability, and failure recovery for real-world deployment scenarios.",
+      "Exploring a broader question behind CivicLens AI: if technology can recognize faces, recommend videos, and generate content, can we also teach it to notice when a human may genuinely need help — responsibly, contextually, and with human oversight?",
+    ],
+  },
+
+  {
+    title: "Agentic Search Assistant",
+    category: "AI-Powered Search Overview Engine",
+    impact: "Citation-backed AI search that synthesizes live web results",
+    link: "https://github.com/prajwal-devaraj/Agentic-Search-Assistant.git",
+    tech: "React, FastAPI, PostgreSQL, OpenAI/Gemini API, Web Search API, RAG, Tailwind CSS",
+    period: "Jun 2026 – Present",
+    metrics: ["RAG pipeline", "Citation mapping", "Confidence scoring"],
+    points: [
+      "Building an AI search platform that works the way modern AI search overviews do — pulling live web results and synthesizing them into a cited answer instead of a list of links.",
+      "Wired web search APIs into an LLM summarization pipeline (RAG) so answers are grounded in what's actually on the page right now, not just the model's training data.",
+      "Added agentic behaviors on top of plain Q&A — comparison tables, follow-up questions, research summaries, checklists — so it acts more like a research assistant than a search box.",
+      "Built source citation mapping and confidence scoring specifically to cut down on hallucinated claims, since 'sounds right' isn't good enough when you're citing sources.",
+    ],
+  },
+  {
+    title: "What's Cooking",
+    category: "Full-Stack Recipe Finder",
+    impact: "Live app that matches recipes to what's actually in your kitchen",
+    link: "https://whats-cooking-app-kappa.vercel.app/",
+    tech: "Full-Stack, PostgreSQL, bcrypt, i18n (EN/HI/ES), Vercel Serverless",
+    period: "May 2026 – Jun 2026",
+    metrics: ["22 curated recipes", "3 languages", "Sub-2s cold start"],
+    points: [
+      "A recipe finder that scores 22 curated recipes by ingredient match percentage and filters by method, diet, and ingredients at once.",
+      "Wrote a free-text ingredient parser that handles commas, newlines, plain spaces, and 15+ multi-word phrases correctly — the naive split-on-comma approach kept mangling inputs.",
+      "Session-based auth with bcrypt-hashed passwords and lazy PostgreSQL connection pooling, so the app doesn't crash on cold start even before the database is configured.",
+      "Built a custom recipe generator — no third-party recipe API — covering 4 cooking methods and 2 diet types from free-text input.",
+      "Shipped in English, Hindi, and Spanish with the language choice saved per account, not just a browser toggle.",
+      "Deployed to Vercel as a serverless function with automatic schema migration on first request and sub-2-second cold starts.",
+    ],
+  },
+  {
+    title: "SocialSphere Analytics Platform",
+    category: "Product Analytics Data Lakehouse",
+    impact: "End-to-end analytics pipeline processing 400K+ events",
+    link: "https://github.com/prajwal-devaraj/SocialSphere-Analytics-Platform.git",
+    tech: "Python, FastAPI, PySpark, Apache Airflow, MinIO/S3, Parquet, Streamlit, Docker, pytest, GitHub Actions",
+    period: "Apr 2026 – Jun 2026",
+    metrics: ["400K+ events", "27 passing tests", "~60% faster WAU/MAU"],
+    points: [
+      "Built a full analytics lakehouse — Bronze/Silver/Gold medallion architecture — processing 400K+ synthetic social events across 12,000 simulated users: engagement, sessions, revenue, retention.",
+      "Wrote 6 PySpark ETL jobs for the gold tables. Found a cross-join bottleneck in the WAU/MAU calculation and rewrote it as a range join — cut that computation time by about 60%.",
+      "Built a 7-check data quality layer (null IDs, duplicates, bad timestamps, negative revenue, volume drops, partition completeness) that filters out the ~5% of corrupted records automatically.",
+      "Orchestrated everything with 3 Airflow DAGs — daily run, standalone monitoring, manual backfill — with independent gold jobs running in parallel to cut wall time.",
+      "Caught a real funnel-analysis bug through unit testing: users were counting at later funnel steps without passing through earlier ones, producing negative drop-off rates. Fixed it and wrote a regression test so it can't come back quietly. 27 tests total across schema, API, Spark transforms, and data quality.",
+      "Shipped a 6-page Streamlit dashboard — KPIs, retention heatmap, funnel, feature usage, revenue, anomaly detection — live on Streamlit Community Cloud.",
+    ],
+  },
+  {
+    title: "Procurement & Vendor Management Platform",
+    category: "Enterprise Full-Stack System",
+    impact: "End-to-end procurement lifecycle with multi-stage approvals",
+    link: "https://github.com/prajwal-devaraj/Procurement-Vendor-Management-Platform.git",
+    tech: "Node.js, Express, SQLite, JWT/RBAC, Jest, Supertest, Docker",
+    period: "May 2026 – Present",
+    metrics: ["83 tests · 100% route coverage", "6 user roles", "30+ endpoints"],
+    points: [
+      "A procurement system covering the full lifecycle — vendor onboarding, purchase approvals, PO generation, invoice matching, payment tracking — across 6 user roles.",
+      "Built a 4-stage approval engine (Employee → Manager → Finance → Procurement Admin) with JWT-based RBAC, so approvals don't happen over email chains anymore.",
+      "Auto-matches invoices to POs within a 2% tolerance band and flags mismatches before Finance even sees them.",
+      "Wrote 83 integration tests with Jest and Supertest against fully isolated SQLite instances, hitting 100% route coverage across 30+ endpoints.",
+      "Set up a multi-stage Dockerfile that runs the test suite during the build itself — if tests fail, the image doesn't build.",
+    ],
+  },
+  {
+    title: "SmartSpend",
+    category: "AI-Powered Personal Finance Platform",
+    impact: "Full-stack AI-driven financial intelligence system",
+    link: "https://github.com/prajwal-devaraj/SmartSpend.git",
+    tech: "React, Flask, MongoDB, Python, scikit-learn, Recharts, JWT, REST APIs",
+    period: "Aug 2025 – Dec 2025",
+    metrics: ["85–90% accuracy", "Team of 7", "5 core modules"],
+    points: [
+      "Led a team of 7 to build a personal finance app that actually tries to tell you something useful about your money, not just log transactions.",
+      "React frontend, Flask + MongoDB backend, with modular APIs that made it easy to bolt on new features without breaking old ones.",
+      "The core feature is a 'Days Left' predictor — spend forecasting and burn-rate analysis that estimates how long your money will realistically last, running at 85–90% prediction accuracy.",
+      "Added a behavioral layer I'm pretty proud of: an NWG (Need–Want–Guilt) classifier that tags spending by the emotion behind it, not just the category.",
+      "Built the dashboards in Recharts so people could actually see their spending trends instead of scrolling a transaction list.",
+      "Tested with real users spanning ages 18 to 65+, which surfaced a lot of usability issues a dev-only team would've missed.",
+    ],
+  },
+  {
+    title: "CodeTheGenome",
+    category: "AI/ML • Genomics • Healthcare",
+    impact: "ML system for genetic variant conflict prediction",
+    link: "https://github.com/prajwal-devaraj/CodeTheGenome.git",
+    tech: "Python, scikit-learn, XGBoost, LightGBM, CatBoost, SHAP",
+    period: "Jan 2025 – May 2026",
+    metrics: ["93.3% accuracy", "+6.3% vs baseline", "SHAP explainability"],
+    points: [
+      "Grad research project: predicting when two labs' interpretations of the same genetic variant conflict, using the ClinVar dataset.",
+      "Spent a lot of time on feature engineering before touching a model — genomic and statistical features that actually carried signal.",
+      "Trained an ensemble of XGBoost, LightGBM, and CatBoost with cross-validation, pushing accuracy from ~87% to 93.3%.",
+      "Didn't want a black box for something clinically relevant, so I added SHAP to explain why the model was flagging a conflict.",
+      "Full pipeline end to end: preprocessing, feature engineering, training, evaluation. Still ongoing, with a possible publication down the line.",
+    ],
+  },
+  {
+    title: "Adaptive Query Optimizer",
+    category: "ML + Database Systems",
+    impact: "30–40% query latency reduction",
+    link: "https://github.com/prajwal-devaraj/adaptive-query-optimizer",
+    tech: "Python, Flask, PostgreSQL, scikit-learn, Pandas, NumPy, System Design",
+    period: "Jan 2026 – Mar 2026",
+    metrics: ["↓30–40% latency", "500K queries", "↓20% MAE"],
+    points: [
+      "A system that watches SQL queries and picks a better execution strategy at runtime, instead of relying on Postgres's static planner alone.",
+      "Trained a Random Forest to predict query cost ahead of execution, which cut average latency by 30–40% on the benchmark workload.",
+      "Generated and ran against 200K–500K+ synthetic queries to get something close to a real-world workload for testing.",
+      "Pulled 10+ features straight out of the SQL itself — joins, predicates, aggregations, limits — to represent how complex a query actually is.",
+      "Added a feedback loop so the model retrains itself over time, which brought prediction error down another ~20%.",
+    ],
+  },
+  {
+    title: "Secure Healthcare DBaaS",
+    category: "Backend • Security • Cloud Systems",
+    impact: "Secure database service with encryption & access control",
+    link: "https://github.com/prajwal-devaraj/Secure-Database-as-a-Service-DBaaS-System.git",
+    tech: "Python, Flask, MySQL/PostgreSQL, AES, HMAC, RBAC, REST APIs",
+    period: "2025",
+    metrics: ["AES encryption", "RBAC"],
+    points: [
+      "A Database-as-a-Service platform built specifically for handling sensitive medical data securely.",
+      "AES encryption at rest and HMAC for integrity checks, so data can't be quietly tampered with.",
+      "Role-based access control with fine-grained permissions — not everyone touching the system should be able to see everything.",
+      "Modular backend APIs handling CRUD securely, built with extensibility in mind rather than a one-off script.",
+    ],
+  },
+  {
+    title: "Disaster Management System",
+    category: "Full-Stack • Real-Time Systems • APIs",
+    impact: "Real-time incident reporting & response system",
+    link: "https://github.com/prajwal-devaraj/DISASTER-MANAGEMENT-EARLY-WARNING-SYSTEM.git",
+    tech: "React, Flask, MongoDB, REST APIs, GeoJSON, Leaflet/Maps",
+    period: "2025",
+    metrics: ["Real-time updates", "Geo-tracking", "Multi-API"],
+    points: [
+      "A full-stack platform for reporting disasters and coordinating response in real time.",
+      "Map-based dashboard using GeoJSON and live location tracking, so incidents show up where they're actually happening, not just as a list.",
+      "Backend handles the real-time ingestion side — pulling in live disaster feeds from external APIs and getting that data to responders quickly.",
+      "Built to support multiple concurrent users without the real-time updates falling behind.",
+    ],
+  },
+];
+
+const allProjects = [
+  ["Agentic Search Assistant", "AI search overview engine with RAG, citation mapping, and confidence scoring.", "React, FastAPI, PostgreSQL, RAG"],
+  ["What's Cooking", "Live recipe finder with ingredient matching, 3-language support, custom recipe engine.", "Full-Stack, PostgreSQL, i18n"],
+  ["SocialSphere Analytics Platform", "Product analytics lakehouse processing 400K+ events with 6 PySpark ETL jobs.", "Python, FastAPI, PySpark, Airflow"],
+  ["Procurement & Vendor Management Platform", "Enterprise procurement lifecycle with multi-stage approvals and 83 tests.", "Node.js, Express, SQLite, JWT"],
+  ["Employee Self-Service Portal", "In-progress HR self-service platform.", "Full-Stack (in progress)"],
+  ["Edge-Cloud Collaborative Anomaly Detection for CNC Machining", "1M+ sensor time-series data, LSTM, drift detection, Streamlit dashboard, MLflow, Docker.", "Python, TensorFlow, scikit-learn, Streamlit"],
+  ["Mice Odour Detection & Behavior Analysis System", "Sensor-driven ML pipeline for mice behavior and odor signal classification.", "Python, scikit-learn, Pandas, NumPy"],
+  ["Firehawk Bird Detection & Environmental Monitoring System", "Computer vision system for Firehawk bird detection and wildfire monitoring research.", "Python, OpenCV, PyTorch/TensorFlow"],
+  ["Endoscopy Image Analysis", "Medical image analysis for gastrointestinal abnormality and blood clot pattern detection.", "Python, OpenCV, PyTorch/TensorFlow"],
+  ["CodeTheGenome", "ClinVar conflict prediction using ensemble ML and SHAP explainability.", "Python, XGBoost, LightGBM, CatBoost, SHAP"],
+  ["Mixture of Experts", "PyTorch MoE with gated routing and expert specialization.", "Python, PyTorch"],
+  ["CNN with 3×3 Kernels", "MNIST CNN with manual convolution verification and ~99% accuracy.", "Python, PyTorch"],
+  ["3-Layer MLP for MNIST", "NumPy neural network with Cross-Entropy, MSE, softmax stability, and ~97–98% accuracy.", "Python, NumPy"],
+  ["Adaptive Query Optimizer", "ML-powered SQL query latency prediction and optimization.", "Python, Flask, PostgreSQL"],
+  ["Web Crawler Project", "Crawler and metadata extraction platform.", "Python, Flask, BeautifulSoup"],
+  ["SmartSpend", "AI-powered finance platform with forecasting and dashboards.", "React, Flask, MongoDB"],
+  ["Secure Healthcare DBaaS", "Encrypted healthcare database-as-a-service system.", "Python, Flask, MySQL, Cryptography"],
+  ["Disaster Management System", "Real-time multi-hazard prediction and early-warning platform.", "Flask, scikit-learn, Leaflet.js"],
+  ["VishingAI", "Voice phishing detection from audio using MFCC features and a Flask API.", "Python, Flask, Librosa, scikit-learn"],
+  ["IDERS", "Geospatial disaster incident reporting system.", "Flask, MongoDB, GeoJSON"],
+  ["MNIST Visual Autoregressive Modeling", "Convolutional autoencoder for MNIST reconstruction.", "Python, PyTorch"],
+  ["Text2Language", "Language detection web app supporting 100+ languages.", "Python, Flask"],
+  ["AI Avatar & Cartoon Generator", "Image cartoonization web app using OpenCV.", "Python, Flask, OpenCV"],
+  ["Facebook Graph Network Analysis", "SNAP graph analytics using centrality, clustering, BFS, DFS.", "Python, NetworkX"],
+  ["Intelligent Alarm Clock Dashboard", "IoT-inspired dashboard with weather and transit alerts.", "C++, HTML, CSS, JS"],
+  ["PIRVISION", "Human presence detection using PIR sensor time-series data.", "Python, scikit-learn"],
+  ["ADL Recognition", "Unsupervised smart-home activity recognition.", "Python, clustering, PCA, t-SNE"],
+  ["Facial Emotion Recognition", "7-class CNN emotion classifier.", "Python, TensorFlow/Keras"],
+  ["Don't Touch Your Face", "CNN behavior detection for face-touch prevention.", "Python, TensorFlow/Keras"],
+  ["Network Anomaly Detection", "Frequent pattern mining and anomaly detection.", "Python, Apriori, ML"],
+  ["DeepWalk Graph Embedding", "Random walks + Word2Vec graph embeddings.", "Python, NetworkX, Gensim"],
+  ["MOOC User Action Analysis", "MOOC engagement analytics and forecasting.", "Python, Pandas, Tableau"],
+  ["Library Inventory Management System", "Flask + MongoDB library management app.", "Python, Flask, MongoDB"],
+  ["Real-Time Inventory Management System", "Flask + MongoDB inventory tracking system.", "Python, Flask, MongoDB"],
+  ["Bus Transportation Management System", "Transportation scheduling and route management platform.", "HTML, CSS, JS, PHP, MySQL"],
+  ["Integrated Fire & Wildlife Monitoring System", "OpenCV fire and wildlife monitoring system.", "Python, OpenCV"],
+  ["JSS Fashion UI/UX Design", "High-fidelity Figma prototype.", "Figma"],
+  ["Mobile Quiz App", "Android quiz application.", "Kotlin, Android"],
+  ["Bajpe Air Crash 3D Simulation", "3D OpenGL aircraft crash simulation.", "C++, OpenGL"],
+  ["Student & School Management Systems", "MERN and Node/Express management systems.", "React, Node, MongoDB"],
+  ["COVID Tracking Management System", "Patient registration and COVID case tracking system.", "HTML, CSS, JavaScript"],
+  ["Queries over Distributed Time-Series Data", "Distributed time-series query processing concepts.", "Distributed Systems"],
+];
+
+const publications = [
+  {
+    title: "CodeTheGenome: Machine Learning-Based Prediction of Genetic Variant Conflicts Using Ensemble Learning",
+    status: "In Progress",
+    venue: "Kent State University",
+    period: "2025 – 2026",
+    authors: "Prajwal Devaraj, Research Team",
+    description:
+      "Developed ensemble ML models using XGBoost, LightGBM, and CatBoost to predict conflicting genetic variant interpretations from ClinVar datasets, achieving 93.3% accuracy with SHAP-based explainability.",
+  },
+  {
+    title: "Endoscopy Image Analysis for Gastrointestinal Applications",
+    status: "Ongoing",
+    venue: "Kent State University",
+    period: "2025 – 2026",
+    authors: "Prajwal Devaraj, Faculty Research Team",
+    description:
+      "Conducting AI-driven medical imaging research for blood clot pattern detection before and after gastric cancer surgery using real-world multi-center clinical datasets.",
+  },
+  {
+    title: "Edge-Cloud Collaborative Anomaly Detection for CNC Machining",
+    status: "Complete",
+    venue: "Academic Research",
+    period: "2025",
+    authors: "Prajwal Devaraj",
+    description:
+      "Built anomaly detection pipelines on industrial multi-sensor CNC machining datasets using LSTM models, drift detection, and edge preprocessing techniques.",
+  },
+];
+
+const courses = [
+  {
+    role: "Corporate Training & Compliance",
+    org: "Barnes & Noble College (Kent State University Bookstore)",
+    period: "2024 – 2026",
+    points: [
+      "20+ corporate training modules covering compliance, security, and operational workflows.",
+      "Security & risk: Cyber Security Awareness, VeriFone PCI Compliance, Anti-Money Laundering Policy, Gift Card Fraud Prevention — all completed at 100%.",
+      "Ethics & workplace standards: Ethical Decision Making, Preventing Harassment & Discrimination, BNED Information Security Policy.",
+      "Operational systems: myADP Workforce Systems, shift/scheduling workflows, POS and transaction training.",
+    ],
+  },
+  {
+    role: "Full Stack Web Development",
+    org: "Technofly Solutions",
+    period: "Aug 2022",
+    points: [
+      "120+ hours of full-stack training across frontend and backend systems.",
+      "Built and deployed responsive UIs plus backend services with database integration.",
+    ],
+  },
+  {
+    role: "Full Stack Web Development",
+    org: "BETSOL",
+    period: "May 2022 – Jul 2022",
+    points: [
+      "Hands-on, end-to-end web development training — 3+ application modules built.",
+      "Worked with API integration, databases, and deployment/debugging workflows.",
+    ],
+  },
+  {
+    role: "Teacher Training",
+    org: "Edsmart Edu Services Pvt Ltd",
+    period: "May 2022",
+    points: ["Structured educational program design and lesson planning with practicing educators."],
+  },
+  {
+    role: "C Programming",
+    org: "NPTEL",
+    period: "Jun 2021 – Jan 2022",
+    points: ["50+ coding exercises building core programming fundamentals and algorithmic thinking."],
+  },
+  {
+    role: "Data Science Phase Shift",
+    org: "B.M.S.C.E",
+    period: "Sep 2019",
+    points: ["Hands-on data science workshop covering early ML fundamentals."],
+  },
+  {
+    role: "IT-Wizard Plus Programme",
+    org: "NIIT",
+    period: "Jun 2014 – Mar 2015",
+    points: ["Completed with an 'Outstanding' grade — my earliest formal IT foundation."],
+  },
+];
+
+const activities = [
+  {
+    group: "Graduate Leadership & Technical Involvement",
+    items: [
+      "Graduate Research Assistant — Kent State University (May 2025 – May 2026)",
+      "Undergraduate Teaching Assistant — Computer Science (Sep 2025 – May 2026)",
+      "Student Ambassador — Barnes & Noble College (2025–2026)",
+      "HACKSU Member — Hackathons, Engineering Events & Technical Workshops",
+      "Technical Club Member — Software Development & System Design",
+      "Kent Indian Association Member — Community & Cultural Engagement",
+    ],
+  },
+  {
+    group: "Undergraduate Leadership & Campus Contributions",
+    items: [
+      "CSE Coordinator — JSS Academy of Technical Education (2019 – 2023)",
+      "Student Project Coordinator & Technical Lead (2022 – 2023)",
+      "Sudo Club (Technical Club) — Head & Event Organizer",
+      "JSS Anveshan — CSE Department Head",
+      "VTU Pratibhotsava — Team Lead & Event Coordinator",
+      "Yodha NSS — Community Service & Student Volunteer",
+    ],
+  },
+  {
+    group: "Awards & Recognition",
+    items: [
+      "Company-Wide Recognition — Highest YoY Increase in Customer Opt-Ins, Barnes & Noble College (12,000+ opt-ins, 28% opt-in rate)",
+      "Best Student — Highest Score in Machine Learning & Deep Learning, Kent State University (Spring 2025)",
+      "Project Team Lead, Kent State University (Fall 2025)",
+      "State-Level Volleyball Player & Award (2019–2024)",
+      "Best Employee Recognition — Culinary Services, Kent State University",
+      "Student Ambassador Recognition — Barnes & Noble College",
+      "Campus Ambassador — JSS Academy of Technical Education (2021, 2022)",
+      "Mr. JSS Talented Winner (2020)",
+      "Pick & Speak Winner (2021)",
+    ],
+  },
+  {
+    group: "Creative & Public Engagement",
+    items: [
+      "Novel Writing & Storytelling",
+      "Poetry & Songwriting",
+      "Stage Acting & Theatre Performance",
+      "Debate & Public Speaking",
+      "Event Anchoring & Hosting (20+ Academic & Cultural Events)",
+    ],
+  },
+];
+
+const SHEETS = [
+  { id: "about", no: "01", label: "About" },
+  { id: "experience", no: "02", label: "Experience" },
+  { id: "projects", no: "03", label: "Projects" },
+  { id: "skills", no: "04", label: "Skills" },
+  { id: "research", no: "05", label: "Research" },
+  { id: "education", no: "06", label: "Education" },
+  { id: "profiles", no: "07", label: "Profiles" },
+];
+
+/* ============================================================
+   CHATBOT KNOWLEDGE BASE
+   A small local, keyword-matching assistant — no API key, no backend.
+   Every answer is derived from the same data arrays that render the page,
+   so it can't drift out of sync with the actual content.
+   ============================================================ */
+
+const CHAT_TOPICS = [
+  {
+    id: "greeting",
+    keywords: ["hi", "hello", "hey", "yo", "sup", "greetings"],
+    respond: () =>
+      "Hello — I can summarize Prajwal’s engineering background, projects, research, skills, education, and contact information.",
+  },
+  {
+    id: "about",
+    keywords: ["who is prajwal", "about prajwal", "tell me about him", "who are you", "background", "introduce", "about him"],
+    respond: () => `${aboutParagraphs[0]} ${aboutParagraphs[2]}`,
+  },
+  {
+    id: "graduate",
+    keywords: ["graduate", "graduated", "degree status", "still studying", "currently a student", "when did he finish"],
+    respond: () =>
+      `Yep — Prajwal wrapped up his M.S. in Computer Science at Kent State University (GPA ${education[0].gpa}/4.0) and is actively looking for Software Engineering and AI/ML roles. 🎓`,
+  },
+  {
+    id: "skills",
+    keywords: ["skill", "tech stack", "technologies", "stack", "language", "tools", "what can he do", "programming"],
+    respond: () => {
+      const groups = Object.keys(skills).slice(0, 5);
+      return `He's strongest in ${groups.join(", ")}. On languages: ${skills["Programming Languages"].slice(0, 7).join(", ")}. For AI/ML: ${skills["Artificial Intelligence / Machine Learning"].slice(0, 5).join(", ")}. His profile combines software engineering depth with applied AI/ML breadth.`;
+    },
+  },
+  {
+    id: "experience",
+    keywords: ["experience", "work history", "job", "worked", "role", "career", "employer"],
+    respond: () => {
+      const recent = experience.slice(0, 2);
+      return (
+        recent.map((e) => `${e.role} at ${e.org} (${e.period})`).join(" · ") +
+        ". Ask about a specific company for more detail, or see the Experience section for details"
+      );
+    },
+  },
+  {
+    id: "projects",
+    keywords: ["project", "built", "portfolio", "work on", "github repo", "shipped", "app"],
+    respond: () => {
+      const top = featuredProjects.slice(0, 3);
+      return `A few favorites: ${top.map((p) => p.title).join(", ")}. He's shipped ${allProjects.length}+ projects total — the Projects section has the full catalog with a search box.`;
+    },
+  },
+  {
+    id: "education",
+    keywords: ["education", "university", "school", "degree", "gpa", "study", "college"],
+    respond: () =>
+      education.map((e) => `${e.degree} — ${e.school} (${e.period}${e.gpa ? `, GPA ${e.gpa}` : ""})`).join(" · "),
+  },
+  {
+    id: "contact",
+    keywords: ["contact", "email", "reach", "linkedin", "hire him", "get in touch", "phone"],
+    respond: () =>
+      `Best way to reach him is ${contact.email} , or connect through LinkedIn, GitHub, or the professional profile links on this page.`,
+  },
+  {
+    id: "location",
+    keywords: ["location", "based", "where is he", "relocate", "remote", "live"],
+    respond: () => `He's based in ${contact.location} — United States.`,
+  },
+  {
+    id: "publications",
+    keywords: ["publication", "research", "paper", "genome", "clinvar"],
+    respond: () =>
+      `He's got ${publications.length} research efforts in progress, mostly applied ML in healthcare and genomics — see the Publications section for methodology and project details.`,
+  },
+  {
+    id: "hire",
+    keywords: ["why hire", "why should", "fit for", "strength", "good candidate", "perfect", "best fit"],
+    respond: () =>
+      "He pairs hands-on AI/ML research with real full-stack shipping experience — tested backend systems, production-style data pipelines, and apps that are actually live, not just coursework. The Projects and Experience sections show the strongest evidence of that work.",
+  },
+];
+
+function matchChatTopic(text) {
+  const q = text.toLowerCase();
+  let best = null;
+  let bestScore = 0;
+  for (const topic of CHAT_TOPICS) {
+    let score = 0;
+    for (const kw of topic.keywords) {
+      if (q.includes(kw)) score += kw.split(" ").length;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = topic;
+    }
+  }
+  return bestScore > 0 ? best : null;
+}
+
+/* ============================================================
+   PRIMITIVES
+   ============================================================ */
+
+function SectionHead({ eyebrow, title, sub }) {
+  return (
+    <div className="sectionHead reveal">
+      <div className="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+      {sub && <p className="sectionSub">{sub}</p>}
+    </div>
+  );
+}
+
+/** Floating "Ask about Prajwal" chat widget — local keyword matching, no backend or API key. */
+function Chatbot() {
+  const [open, setOpen] = useState(false);
+  const [greetShown, setGreetShown] = useState(false);
+  const [greetDismissed, setGreetDismissed] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [confetti, setConfetti] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      from: "bot",
+      text: "Welcome. I can give you a quick overview of Prajwal’s engineering experience, projects, research, skills, education, or contact details.",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const listRef = useRef(null);
+  const firedConfetti = useRef(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setGreetShown(true), 2200);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
+  }, [messages, open, typing]);
+
+  const fireConfetti = () => {
+    if (firedConfetti.current) return;
+    firedConfetti.current = true;
+    const colors = ["#4f46e5", "#9333ea", "#ec4899", "#22c55e", "#f59e0b"];
+    const pieces = Array.from({ length: 16 }).map((_, i) => ({
+      id: i,
+      x: (Math.random() - 0.5) * 160,
+      y: -Math.random() * 130 - 20,
+      r: Math.random() * 360,
+      c: colors[i % colors.length],
+      delay: Math.random() * 0.12,
+    }));
+    setConfetti(pieces);
+    setTimeout(() => setConfetti([]), 900);
+  };
+
+  const send = (raw) => {
+    const q = raw.trim();
+    if (!q) return;
+    setMessages((m) => [...m, { from: "user", text: q }]);
+    setInput("");
+    setTyping(true);
+    const topic = matchChatTopic(q);
+    const answer = topic
+      ? topic.respond()
+      : `Ooh, stumped me on that one 🤔 try asking about his skills, experience, projects, education, or contact info — or just email him at ${contact.email}, he answers those a lot faster than me.`;
+    setTimeout(() => {
+      setTyping(false);
+      setMessages((m) => [...m, { from: "bot", text: answer }]);
+    }, 500 + Math.random() * 400);
+  };
+
+  const quickReplies = ["Skills", "Projects", "Experience", "Research", "Contact"];
+
+  const openChat = () => {
+    setOpen(true);
+    setGreetDismissed(true);
+    fireConfetti();
+  };
+
+  return (
+    <div className={`chatWidget ${open ? "open" : ""}`}>
+      {confetti.length > 0 && (
+        <div className="confettiBurst" aria-hidden="true">
+          {confetti.map((p) => (
+            <span
+              key={p.id}
+              style={{
+                "--x": `${p.x}px`,
+                "--y": `${p.y}px`,
+                "--r": `${p.r}deg`,
+                background: p.c,
+                animationDelay: `${p.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {!open && greetShown && !greetDismissed && (
+        <div className="chatGreetBubble" onClick={openChat}>
+          <button
+            className="chatGreetClose"
+            onClick={(e) => {
+              e.stopPropagation();
+              setGreetDismissed(true);
+            }}
+            aria-label="Dismiss greeting"
+          >
+            ✕
+          </button>
+          Need a fast overview? Ask about experience, projects, research, or skills.
+        </div>
+      )}
+
+      {open && (
+        <div className="chatPanel">
+          <div className="chatHead">
+            <div>
+              <b>Portfolio assistant</b>
+              <span>Quick answers from the portfolio data on this page</span>
+            </div>
+            <button className="chatClose" onClick={() => setOpen(false)} aria-label="Close chat">
+              ✕
+            </button>
+          </div>
+
+          <div className="chatList" ref={listRef}>
+            {messages.map((m, i) => (
+              <div key={i} className={`chatBubble ${m.from}`}>
+                {m.text}
+              </div>
+            ))}
+            {typing && (
+              <div className="chatBubble bot chatTyping">
+                <span /><span /><span />
+              </div>
+            )}
+          </div>
+
+          <div className="chatQuick">
+            {quickReplies.map((q) => (
+              <button key={q} onClick={() => send(q.replace(/\s*[^\w\s]+$/u, ""))}>
+                {q}
+              </button>
+            ))}
+          </div>
+
+          <form
+            className="chatForm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              send(input);
+            }}
+          >
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask a question…"
+              aria-label="Ask a question about Prajwal"
+            />
+            <button type="submit" aria-label="Send">↑</button>
+          </form>
+        </div>
+      )}
+
+      <button
+        className="chatToggle"
+        onClick={() => {
+          setOpen((v) => {
+            if (!v) fireConfetti();
+            return !v;
+          });
+          setGreetDismissed(true);
+        }}
+        aria-label="Toggle chat with assistant"
+      >
+        <span className="chatToggleRing" aria-hidden="true" />
+        <span className="chatToggleIcon">{open ? "✕" : "👋"}</span>
+      </button>
+    </div>
+  );
+}
+
+/** Counts up from 0 to `to` once it scrolls into view. */
+function Counter({ to, suffix = "", duration = 1200, decimals = 0 }) {
+  const ref = useRef(null);
+  const [value, setValue] = useState(0);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !started.current) {
+            started.current = true;
+            const start = performance.now();
+            const tick = (now) => {
+              const p = Math.min(1, (now - start) / duration);
+              const eased = 1 - Math.pow(1 - p, 3);
+              setValue(to * eased);
+              if (p < 1) requestAnimationFrame(tick);
+              else setValue(to);
+            };
+            requestAnimationFrame(tick);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [to, duration]);
+
+  return (
+    <span ref={ref}>
+      {value.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+}
+
+/** Adds a subtle tilt + cursor-spotlight to a card on mouse move. Pure DOM mutation, no re-render. */
+function useTilt(strength = 8) {
+  const onMouseMove = (e) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    const rx = (0.5 - py) * strength;
+    const ry = (px - 0.5) * strength;
+    el.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    el.style.setProperty("--mx", `${px * 100}%`);
+    el.style.setProperty("--my", `${py * 100}%`);
+  };
+  const onMouseLeave = (e) => {
+    e.currentTarget.style.transform = "";
+  };
+  return { onMouseMove, onMouseLeave };
+}
+
+/** Small magnetic pull toward the cursor for buttons. */
+function useMagnet(strength = 0.35) {
+  const onMouseMove = (e) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    const mx = (e.clientX - r.left - r.width / 2) * strength;
+    const my = (e.clientY - r.top - r.height / 2) * strength;
+    el.style.transform = `translate(${mx}px, ${my}px)`;
+  };
+  const onMouseLeave = (e) => {
+    e.currentTarget.style.transform = "";
+  };
+  return { onMouseMove, onMouseLeave };
+}
+
+const HERO_ROLES = ["Software Engineer", "AI/ML Engineer", "Full-Stack Developer", "Problem Solver"];
+
+/** Types out, pauses, deletes, and moves to the next word — forever. */
+function useTypewriter(words, typingSpeed = 65, deletingSpeed = 38, pause = 1500) {
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length];
+    let timeout;
+    if (!deleting && text === current) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && text === "") {
+      setDeleting(false);
+      setWordIndex((i) => i + 1);
+    } else {
+      timeout = setTimeout(
+        () => setText((t) => (deleting ? current.slice(0, t.length - 1) : current.slice(0, t.length + 1))),
+        deleting ? deletingSpeed : typingSpeed
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [text, deleting, wordIndex, words, typingSpeed, deletingSpeed, pause]);
+
+  return text;
+}
+
+/* ============================================================
+   MAIN COMPONENT
+   ============================================================ */
+
+export default function PrajwalPortfolio() {
+  const [query, setQuery] = useState("");
+  const [navOpen, setNavOpen] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem("pd-theme");
+      if (saved === "light" || saved === "dark") return saved;
+    } catch (e) {}
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
+  const progressRef = useRef(null);
+  const heroRef = useRef(null);
+  const tilt = useTilt(7);
+  const magnet = useMagnet(0.3);
+  const typedRole = useTypewriter(HERO_ROLES);
+  const [introPhase, setIntroPhase] = useState("show");
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setIntroPhase("hide"), 1000);
+    const t2 = setTimeout(() => setIntroPhase("gone"), 1600);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("pd-theme", theme);
+    } catch (e) {}
+  }, [theme]);
+
+  useEffect(() => {
+    const t = requestAnimationFrame(() => setLoaded(true));
+    return () => cancelAnimationFrame(t);
+  }, []);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("show");
+        });
+      },
+      { threshold: 0.1 }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [showAllProjects]);
+
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop;
+        const height = h.scrollHeight - h.clientHeight;
+        const pct = height > 0 ? (scrolled / height) * 100 : 0;
+        if (progressRef.current) progressRef.current.style.width = `${pct}%`;
+        setNavScrolled(scrolled > 8);
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const onHeroMove = (e) => {
+    const el = heroRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+    el.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+  };
+
+  const filteredProjects = useMemo(() => {
+    const q = query.toLowerCase().trim();
+    if (!q) return allProjects;
+    return allProjects.filter(([title, desc, tech]) =>
+      `${title} ${desc} ${tech}`.toLowerCase().includes(q)
+    );
+  }, [query]);
+
+  return (
+    <div className="site" data-theme={theme}>
+      {introPhase !== "gone" && (
+        <div className={`introOverlay ${introPhase === "hide" ? "hide" : ""}`} aria-hidden="true">
+          <div className="introMark">PD</div>
+          <div className="introName">Prajwal Devaraj</div>
+        </div>
+      )}
+
+      <div className="progressBar"><span ref={progressRef} /></div>
+
+      <header className={`nav ${navScrolled ? "scrolled" : ""}`}>
+        <div className="navInner">
+          <a className="navBrand" href="#top">Prajwal Devaraj</a>
+
+          <button
+            className="navToggle"
+            onClick={() => setNavOpen((v) => !v)}
+            aria-expanded={navOpen}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
+
+          <nav className={`navLinks ${navOpen ? "open" : ""}`}>
+            {SHEETS.map((s) => (
+              <a key={s.id} href={`#${s.id}`} onClick={() => setNavOpen(false)}>{s.label}</a>
+            ))}
+            <button
+              className="themeToggle"
+              onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? "Light" : "Dark"}
+            </button>
+            <a className="navCta" href={`mailto:${contact.email}`} onClick={() => setNavOpen(false)} {...magnet}>
+              Contact
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="top">
+        {/* ---------- HERO ---------- */}
+        <section className="hero heroExecutive" ref={heroRef} onMouseMove={onHeroMove}>
+          <span className="blob blobOne" aria-hidden="true" />
+          <span className="blob blobTwo" aria-hidden="true" />
+          <span className="blob blobThree" aria-hidden="true" />
+          <span className="heroSpot" aria-hidden="true" />
+
+          <div className={`heroInner heroExecutiveInner ${loaded ? "loaded" : ""}`}>
+            <div className="heroAvailability" style={{ "--d": 0 }}>
+              <span className="statusDot" aria-hidden="true" /> Open to Software Engineering &amp; Applied AI opportunities
+            </div>
+
+            <p className="heroKicker" style={{ "--d": 1 }}>
+              {typedRole}<span className="caret" aria-hidden="true">|</span>
+            </p>
+
+            <h1 style={{ "--d": 2 }}>
+              I build <span className="gradText">AI-native products</span> and reliable software systems.
+            </h1>
+
+            <p className="heroLede heroLedeExecutive" style={{ "--d": 3 }}>
+              Software Engineer with an M.S. in Computer Science from Kent State University, spanning
+              backend engineering, full-stack development, applied AI/ML, data platforms, and agentic systems.
+              I turn ambiguous problems into production-minded software that is measurable, testable, and built to scale.
+            </p>
+
+            <div className="heroActions" style={{ "--d": 4 }}>
+              <a className="btn btnPrimary" href="#projects" {...magnet}>Explore selected work</a>
+              <a className="btn btnSecondary" href={`mailto:${contact.email}`} {...magnet}>Contact me</a>
+              <a className="btn btnSecondary" href={contact.github} target="_blank" rel="noreferrer" {...magnet}>GitHub ↗</a>
+            </div>
+
+            <div className="heroSignalRow" style={{ "--d": 5 }}>
+              <span>Backend &amp; APIs</span><span>Applied AI / ML</span><span>Agentic AI &amp; RAG</span>
+              <span>Full-Stack</span><span>Data &amp; Distributed Systems</span>
+            </div>
+
+            <div className="heroFacts heroFactsExecutive" style={{ "--d": 6 }}>
+              <div><span>Selected ML result</span><b>93.3%</b><small>ClinVar conflict prediction</small></div>
+              <div><span>Engineering portfolio</span><b><Counter to={45} suffix="+" /></b><small>Projects across software &amp; AI</small></div>
+              <div><span>Graduate GPA</span><b>3.97 / 4.0</b><small>M.S. Computer Science</small></div>
+              <div><span>Location</span><b>United States</b><small>Open to relocation</small></div>
+            </div>
+          </div>
+        </section>
+
+        <div className="wrap">
+          {/* ---------- ABOUT ---------- */}
+          <section id="about" className="section">
+            <SectionHead eyebrow="About" title="A bit more about me" />
+            <div className="aboutText reveal">
+              {aboutParagraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          <section className="proofStrip reveal" aria-label="Professional highlights">
+            <div><b>Research + Engineering</b><span>Healthcare ML, genomics, multimodal AI, backend systems</span></div>
+            <div><b>Production mindset</b><span>Testing, CI/CD, observability, APIs, data quality, deployment</span></div>
+            <div><b>Cross-functional range</b><span>Research, teaching, product building, operations, leadership</span></div>
+          </section>
+
+          {/* ---------- EXPERIENCE ---------- */}
+          <section id="experience" className="section">
+            <SectionHead eyebrow="Experience" title="Where I've worked" />
+            <div className="expList">
+              {experience.map((job, i) => (
+                <details className="expItem reveal" key={i} open={i < 3} style={{ "--d": i }}>
+                  <summary>
+                    <div className="expDot" aria-hidden="true" />
+                    <div className="expMain">
+                      <div className="expTop">
+                        <h3>{job.role}</h3>
+                        <span className="expPeriod">{job.period}</span>
+                      </div>
+                      <div className="expOrg">{job.org} · {job.location}</div>
+                    </div>
+                  </summary>
+                  <ul>
+                    {job.points.map((p, j) => (
+                      <li key={j}>{p}</li>
+                    ))}
+                  </ul>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          {/* ---------- PROJECTS ---------- */}
+          <section id="projects" className="section">
+            <SectionHead
+              eyebrow="Projects"
+              title="Things I've built"
+              sub="A handful of the projects I'm most proud of - full catalog of 30+ below."
+            />
+            <div className="projectGrid">
+              {featuredProjects.map((proj, i) => (
+                <a
+                  className="projectCard reveal"
+                  key={proj.title}
+                  href={proj.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ "--d": i % 4 }}
+                  {...tilt}
+                >
+                  <div className="projectCardTop">
+                    <span className="projectCat">{proj.category}</span>
+                    <span className="projectArrow" aria-hidden="true">↗</span>
+                  </div>
+                  <h3>{proj.title}</h3>
+                  <p className="projectImpact">{proj.impact}</p>
+                  <ul className="projectPoints">
+                    {proj.points.slice(0, 3).map((p, j) => (
+                      <li key={j}>{p}</li>
+                    ))}
+                  </ul>
+                  {proj.metrics && (
+                    <div className="metricRow">
+                      {proj.metrics.map((m) => (
+                        <span key={m}>{m}</span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="projectTech">{proj.tech}</div>
+                </a>
+              ))}
+            </div>
+
+            <div className="catalog reveal">
+              <button
+                className="catalogToggle"
+                onClick={() => setShowAllProjects((v) => !v)}
+                aria-expanded={showAllProjects}
+              >
+                {showAllProjects ? "Hide full catalog ↑" : `See all ${allProjects.length} projects ↓`}
+              </button>
+
+              {showAllProjects && (
+                <div className="catalogBody">
+                  <input
+                    type="text"
+                    placeholder="Search by name, stack, or keyword…"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+                  <div className="catalogList">
+                    {filteredProjects.map(([title, desc, tech]) => (
+                      <div className="catalogRow" key={title}>
+                        <div className="catalogName">{title}</div>
+                        <div className="catalogDesc">{desc}</div>
+                        <div className="catalogTech">{tech}</div>
+                      </div>
+                    ))}
+                    {filteredProjects.length === 0 && (
+                      <div className="catalogEmpty">No matches — try a different keyword.</div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* ---------- SKILLS ---------- */}
+          <section id="skills" className="section">
+            <SectionHead eyebrow="Skills" title="What I work with" />
+
+            <div className="skillMarquee" aria-hidden="true">
+              <div className="skillMarqueeTrack">
+                {[...Object.values(skills).flat(), ...Object.values(skills).flat()].map((s, i) => (
+                  <span key={i}>{s}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="skillGrid">
+              {Object.entries(skills).map(([group, items], gi) => (
+                <div className="skillGroup reveal" key={group} style={{ "--d": gi }}>
+                  <div className="skillGroupLabel">{group}</div>
+                  <div className="chipRow">
+                    {items.map((s, si) => (
+                      <span className="chip" key={s} style={{ "--d": si }}>{s}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ---------- EDUCATION ---------- */}
+          <section id="education" className="section">
+            <SectionHead eyebrow="Education" title="Academic background" />
+            <div className="eduGrid">
+              {education.map((item, i) => (
+                <div className="eduCard reveal" key={item.school} style={{ "--d": i }} {...tilt}>
+                  <div className="eduCardTop">
+                    <a href={item.website} target="_blank" rel="noreferrer" className="eduSchool">
+                      {item.school}
+                    </a>
+                    <span className="eduPeriod">{item.period}</span>
+                  </div>
+                  <div className="eduDegree">{item.degree}</div>
+                  <div className="eduLocation">{item.location}{item.gpa ? ` · GPA ${item.gpa}` : ""}</div>
+                  <p className="eduDetails">{item.details}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ---------- PUBLICATIONS ---------- */}
+          <section id="research" className="section">
+            <SectionHead eyebrow="Research" title="Research & technical investigation" sub="Applied machine learning work across genomics, healthcare, and intelligent systems." />
+            <div className="pubList">
+              {publications.map((pub, i) => (
+                <div className="pubCard reveal" key={pub.title} style={{ "--d": i }}>
+                  <div className="pubTop">
+                    <h3>{pub.title}</h3>
+                    <span className="pubStatus">{pub.status}</span>
+                  </div>
+                  <div className="pubMeta">{pub.venue} · {pub.period}</div>
+                  <div className="pubAuthors">{pub.authors}</div>
+                  <p>{pub.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ---------- PROFILES ---------- */}
+          <section id="profiles" className="section">
+            <SectionHead
+              eyebrow="Professional presence"
+              title="Code, research & public profiles"
+              sub="A single place for engineering work, research identity, model work, and professional updates."
+            />
+            <div className="profileGrid">
+              {professionalProfiles.map((profile, i) => (
+                <a
+                  className="profileCard reveal"
+                  href={profile.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={profile.label}
+                  style={{ "--d": i % 4 }}
+                >
+                  <span className="profileKind">{profile.kind}</span>
+                  <div className="profileTitleRow">
+                    <h3>{profile.label}</h3><span aria-hidden="true">↗</span>
+                  </div>
+                  <p>{profile.value}</p>
+                </a>
+              ))}
+              <div className="profileCard reveal discordCard">
+                <span className="profileKind">Community</span>
+                <div className="profileTitleRow"><h3>Discord</h3></div>
+                <p>{contact.discord}</p>
+                <button
+                  type="button"
+                  className="copyDiscord"
+                  onClick={() => navigator.clipboard?.writeText(contact.discord)}
+                >
+                  Copy username
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* ---------- COURSES ---------- */}
+          <section id="courses" className="section secondarySection">
+            <SectionHead eyebrow="Training" title="Courses & certifications" />
+            <div className="courseGrid">
+              {courses.map((c, i) => (
+                <div className="courseCard reveal" key={c.role + c.org} style={{ "--d": i % 4 }}>
+                  <div className="courseTop">
+                    <b>{c.role}</b>
+                    <span>{c.period}</span>
+                  </div>
+                  <div className="courseOrg">{c.org}</div>
+                  <ul>
+                    {c.points.map((p, j) => (
+                      <li key={j}>{p}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ---------- ACTIVITIES ---------- */}
+          <section id="activities" className="section secondarySection">
+            <SectionHead eyebrow="Activities" title="Beyond the job description" />
+            <div className="activityGrid">
+              {activities.map((group, i) => (
+                <div className="activityCard reveal" key={group.group} style={{ "--d": i }}>
+                  <div className="activityLabel">{group.group}</div>
+                  <ul>
+                    {group.items.map((item, j) => (
+                      <li key={j}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <footer className="footer">
+          <div className="footerInner footerExecutive">
+            <div>
+              <div className="footerName">Prajwal Devaraj</div>
+              <div className="footerTag">Software Engineer · AI/ML Engineer · Backend &amp; Full-Stack Developer</div>
+              <div className="footerFine">M.S. Computer Science, Kent State University · United States</div>
+            </div>
+            <div className="footerLinks footerLinkGrid">
+              <a href={`mailto:${contact.email}`}>Email</a>
+              <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
+              <a href={contact.scholar} target="_blank" rel="noreferrer">Scholar</a>
+              <a href={contact.huggingface} target="_blank" rel="noreferrer">Hugging Face</a>
+              <a href={contact.orcid} target="_blank" rel="noreferrer">ORCID</a>
+            </div>
+          </div>
+        </footer>
+      </main>
+
+      <Chatbot />
+
+      <style>{`
+        :root {
+          --bg: #ffffff;
+          --bg-soft: #f6f7fb;
+          --card: #ffffff;
+          --border: #e6e8ef;
+          --text: #14161f;
+          --text-soft: #565b6b;
+          --text-faint: #8f93a3;
+          --accent: #4f46e5;
+          --accent-dark: #4338ca;
+          --accent-soft: #eef1ff;
+          --accent-glow: rgba(79,70,229,0.22);
+          --violet: #9333ea;
+          --pink: #ec4899;
+          --brand-gradient: linear-gradient(120deg, var(--accent), var(--violet) 55%, var(--pink));
+          --nav-bg: rgba(255,255,255,0.86);
+          --nav-bg-scrolled: rgba(255,255,255,0.96);
+          --radius: 14px;
+        }
+
+        .site[data-theme="dark"] {
+          --bg: #0f1117;
+          --bg-soft: #161922;
+          --card: #1a1e29;
+          --border: #2b3040;
+          --text: #f1f2f6;
+          --text-soft: #b8bccb;
+          --text-faint: #82879b;
+          --accent: #818cf8;
+          --accent-dark: #a5b4fc;
+          --accent-soft: rgba(129,140,248,0.16);
+          --accent-glow: rgba(129,140,248,0.3);
+          --nav-bg: rgba(15,17,23,0.86);
+          --nav-bg-scrolled: rgba(15,17,23,0.96);
+        }
+        .site { transition: background-color .3s ease, color .3s ease; }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        .site {
+          background: var(--bg);
+          color: var(--text);
+          font-family: "Inter", "Segoe UI", sans-serif;
+          min-height: 100vh;
+          line-height: 1.65;
+          -webkit-font-smoothing: antialiased;
+          overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: "Inter Tight", "Inter", sans-serif; letter-spacing: -0.02em; }
+        a { color: var(--accent); text-decoration: none; }
+
+        /* ---------- Progress bar ---------- */
+        .progressBar { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 65; background: transparent; }
+        .progressBar span {
+          display: block; height: 100%; width: 0%;
+          background: var(--brand-gradient); background-size: 200% 100%;
+          animation: gradientShift 4s linear infinite;
+          transition: width 0.1s linear;
+        }
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 200% 50%; }
+        }
+
+        /* ---------- Nav ---------- */
+        .nav {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+          background: var(--nav-bg); backdrop-filter: blur(10px);
+          border-bottom: 1px solid transparent;
+          transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+        .nav.scrolled { border-color: var(--border); box-shadow: 0 4px 24px rgba(20,22,31,0.08); background: var(--nav-bg-scrolled); }
+        #top { padding-top: 66px; }
+        .navInner {
+          max-width: 1120px; margin: 0 auto; padding: 16px 24px;
+          display: flex; align-items: center; justify-content: space-between; gap: 20px;
+        }
+        .navBrand { font-weight: 700; font-size: 15px; color: var(--text); transition: color .2s; }
+        .navBrand:hover { color: var(--accent); }
+        .navToggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; }
+        .navToggle span { width: 20px; height: 2px; background: var(--text); display: block; border-radius: 2px; }
+        .navLinks { display: flex; align-items: center; gap: 22px; }
+        .navLinks a:not(.navCta) {
+          font-size: 14px; color: var(--text-soft); font-weight: 500; position: relative; padding-bottom: 3px;
+        }
+        .navLinks a:not(.navCta)::after {
+          content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px;
+          background: var(--brand-gradient); border-radius: 2px; transition: right .22s ease;
+        }
+        .navLinks a:not(.navCta):hover { color: var(--text); }
+        .navLinks a:not(.navCta):hover::after { right: 0; }
+        .themeToggle {
+          width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border);
+          background: var(--bg-soft); cursor: pointer; font-size: 15px; display: flex;
+          align-items: center; justify-content: center; transition: border-color .2s, transform .2s;
+        }
+        .themeToggle:hover { border-color: var(--accent); transform: rotate(15deg); }
+        .navCta {
+          background: var(--brand-gradient); background-size: 200% 100%; color: #fff !important;
+          padding: 8px 16px; border-radius: 999px;
+          font-weight: 600; font-size: 13.5px; display: inline-block;
+          transition: background-position .35s ease, box-shadow .2s, transform .15s;
+        }
+        .navCta:hover { background-position: 100% 0; box-shadow: 0 6px 18px var(--accent-glow); transform: translateY(-1px); }
+
+        /* ---------- Hero ---------- */
+        .hero {
+          position: relative; overflow: hidden; background: var(--bg-soft);
+          border-bottom: 1px solid var(--border); isolation: isolate;
+        }
+        .heroSpot {
+          position: absolute; inset: 0; pointer-events: none; z-index: 0;
+          background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 30%), var(--accent-glow), transparent 60%);
+          opacity: 0.7; transition: opacity .3s ease;
+        }
+        .blob {
+          position: absolute; border-radius: 50%; filter: blur(70px); z-index: 0; opacity: 0.55;
+        }
+        .blobOne {
+          width: 480px; height: 480px; top: -180px; right: -140px;
+          background: radial-gradient(circle, var(--violet), transparent 70%);
+          animation: drift1 14s ease-in-out infinite;
+        }
+        .blobTwo {
+          width: 380px; height: 380px; bottom: -160px; left: -110px;
+          background: radial-gradient(circle, var(--accent), transparent 70%);
+          animation: drift2 18s ease-in-out infinite;
+        }
+        .blobThree {
+          width: 300px; height: 300px; top: 40%; left: 55%;
+          background: radial-gradient(circle, var(--pink), transparent 70%);
+          animation: drift3 22s ease-in-out infinite; opacity: 0.35;
+        }
+        @keyframes drift1 {
+          0%, 100% { transform: translate(0,0) scale(1) rotate(0deg); }
+          50% { transform: translate(-40px, 40px) scale(1.15) rotate(12deg); }
+        }
+        @keyframes drift2 {
+          0%, 100% { transform: translate(0,0) scale(1) rotate(0deg); }
+          50% { transform: translate(34px, -34px) scale(1.18) rotate(-10deg); }
+        }
+        @keyframes drift3 {
+          0%, 100% { transform: translate(0,0) scale(1); }
+          50% { transform: translate(-20px, -30px) scale(1.25); }
+        }
+
+        .heroInner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 96px 24px 72px; }
+        .heroInner > * {
+          opacity: 0; transform: translateY(18px);
+          transition: opacity .6s ease, transform .6s ease;
+          transition-delay: calc(var(--d, 0) * 100ms);
+        }
+        .heroInner.loaded > * { opacity: 1; transform: none; }
+
+        .heroKicker { font-size: 13.5px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 16px; min-height: 1.2em; }
+        .caret { display: inline-block; margin-left: 2px; color: var(--accent); animation: caretBlink 0.9s steps(1) infinite; }
+        @keyframes caretBlink { 50% { opacity: 0; } }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; margin: 0 0 20px; }
+        .gradText {
+          background: var(--brand-gradient); background-size: 200% auto;
+          -webkit-background-clip: text; background-clip: text; color: transparent;
+          animation: gradientShift 6s linear infinite;
+        }
+        .heroLede { font-size: 18px; color: var(--text-soft); margin: 0 0 32px; max-width: 62ch; }
+        .heroActions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+        .btn {
+          font-weight: 600; font-size: 14.5px; padding: 12px 22px; border-radius: 999px;
+          border: 1px solid transparent; display: inline-block; transition: background .2s, background-position .35s ease, color .2s, border-color .2s, box-shadow .2s, transform .15s ease-out;
+        }
+        .btnPrimary { background: var(--brand-gradient); background-size: 200% 100%; color: #fff; }
+        .btnPrimary:hover { background-position: 100% 0; box-shadow: 0 12px 28px var(--accent-glow); transform: translateY(-2px); }
+        .btnSecondary { background: var(--card); border-color: var(--border); color: var(--text); }
+        .btnSecondary:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 8px 20px rgba(20,22,31,0.06); transform: translateY(-2px); }
+        .heroFacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; border-top: 1px solid var(--border); padding-top: 28px; }
+        .heroFacts div { display: flex; flex-direction: column; gap: 4px; }
+        .heroFacts span { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); font-weight: 600; }
+        .heroFacts b { font-size: 14.5px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+
+        /* ---------- Layout ---------- */
+        .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; transition-delay: calc(var(--d, 0) * 70ms); }
+        .reveal.show { opacity: 1; transform: none; }
+
+        .section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+        .section:last-of-type { border-bottom: none; }
+        .sectionHead { max-width: 640px; margin-bottom: 40px; }
+        .eyebrow { font-size: 12.5px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+        .section h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; margin: 0 0 6px; }
+        .sectionSub { color: var(--text-soft); font-size: 15.5px; margin: 0; }
+
+        /* ---------- About ---------- */
+        .aboutText { max-width: 72ch; display: grid; gap: 16px; font-size: 16.5px; color: var(--text-soft); }
+        .aboutText p:first-child { font-size: 18px; color: var(--text); }
+
+        /* ---------- Experience ---------- */
+        .expList { display: grid; gap: 2px; }
+        .expItem {
+          border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px;
+          margin-bottom: 12px; background: var(--card); transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .expItem:hover { border-color: var(--accent); box-shadow: 0 8px 22px rgba(20,22,31,0.05); }
+        .expItem summary { list-style: none; cursor: pointer; display: flex; align-items: flex-start; gap: 14px; }
+        .expItem summary::-webkit-details-marker { display: none; }
+        .expDot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); margin-top: 8px; flex-shrink: 0; position: relative; }
+        .expDot::after {
+          content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--accent);
+          opacity: 0; animation: pulseRing 2.6s ease-out infinite;
+        }
+        @keyframes pulseRing {
+          0% { transform: scale(0.6); opacity: 0.5; }
+          70% { transform: scale(1.6); opacity: 0; }
+          100% { opacity: 0; }
+        }
+        .expMain { flex: 1; min-width: 0; }
+        .expTop { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+        .expTop h3 { font-size: 17.5px; font-weight: 700; margin: 0; }
+        .expPeriod { font-size: 12.5px; color: var(--text-faint); font-weight: 500; white-space: nowrap; }
+        .expOrg { font-size: 13.5px; color: var(--text-soft); margin-top: 2px; }
+        .expItem ul { margin: 16px 0 0 23px; padding: 0; color: var(--text-soft); font-size: 14.5px; display: grid; gap: 8px; }
+        .expItem[open] summary .expDot { box-shadow: 0 0 0 4px var(--accent-soft); }
+
+        /* ---------- Projects ---------- */
+        .projectGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 28px; }
+        .projectCard {
+          position: relative; display: block; border: 1px solid var(--border); border-radius: var(--radius);
+          padding: 24px; background: var(--card); overflow: hidden;
+          transition: border-color .2s ease, box-shadow .25s ease, transform .12s ease-out;
+          transform-style: preserve-3d; will-change: transform;
+        }
+        .projectCard::after {
+          content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px;
+          background: var(--brand-gradient); opacity: 0; pointer-events: none;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor; mask-composite: exclude;
+          transition: opacity .25s ease;
+        }
+        .projectCard:hover::after { opacity: 1; }
+        .projectCard::before {
+          content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+          background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), var(--accent-glow), transparent 65%);
+          transition: opacity .25s ease;
+        }
+        .projectCard:hover { border-color: transparent; box-shadow: 0 20px 44px rgba(147,51,234,0.16); }
+        .projectCard:hover::before { opacity: 1; }
+        .projectCardTop { position: relative; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .projectCat { font-size: 11.5px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; }
+        .projectArrow { color: var(--text-faint); font-size: 16px; transition: transform .2s ease, color .2s ease; display: inline-block; }
+        .projectCard:hover .projectArrow { transform: translate(3px, -3px); color: var(--accent); }
+        .projectCard h3 { position: relative; font-size: 19px; margin: 0 0 6px; font-weight: 700; }
+        .projectImpact { position: relative; color: var(--text-soft); font-size: 13.5px; margin: 0 0 12px; }
+        .projectPoints { position: relative; margin: 0 0 14px; padding-left: 18px; font-size: 13.5px; color: var(--text-soft); display: grid; gap: 5px; }
+        .metricRow { position: relative; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .metricRow span { font-size: 11px; font-weight: 600; background: var(--accent-soft); color: var(--accent-dark); border-radius: 999px; padding: 4px 10px; transition: transform .15s ease; }
+        .projectCard:hover .metricRow span { transform: translateY(-1px); }
+        .projectTech { position: relative; font-size: 12px; color: var(--text-faint); }
+
+        .catalog { border-top: 1px solid var(--border); padding-top: 24px; }
+        .catalogToggle {
+          font-family: inherit; font-weight: 600; font-size: 14px; color: var(--accent);
+          background: var(--accent-soft); border: none; border-radius: 999px; padding: 10px 20px; cursor: pointer;
+          transition: background .2s ease, transform .15s ease;
+        }
+        .catalogToggle:hover { background: #e2e5ff; transform: translateY(-1px); }
+        .catalogBody { margin-top: 22px; animation: fadeIn .35s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+        .catalogBody input {
+          width: 100%; max-width: 380px; font-family: inherit; font-size: 14px; padding: 11px 16px;
+          border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft);
+          color: var(--text); outline: none; margin-bottom: 16px; transition: border-color .2s;
+        }
+        .catalogBody input:focus { border-color: var(--accent); }
+        .catalogList { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .catalogRow {
+          background: var(--card); display: grid; grid-template-columns: 1.2fr 2fr 1fr; gap: 16px;
+          padding: 13px 16px; font-size: 13.5px; align-items: baseline; transition: background .15s ease;
+        }
+        .catalogRow:hover { background: var(--bg-soft); }
+        .catalogName { font-weight: 600; }
+        .catalogDesc { color: var(--text-soft); }
+        .catalogTech { color: var(--text-faint); font-size: 12px; }
+        .catalogEmpty { background: var(--card); padding: 24px; text-align: center; color: var(--text-faint); font-size: 13.5px; }
+
+        /* ---------- Skills ---------- */
+        .skillMarquee {
+          overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+          padding: 14px 0; margin-bottom: 32px;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+        .skillMarqueeTrack { display: flex; gap: 30px; width: max-content; animation: marquee 200s linear infinite; }
+        .skillMarqueeTrack span { font-family: "Inter Tight", sans-serif; font-weight: 600; font-size: 14px; color: var(--text-faint); white-space: nowrap; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .skillGrid { display: grid; gap: 22px; }
+        .skillGroupLabel { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+        .chipRow { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip {
+          font-size: 13px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px;
+          padding: 6px 14px; color: var(--text-soft); font-weight: 500;
+          transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+        }
+        .chip:hover { transform: translateY(-2px) scale(1.04); background: var(--accent-soft); color: var(--accent-dark); border-color: var(--accent); }
+
+        /* ---------- Education ---------- */
+        .eduGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .eduCard {
+          border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; background: var(--card);
+          position: relative; overflow: hidden; transition: border-color .2s ease, box-shadow .25s ease, transform .12s ease-out;
+        }
+        .eduCard::before {
+          content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+          background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--accent-glow), transparent 65%);
+          transition: opacity .25s ease;
+        }
+        .eduCard:hover { border-color: var(--accent); box-shadow: 0 14px 34px rgba(79,70,229,0.12); }
+        .eduCard:hover::before { opacity: 1; }
+        .eduCardTop { position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+        .eduSchool { font-weight: 700; font-size: 17px; color: var(--text); }
+        .eduSchool:hover { color: var(--accent); }
+        .eduPeriod { font-size: 12px; color: var(--text-faint); }
+        .eduDegree { position: relative; font-weight: 600; color: var(--accent-dark); margin-bottom: 4px; font-size: 14.5px; }
+        .eduLocation { position: relative; font-size: 13px; color: var(--text-faint); margin-bottom: 12px; }
+        .eduDetails { position: relative; font-size: 14px; color: var(--text-soft); margin: 0; }
+
+        /* ---------- Publications ---------- */
+        .pubList { display: grid; gap: 14px; }
+        .pubCard { border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; background: var(--card); transition: border-color .2s, box-shadow .2s; }
+        .pubCard:hover { border-color: var(--accent); box-shadow: 0 10px 26px rgba(20,22,31,0.05); }
+        .pubTop { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+        .pubCard h3 { margin: 0; font-size: 16.5px; font-weight: 700; }
+        .pubStatus { font-size: 11px; font-weight: 700; background: var(--accent-soft); color: var(--accent-dark); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .pubMeta { font-size: 12.5px; color: var(--text-faint); margin-bottom: 4px; }
+        .pubAuthors { font-size: 12.5px; color: var(--text-soft); font-style: italic; margin-bottom: 10px; }
+        .pubCard p { margin: 0; font-size: 14px; color: var(--text-soft); }
+
+        /* ---------- Courses ---------- */
+        .courseGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .courseCard { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--card); transition: border-color .2s, box-shadow .2s; }
+        .courseCard:hover { border-color: var(--accent); box-shadow: 0 10px 24px rgba(20,22,31,0.05); }
+        .courseTop { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+        .courseTop b { font-size: 15px; font-weight: 700; }
+        .courseTop span { font-size: 11.5px; color: var(--text-faint); white-space: nowrap; }
+        .courseOrg { font-size: 12.5px; color: var(--accent-dark); margin-bottom: 10px; font-weight: 500; }
+        .courseCard ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--text-soft); display: grid; gap: 6px; }
+
+        /* ---------- Activities ---------- */
+        .activityGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .activityCard { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--card); transition: border-color .2s, box-shadow .2s; }
+        .activityCard:hover { border-color: var(--accent); box-shadow: 0 10px 24px rgba(20,22,31,0.05); }
+        .activityLabel { font-size: 12.5px; font-weight: 700; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.03em; }
+        .activityCard ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--text-soft); display: grid; gap: 6px; }
+
+        /* ---------- Footer ---------- */
+        .footer { background: var(--bg-soft); border-top: 1px solid var(--border); }
+        .footerInner {
+          max-width: 1120px; margin: 0 auto; padding: 40px 24px;
+          display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+        }
+        .footerName { font-weight: 700; font-size: 16px; }
+        .footerTag { font-size: 13px; color: var(--text-soft); margin-top: 2px; }
+        .footerLinks { display: flex; gap: 18px; font-size: 13.5px; font-weight: 500; }
+        .footerLinks a { transition: color .2s; }
+        .footerLinks a:hover { color: var(--accent-dark); }
+
+        /* ---------- Intro splash ---------- */
+        .introOverlay {
+          position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column;
+          align-items: center; justify-content: center; gap: 16px; background: var(--bg);
+          transition: opacity .5s ease, visibility .5s ease;
+        }
+        .introOverlay.hide { opacity: 0; pointer-events: none; }
+        .introMark {
+          width: 84px; height: 84px; border-radius: 22px; color: #fff;
+          background: var(--brand-gradient); background-size: 200% 200%;
+          font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 30px;
+          display: flex; align-items: center; justify-content: center;
+          animation: introPulse 1.1s ease-in-out infinite, gradientShift 3s linear infinite;
+          box-shadow: 0 16px 40px var(--accent-glow);
+        }
+        @keyframes introPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        .introName {
+          font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 13px; color: var(--text-faint);
+          letter-spacing: 0.14em; text-transform: uppercase; animation: fadeIn .6s ease;
+        }
+
+        /* ---------- Chat widget ---------- */
+        .chatWidget { position: fixed; right: 22px; bottom: 22px; z-index: 70; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+        .confettiBurst { position: absolute; right: 26px; bottom: 30px; width: 0; height: 0; pointer-events: none; }
+        .confettiBurst span {
+          position: absolute; width: 7px; height: 7px; border-radius: 2px;
+          animation: confettiPop .85s ease-out forwards;
+        }
+        @keyframes confettiPop {
+          0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+          100% { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; }
+        }
+        .chatToggle {
+          position: relative; width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+          background: var(--brand-gradient); background-size: 200% 200%; color: #fff; font-size: 24px; line-height: 1;
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 12px 32px var(--accent-glow); transition: transform .15s ease, background-position .3s ease;
+          animation: chatFloat 3.4s ease-in-out infinite;
+        }
+        .chatToggle:hover { transform: translateY(-3px) scale(1.06); background-position: 100% 100%; }
+        .chatToggleRing {
+          position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--violet);
+          opacity: 0; animation: chatRing 2.6s ease-out infinite;
+        }
+        .chatToggleIcon { display: inline-block; transform-origin: 70% 70%; animation: wave 2.4s ease-in-out infinite; }
+        @keyframes wave {
+          0%, 60%, 100% { transform: rotate(0deg); }
+          10% { transform: rotate(18deg); }
+          20% { transform: rotate(-12deg); }
+          30% { transform: rotate(18deg); }
+          40% { transform: rotate(-8deg); }
+          50% { transform: rotate(0deg); }
+        }
+        @keyframes chatFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        @keyframes chatRing {
+          0% { transform: scale(0.85); opacity: 0.6; }
+          100% { transform: scale(1.35); opacity: 0; }
+        }
+        .chatGreetBubble {
+          position: relative; max-width: 230px; background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px 14px 4px 14px; padding: 12px 30px 12px 14px; font-size: 13px; color: var(--text);
+          box-shadow: 0 12px 30px rgba(20,22,31,0.14); cursor: pointer; animation: chatIn .3s ease;
+        }
+        .chatGreetClose {
+          position: absolute; top: 6px; right: 6px; background: none; border: none; cursor: pointer;
+          font-size: 10px; color: var(--text-faint); padding: 4px;
+        }
+        .chatGreetClose:hover { color: var(--text); }
+        .chatPanel {
+          width: min(340px, 88vw); max-height: min(480px, 70vh); display: flex; flex-direction: column;
+          background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+          box-shadow: 0 24px 60px rgba(20,22,31,0.18); overflow: hidden; animation: chatIn .22s ease;
+        }
+        @keyframes chatIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+        .chatHead {
+          display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+          padding: 14px 16px; background: var(--brand-gradient); color: #fff; border-bottom: 1px solid var(--border);
+        }
+        .chatHead b { font-size: 14px; display: block; }
+        .chatHead span { font-size: 11px; color: rgba(255,255,255,0.85); }
+        .chatClose { background: none; border: none; cursor: pointer; font-size: 13px; color: rgba(255,255,255,0.85); padding: 2px 4px; }
+        .chatClose:hover { color: #fff; }
+        .chatList { flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+        .chatBubble { max-width: 88%; padding: 9px 13px; border-radius: 12px; font-size: 13.5px; line-height: 1.5; animation: chatIn .2s ease; }
+        .chatBubble.bot { align-self: flex-start; background: var(--bg-soft); color: var(--text); border-bottom-left-radius: 3px; }
+        .chatBubble.user { align-self: flex-end; background: var(--accent); color: #fff; border-bottom-right-radius: 3px; }
+        .chatTyping { display: flex; gap: 4px; align-items: center; padding: 12px 14px; }
+        .chatTyping span { width: 6px; height: 6px; border-radius: 50%; background: var(--text-faint); animation: chatDot 1.2s ease-in-out infinite; }
+        .chatTyping span:nth-child(2) { animation-delay: .15s; }
+        .chatTyping span:nth-child(3) { animation-delay: .3s; }
+        @keyframes chatDot { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+        .chatQuick { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 10px; }
+        .chatQuick button {
+          font-size: 11.5px; font-weight: 600; padding: 6px 11px; border-radius: 999px;
+          border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-soft); cursor: pointer;
+          transition: border-color .15s, color .15s, transform .15s;
+        }
+        .chatQuick button:hover { border-color: var(--accent); color: var(--accent-dark); transform: translateY(-1px); }
+        .chatForm { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+        .chatForm input {
+          flex: 1; font-family: inherit; font-size: 13.5px; padding: 9px 12px;
+          border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); color: var(--text); outline: none;
+        }
+        .chatForm input:focus { border-color: var(--accent); }
+        .chatForm button {
+          width: 36px; height: 36px; border-radius: 10px; border: none; background: var(--brand-gradient);
+          color: #fff; font-size: 15px; cursor: pointer; flex-shrink: 0; transition: transform .15s;
+        }
+        .chatForm button:hover { transform: scale(1.06); }
+
+
+        /* ---------- Company-grade portfolio refinements ---------- */
+        .heroExecutive {
+          min-height: min(860px, calc(100vh - 66px));
+          display: flex; align-items: center;
+          background:
+            linear-gradient(180deg, color-mix(in srgb, var(--bg-soft) 86%, transparent), var(--bg)),
+            var(--bg-soft);
+        }
+        .heroExecutiveInner { max-width: 1180px; padding-top: 104px; padding-bottom: 84px; }
+        .heroAvailability {
+          display: inline-flex; align-items: center; gap: 9px;
+          width: fit-content; padding: 7px 11px; border-radius: 999px;
+          border: 1px solid var(--border); background: color-mix(in srgb, var(--card) 84%, transparent);
+          color: var(--text-soft); font-size: 12px; font-weight: 650; letter-spacing: .01em;
+          box-shadow: 0 8px 24px rgba(20,22,31,.04);
+        }
+        .statusDot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,.12); }
+        .heroExecutive h1 { max-width: 940px; font-size: clamp(48px, 7vw, 88px); line-height: .98; letter-spacing: -.055em; margin-top: 24px; }
+        .heroLedeExecutive { max-width: 820px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.75; }
+        .heroSignalRow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+        .heroSignalRow span {
+          border: 1px solid var(--border); background: color-mix(in srgb, var(--card) 82%, transparent);
+          padding: 7px 11px; border-radius: 8px; color: var(--text-soft); font-size: 12px; font-weight: 600;
+        }
+        .heroFactsExecutive { margin-top: 38px; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+        .heroFactsExecutive > div { background: var(--card); padding: 19px 20px; min-height: 112px; }
+        .heroFactsExecutive span { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--text-faint); }
+        .heroFactsExecutive b { display: block; margin-top: 5px; font-size: 22px; letter-spacing: -.03em; }
+        .heroFactsExecutive small { display: block; margin-top: 4px; color: var(--text-soft); font-size: 11.5px; }
+
+        .proofStrip {
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+          margin: 2px 0 22px; background: var(--border); border: 1px solid var(--border);
+          border-radius: 16px; overflow: hidden;
+        }
+        .proofStrip > div { background: var(--bg-soft); padding: 20px 22px; }
+        .proofStrip b { display: block; font-size: 13px; margin-bottom: 5px; }
+        .proofStrip span { display: block; color: var(--text-soft); font-size: 12.5px; line-height: 1.55; }
+
+        .profileGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .profileCard {
+          min-height: 150px; padding: 20px; border-radius: 14px; border: 1px solid var(--border);
+          background: var(--card); color: var(--text); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+        .profileCard:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: 0 14px 32px rgba(20,22,31,.07); }
+        .profileKind { display: inline-block; color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .09em; font-weight: 800; }
+        .profileTitleRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 28px; }
+        .profileTitleRow h3 { margin: 0; font-size: 17px; }
+        .profileTitleRow > span { color: var(--text-faint); }
+        .profileCard p { margin: 6px 0 0; color: var(--text-soft); font-size: 12.5px; overflow-wrap: anywhere; }
+        .discordCard { cursor: default; }
+        .copyDiscord { margin-top: 12px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--text); border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 11.5px; font-weight: 650; cursor: pointer; }
+        .copyDiscord:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+        .secondarySection { opacity: .96; }
+        .footerExecutive { align-items: flex-start; }
+        .footerFine { margin-top: 6px; font-size: 11.5px; color: var(--text-faint); }
+        .footerLinkGrid { max-width: 430px; justify-content: flex-end; flex-wrap: wrap; }
+
+        .themeToggle { width: auto; padding: 0 10px; border-radius: 999px; font-size: 11px; font-weight: 700; color: var(--text-soft); }
+        .projectCard, .eduCard, .profileCard, .courseCard, .activityCard, .pubCard { box-shadow: 0 1px 0 rgba(20,22,31,.02); }
+        .projectImpact { font-weight: 600; color: var(--text); }
+        .sectionHead h2 { max-width: 760px; }
+
+        @media (max-width: 1000px) {
+          .heroFactsExecutive, .profileGrid { grid-template-columns: repeat(2, 1fr); }
+          .proofStrip { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+          .heroFacts, .eduGrid, .projectGrid, .courseGrid, .activityGrid { grid-template-columns: 1fr 1fr; }
+          .heroFacts { grid-template-columns: repeat(2, 1fr); }
+          .catalogRow { grid-template-columns: 1fr; gap: 4px; }
+        }
+
+        @media (max-width: 760px) {
+          .navToggle { display: flex; }
+          .navLinks {
+            display: none; position: absolute; top: 100%; left: 0; right: 0;
+            background: var(--card); border-bottom: 1px solid var(--border);
+            flex-direction: column; align-items: flex-start; padding: 12px 20px 20px; gap: 14px;
+          }
+          .navLinks.open { display: flex; }
+          .heroInner { padding: 56px 20px 48px; }
+          .heroFacts { grid-template-columns: 1fr 1fr; }
+          .heroFactsExecutive, .profileGrid { grid-template-columns: 1fr; }
+          .heroExecutive h1 { font-size: clamp(44px, 13vw, 64px); }
+          .heroExecutiveInner { padding-top: 72px; }
+          .eduGrid, .projectGrid, .courseGrid, .activityGrid { grid-template-columns: 1fr; }
+          .projectCard, .eduCard { transform: none !important; }
+          .chatWidget { right: 14px; bottom: 14px; }
+          .chatPanel { width: min(320px, 90vw); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .reveal, .heroInner > * { opacity: 1; transform: none; transition: none; }
+          .blob, .expDot::after, .caret, .skillMarqueeTrack, .chatToggle, .chatToggleIcon, .introMark { animation: none; }
+          .introOverlay { transition: none; }
+          html { scroll-behavior: auto; }
+        }
+      `}</style>
+    </div>
+  );
+}

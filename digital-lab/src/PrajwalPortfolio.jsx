@@ -13,7 +13,6 @@ const profile = {
   scholar: "https://scholar.google.com/citations?hl=en&user=D40ny1EAAAAJ",
   orcid: "https://orcid.org/0009-0006-0069-928X",
   discord: "prajwaldevaraj",
-  portfolio: "https://prajwal-devaraj.github.io/PrajwalDevaraj_Portfolio/",
 };
 
 const experiences = [
@@ -56,22 +55,6 @@ const experiences = [
     kind: "Operations",
     description:
       "Worked in fast-paced campus operations, opening/closing, training, inventory, service quality, and team coordination.",
-  },
-  {
-    role: "Student Catering Employee",
-    org: "Culinary Services · Kent State University",
-    period: "May 2025 — Aug 2025",
-    kind: "Leadership / Service",
-    description:
-      "Selected for 50+ high-profile university events, including VIP gatherings and functions at the President’s Residence; regularly coordinated crews of 5–15 staff and received Best Employee Recognition.",
-  },
-  {
-    role: "Teacher Training Intern",
-    org: "Edsmart Edu Services Pvt. Ltd.",
-    period: "May 2022",
-    kind: "Teaching",
-    description:
-      "Completed hands-on teacher training across partner schools, creating lesson content around phonics and child development and adapting delivery for different age groups.",
   },
   {
     role: "Administrator",
@@ -451,62 +434,6 @@ const projects = [
     tags: ["Backend", "Frontend", "Database"],
   },
   {
-    title: "AvatarForge AI",
-    category: "Generative AI / Full-Stack",
-    status: "Built",
-    summary: "Modular AI avatar platform built with Flask Blueprints, SQLAlchemy/PostgreSQL, Alembic migrations, authentication, history, templates, and a tested backend architecture.",
-    tags: ["Flask", "PostgreSQL", "Alembic", "pytest"],
-  },
-  {
-    title: "3D Virtual Try-On AI",
-    category: "AI / Computer Vision",
-    status: "Prototype",
-    summary: "Virtual try-on experience exploring body profiles, camera input, 3D avatar interaction, and an AI-ready frontend architecture.",
-    tags: ["Next.js", "TypeScript", "3D", "Computer Vision"],
-  },
-  {
-    title: "NEXORA",
-    category: "AI Systems",
-    status: "Research prototype",
-    summary: "Persistent multimodal intelligence concept exploring memory, multimodal context, long-running AI behavior, and agent-oriented system design.",
-    tags: ["Multimodal AI", "Memory", "Agents", "Research"],
-  },
-  {
-    title: "MIRWE",
-    category: "Conversational AI",
-    status: "Prototype",
-    summary: "Emotional conversational-agent experiment focused on more natural, context-aware, expressive human–AI interaction across web and app experiences.",
-    tags: ["Conversational AI", "LLMs", "Agents", "UX"],
-  },
-  {
-    title: "RGPIR",
-    category: "Machine Learning",
-    status: "Built",
-    summary: "Routing and intent-classification experiment comparing classical ML approaches including logistic regression and SVM on a challenge set.",
-    tags: ["NLP", "SVM", "Logistic Regression", "Evaluation"],
-  },
-  {
-    title: "Tool Dependency Graph",
-    category: "Developer Tools / Graphs",
-    status: "Built",
-    summary: "Dependency-graph analysis project that modeled hundreds of tool nodes and their relationships to reason about composition and execution dependencies.",
-    tags: ["Graphs", "Developer Tools", "Python", "Analysis"],
-  },
-  {
-    title: "Madan Real Estate",
-    category: "Full-Stack / Product",
-    status: "Building",
-    summary: "Company-style real-estate web experience with bilingual brand identity, modern frontend architecture, property presentation, and polished user-facing design.",
-    tags: ["Next.js", "TypeScript", "UI/UX", "Product"],
-  },
-  {
-    title: "Personal AI Agent",
-    category: "Agentic AI",
-    status: "Prototype",
-    summary: "Personal-agent experiment exploring tool use, task orchestration, memory, and assistant-style interaction patterns before agentic workflows became a mainstream build pattern.",
-    tags: ["AI Agents", "Tool Use", "Memory", "Automation"],
-  },
-  {
     title: "JSS Fashion UI/UX Design",
     category: "UI / UX",
     status: "Built",
@@ -525,80 +452,15 @@ const skillCloud = [
 ];
 
 const studies = [
-  {
-    school: "Kent State University",
-    degree: "M.S. Computer Science",
-    period: "Aug 2024 — May 2026",
-    meta: "GPA 3.966 / 4.0 · Kent, Ohio",
-    details: "Advanced Database Systems · AI/ML · Deep Learning · Data Mining · Social & Graph Networks · Data Security & Privacy · Network Security · Advanced Computer Graphics"
-  },
-  {
-    school: "JSS Academy of Technical Education · VTU",
-    degree: "B.E. Computer Science",
-    period: "Aug 2019 — Jun 2023",
-    meta: "Bangalore, Karnataka, India",
-    details: "Data Structures & Algorithms · DBMS · Operating Systems · Computer Networks · Web Development · Software Engineering · Cloud Computing · Mobile App Development · Computer Graphics · Cryptography"
-  },
+  { school: "Kent State University", degree: "M.S. Computer Science", period: "Aug 2024 — May 2026", meta: "GPA 3.966 / 4.0 · Kent, Ohio" },
+  { school: "JSS Academy of Technical Education · VTU", degree: "B.E. Computer Science", period: "Aug 2019 — Jun 2023", meta: "Bangalore, Karnataka, India" },
 ];
 
 const stats = [
   ["40+", "projects & experiments"],
   ["3.966", "M.S. GPA / 4.0"],
-  ["6", "languages I can speak"],
+  ["93.3%", "ClinVar model accuracy"],
   ["120+", "students supported as TA"],
-];
-
-const identityFacts = [
-  ["Based in", "United States"],
-  ["Roots", "Bangalore, Karnataka, India"],
-  ["Education", "M.S. Computer Science · Kent State University"],
-  ["Primary world", "Software + AI/ML + Research + Systems"],
-  ["Also me", "Writer · Poet · Teacher · Debater · Builder"],
-  ["Sports", "Cricket · Volleyball"],
-];
-
-const languages = ["English", "Kannada", "Hindi", "Tulu", "Marathi", "Konkani"];
-
-const humanSide = [
-  {
-    mark: "WRITE",
-    title: "Writer, poet & storyteller",
-    copy: "I write stories, poems, songs, and ideas that have nothing to do with APIs. Creativity is not a side quest for me; it changes how I design, explain, and imagine technology."
-  },
-  {
-    mark: "TEACH",
-    title: "Teacher & explainer",
-    copy: "From Operating Systems and DBMS at Kent State to teaching basic computers to younger students, I genuinely enjoy turning confusing things into something another person can understand."
-  },
-  {
-    mark: "LEAD",
-    title: "Leadership through doing",
-    copy: "I have led student project teams, coordinated event crews, trained coworkers, handled operations, and taken ownership when there was no perfect playbook."
-  },
-  {
-    mark: "STAGE",
-    title: "Actor, debater & communicator",
-    copy: "Stage work and debate taught me presence, storytelling, improvisation, and how to communicate under pressure — skills I use just as much in technical work."
-  },
-  {
-    mark: "PLAY",
-    title: "Cricket & volleyball",
-    copy: "I enjoy the rhythm of team sports: reading situations quickly, coordinating with people, competing hard, and resetting after mistakes."
-  },
-  {
-    mark: "LANG",
-    title: "Multilingual by everyday life",
-    copy: "English, Kannada, Hindi, Tulu, Marathi, and Konkani are part of how I move between people, places, cultures, and ways of thinking."
-  },
-];
-
-const achievements = [
-  { year: "2026", title: "Hybrid ML + GenAI + Agentic AI research", copy: "Completed research effort and submitted the paper in September 2026." },
-  { year: "2026", title: "Firehawk environmental monitoring recognition", copy: "Project recognized as a best project in the context of forest preservation by the Karnataka Forest Department." },
-  { year: "2025", title: "CodeTheGenome · Best Project", copy: "Original project idea; led a four-person team and owned major dataset, modeling, hyperparameter, and training work." },
-  { year: "2025", title: "Best Employee Recognition · Kent State Catering", copy: "Recognized for reliability and leadership after working 50+ university events and frequently coordinating crews." },
-  { year: "2025–26", title: "Student Ambassador · Kent State Bookstore", copy: "Selected to represent the bookstore in campus outreach and events after growing from associate responsibilities into operations and administrative support." },
-  { year: "2021–23", title: "Three-time Best Employee · Sri Guruvandana", copy: "Received Best Employee recognition three years in a row plus an All-Time Best Performance award." },
 ];
 
 const socials = [
@@ -609,16 +471,6 @@ const socials = [
   ["ORCID", "Research identity", profile.orcid],
   ["X", "Thoughts & updates", profile.x],
   ["Linktree", "Everything in one place", profile.linktree],
-];
-
-const rotatingIdentities = [
-  "computer scientist",
-  "AI/ML researcher",
-  "software builder",
-  "teacher",
-  "writer",
-  "team lead",
-  "curious human",
 ];
 
 function Icon({ name, size = 18 }) {
@@ -744,7 +596,6 @@ export default function PrajwalPortfolio() {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [copied, setCopied] = useState(false);
   const [menu, setMenu] = useState(false);
-  const [identityIndex, setIdentityIndex] = useState(0);
 
   useReveal();
 
@@ -752,11 +603,6 @@ export default function PrajwalPortfolio() {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("pd-theme", theme);
   }, [theme]);
-
-  useEffect(() => {
-    const id = setInterval(() => setIdentityIndex((i) => (i + 1) % rotatingIdentities.length), 1800);
-    return () => clearInterval(id);
-  }, []);
 
   const filters = useMemo(() => {
     const roots = [...new Set(projects.map((p) => p.category.split(" /")[0]))];
@@ -797,8 +643,6 @@ export default function PrajwalPortfolio() {
           </a>
           <div className={`nav-links ${menu ? "open" : ""}`}>
             <a href="#about" onClick={() => setMenu(false)}>About</a>
-            <a href="#profile" onClick={() => setMenu(false)}>Profile</a>
-            <a href="#human" onClick={() => setMenu(false)}>Beyond Tech</a>
             <a href="#research" onClick={() => setMenu(false)}>Research</a>
             <a href="#projects" onClick={() => setMenu(false)}>Projects</a>
             <a href="#journey" onClick={() => setMenu(false)}>Journey</a>
@@ -824,9 +668,8 @@ export default function PrajwalPortfolio() {
                 <span className="gradient-text">I build to understand.</span>
               </h1>
               <p className="hero-lead">
-                Computer scientist, software builder, AI/ML researcher, teacher, writer, team lead, and relentlessly curious human. This is not a résumé site — it is the living map of what I build, study, write, teach, lead, question, and become.
+                Computer scientist, software builder, AI/ML researcher, full-stack engineer, teacher, and relentlessly curious human. This is my digital lab — the things I’ve built, studied, broken, rebuilt, and learned from.
               </p>
-              <div className="identity-switcher"><span>I am a</span><b key={identityIndex}>{rotatingIdentities[identityIndex]}</b><i>_</i></div>
               <div className="hero-actions">
                 <a className="btn primary" href="#projects">Explore my work <Icon name="arrow" /></a>
                 <a className="btn ghost" href={profile.github} target="_blank" rel="noreferrer"><Icon name="github" /> GitHub</a>
@@ -870,58 +713,12 @@ export default function PrajwalPortfolio() {
               <p>I finished my <strong>M.S. in Computer Science at Kent State University</strong>, but I still approach technology like a student: question everything, learn the foundations, build the thing, inspect what failed, and try again.</p>
               <p>My work moves across <strong>software engineering, AI/ML, backend systems, full-stack development, data engineering, databases, computer vision, agentic systems, and research</strong>. I’m happiest when a project forces me to combine several of those worlds.</p>
               <p>I’ve also been a research assistant, teaching assistant, intern, team lead, administrator, student worker, and mentor. Those experiences taught me that engineering is not only code — it’s communication, patience, ownership, curiosity, and the ability to make complicated things understandable.</p>
-              <p>Outside of code, I write <strong>stories, poems, and songs</strong>; I have spent time acting and debating; I play <strong>cricket and volleyball</strong>; and I speak multiple Indian languages. I have also worked in cafés, bookstores, catering teams, classrooms, research labs, and school administration. Those worlds are part of the same person.</p>
-              <p>I do not want this site to flatten me into a list of frameworks. I want it to show the complete profile: <strong>the engineer, researcher, teacher, writer, teammate, leader, student, and human behind the code.</strong></p>
+              <p>Outside of code, I write stories, poems, and songs. I like ideas with personality. That is why this site is intentionally a little different.</p>
             </div>
             <div className="terminal-card" data-reveal>
               <div className="terminal-bar"><span/><span/><span/><b>identity.sh</b></div>
-              <pre><code><em>$</em> cat prajwal.json{"\n"}{`{`}{"\n"}  <i>"role"</i>: <b>"builder + researcher"</b>,{"\n"}  <i>"degree"</i>: <b>"M.S. Computer Science"</b>,{"\n"}  <i>"curiosity"</i>: <b>true</b>,{"\n"}  <i>"projects"</i>: <b>"40+"</b>,{"\n"}  <i>"favorite_mode"</i>: <b>"learn → build → iterate"</b>,{"\n"}  <i>"currently"</i>: [<b>"AI"</b>, <b>"agents"</b>, <b>"systems"</b>],{"\n"}  <i>"human"</i>: [<b>"writer"</b>, <b>"teacher"</b>, <b>"cricket"</b>],{"\n"}  <i>"languages"</i>: <b>6</b>{"\n"}{`}`}{"\n"}{"\n"}<em>$</em> echo "still learning..."<span className="terminal-caret">▌</span></code></pre>
+              <pre><code><em>$</em> cat prajwal.json{"\n"}{`{`}{"\n"}  <i>"role"</i>: <b>"builder + researcher"</b>,{"\n"}  <i>"degree"</i>: <b>"M.S. Computer Science"</b>,{"\n"}  <i>"curiosity"</i>: <b>true</b>,{"\n"}  <i>"projects"</i>: <b>"40+"</b>,{"\n"}  <i>"favorite_mode"</i>: <b>"learn → build → iterate"</b>,{"\n"}  <i>"currently"</i>: [<b>"AI"</b>, <b>"agents"</b>, <b>"systems"</b>]{"\n"}{`}`}{"\n"}{"\n"}<em>$</em> echo "still learning..."<span className="terminal-caret">▌</span></code></pre>
             </div>
-          </div>
-        </section>
-
-        <section id="profile" className="section profile-section">
-          <div className="shell">
-            <SectionHead kicker="PROFILE / CONTACT" title="The person behind the projects." copy="A quick map of who I am, where I come from, how to reach me, and the non-code things that shape how I think." />
-            <div className="profile-layout">
-              <div className="profile-id-card" data-reveal>
-                <div className="id-hologram"><span>PD</span><i/><i/><i/></div>
-                <div className="id-copy">
-                  <p className="id-label">PROFILE // PRAJWAL.DEVARAJ</p>
-                  <h3>Prajwal Devaraj</h3>
-                  <p>Computer scientist · researcher · software builder · writer · teacher · team lead</p>
-                  <div className="contact-stack">
-                    <a href={`mailto:${profile.email}`}><span>Email</span><b>{profile.email}</b></a>
-                    <a href={profile.linkedin} target="_blank" rel="noreferrer"><span>LinkedIn</span><b>linkedin.com/in/prajwaldevaraj</b></a>
-                    <a href={profile.github} target="_blank" rel="noreferrer"><span>GitHub</span><b>github.com/prajwal-devaraj</b></a>
-                    <button onClick={copyDiscord}><span>Discord</span><b>{copied ? "Copied ✓" : profile.discord}</b></button>
-                  </div>
-                </div>
-              </div>
-              <div className="facts-grid">
-                {identityFacts.map(([label, value], i) => <article className="fact-card" data-reveal style={{"--delay": `${i*45}ms`}} key={label}><span>{String(i+1).padStart(2,"0")}</span><small>{label}</small><strong>{value}</strong></article>)}
-                <article className="fact-card languages-card" data-reveal>
-                  <span>07</span><small>Languages</small>
-                  <div>{languages.map((l) => <b key={l}>{l}</b>)}</div>
-                </article>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="human" className="section human-section">
-          <div className="shell">
-            <SectionHead kicker="BEYOND TECH" title="My operating system has more than one process." copy="Code is a big part of my life, but not the whole thing. These are the other threads that keep showing up in how I think, work, communicate, and create." />
-            <div className="human-grid">
-              {humanSide.map((item, i) => <article className="human-card" data-reveal style={{"--delay": `${i*55}ms`}} key={item.title}>
-                <div className="human-orb"><span>{item.mark}</span></div>
-                <p>0{ i + 1 }</p>
-                <h3>{item.title}</h3>
-                <div className="human-line"/>
-                <span>{item.copy}</span>
-              </article>)}
-            </div>
-            <div className="life-marquee" aria-hidden="true"><div>{["WRITE","BUILD","TEACH","LEARN","LEAD","QUESTION","PLAY","CREATE","WRITE","BUILD","TEACH","LEARN","LEAD","QUESTION","PLAY","CREATE"].map((x,i)=><span key={i}>{x}<b>✦</b></span>)}</div></div>
           </div>
         </section>
 
@@ -989,17 +786,6 @@ export default function PrajwalPortfolio() {
           </div>
         </section>
 
-        <section className="section achievements-section">
-          <div className="shell">
-            <SectionHead kicker="MILESTONES" title="Some moments I’m proud of." copy="Awards are not the point, but they are useful snapshots of times when effort, teamwork, curiosity, or responsibility turned into something visible." />
-            <div className="achievement-track">
-              {achievements.map((a, i) => <article className="achievement-card" data-reveal style={{"--delay": `${i*60}ms`}} key={a.title}>
-                <span className="achievement-year">{a.year}</span><div className="achievement-pulse"/><h3>{a.title}</h3><p>{a.copy}</p>
-              </article>)}
-            </div>
-          </div>
-        </section>
-
         <section className="section shell education-section">
           <SectionHead kicker="EDUCATION" title="The formal part of the learning loop." />
           <div className="education-grid">
@@ -1010,7 +796,6 @@ export default function PrajwalPortfolio() {
                 <h3>{s.degree}</h3>
                 <h4>{s.school}</h4>
                 <span>{s.meta}</span>
-                <small className="edu-details">{s.details}</small>
               </article>
             ))}
           </div>
@@ -1075,12 +860,7 @@ const css = String.raw`
 .footer{padding:35px 0;border-top:1px solid var(--line)}.footer-grid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}.footer-grid>div{display:flex;align-items:center;gap:12px}.footer-grid>div p,.footer-grid>a{font:500 9px 'JetBrains Mono';color:var(--muted)}.footer-grid>a{text-align:right}.footer-code{display:flex;align-items:center;gap:7px;font:500 9px 'JetBrains Mono';color:var(--muted)}
 [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .75s ease var(--delay,0ms),transform .75s cubic-bezier(.22,.68,0,1) var(--delay,0ms)}[data-reveal].is-visible{opacity:1;transform:none}
 @keyframes spin{to{transform:rotate(360deg)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes gradientShift{to{background-position:200% 0}}@keyframes blink{50%{opacity:0}}@keyframes ticker{to{transform:translateX(-50%)}}@keyframes signal{0%,100%{opacity:.2;transform:scaleY(.55)}50%{opacity:1;transform:scaleY(1)}}@keyframes skillFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.identity-switcher{margin-top:22px;display:flex;align-items:center;gap:9px;font:500 12px 'JetBrains Mono';color:var(--muted);min-height:28px}.identity-switcher b{color:var(--cyan);font-weight:600;animation:identityIn .45s cubic-bezier(.2,.8,.2,1)}.identity-switcher i{font-style:normal;color:var(--violet);animation:blink .8s step-end infinite}
-.profile-section{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--bg),var(--bg2))}.profile-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.profile-id-card{min-height:480px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(103,232,249,.05),transparent 38%),var(--panel);padding:28px;display:grid;grid-template-columns:180px 1fr;gap:28px;position:relative;overflow:hidden}.profile-id-card::before{content:"";position:absolute;inset:-100%;background:conic-gradient(from 90deg,transparent,rgba(103,232,249,.08),transparent,rgba(167,139,250,.08),transparent);animation:holo 10s linear infinite}.profile-id-card>*{position:relative;z-index:1}.id-hologram{height:180px;border:1px solid rgba(103,232,249,.28);position:relative;display:grid;place-items:center;background:radial-gradient(circle at center,rgba(103,232,249,.11),transparent 60%);overflow:hidden}.id-hologram span{font:700 54px 'Space Grotesk';letter-spacing:-.05em;color:var(--text);text-shadow:0 0 28px rgba(103,232,249,.28)}.id-hologram i{position:absolute;border:1px solid rgba(103,232,249,.18);border-radius:50%;animation:spin 10s linear infinite}.id-hologram i:nth-child(2){width:110px;height:110px}.id-hologram i:nth-child(3){width:150px;height:58px;animation-direction:reverse}.id-hologram i:nth-child(4){width:58px;height:150px;animation-duration:7s}.id-label{font:600 9px 'JetBrains Mono'!important;letter-spacing:.14em;color:var(--cyan)!important;margin:4px 0 12px!important}.id-copy h3{font:700 34px 'Space Grotesk';margin:0 0 8px;letter-spacing:-.04em}.id-copy>p{font:500 12px/1.7 'JetBrains Mono';color:var(--muted);margin:0 0 30px}.contact-stack{display:grid;gap:8px}.contact-stack a,.contact-stack button{border:1px solid var(--line);background:rgba(255,255,255,.015);padding:12px 14px;display:flex;flex-direction:column;gap:4px;text-align:left;color:var(--text);cursor:pointer;transition:.25s}.contact-stack a:hover,.contact-stack button:hover{transform:translateX(5px);border-color:rgba(103,232,249,.35);background:rgba(103,232,249,.04)}.contact-stack span{font:600 8px 'JetBrains Mono';text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}.contact-stack b{font:500 11px 'JetBrains Mono';word-break:break-all}.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fact-card{min-height:145px;padding:18px;border:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:.28s}.fact-card::after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-45px;bottom:-45px;background:radial-gradient(circle,rgba(167,139,250,.16),transparent 65%);transition:.3s}.fact-card:hover{transform:translateY(-5px) rotateX(2deg);border-color:rgba(167,139,250,.36)}.fact-card:hover::after{transform:scale(1.6)}.fact-card>span{font:500 9px 'JetBrains Mono';color:var(--cyan)}.fact-card small{margin-top:auto;font:600 8px 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.fact-card strong{font:600 15px/1.35 'Space Grotesk';margin-top:7px}.languages-card{grid-column:1/-1;min-height:auto}.languages-card div{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.languages-card b{padding:6px 8px;border:1px solid var(--line);font:500 9px 'JetBrains Mono';color:var(--violet)}
-.human-section{position:relative;overflow:hidden}.human-section::before{content:"HUMAN";position:absolute;right:-5vw;top:80px;font:700 min(24vw,310px) 'Space Grotesk';letter-spacing:-.08em;color:rgba(148,163,184,.025);pointer-events:none}.human-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;perspective:1200px}.human-card{min-height:310px;border:1px solid var(--line);background:var(--panel);padding:24px;position:relative;overflow:hidden;transition:.35s cubic-bezier(.2,.8,.2,1)}.human-card:hover{transform:translateY(-9px) rotateX(3deg) rotateY(-2deg);border-color:rgba(103,232,249,.4);box-shadow:0 28px 70px rgba(0,0,0,.16)}.human-card>p{font:500 9px 'JetBrains Mono';color:var(--muted);margin:80px 0 10px}.human-card h3{font:600 22px/1.15 'Space Grotesk';margin:0}.human-line{height:1px;background:linear-gradient(90deg,var(--cyan),transparent);margin:18px 0}.human-card>span{font-size:13px;line-height:1.72;color:var(--muted)}.human-orb{position:absolute;right:22px;top:22px;width:74px;height:74px;border-radius:50%;border:1px solid rgba(103,232,249,.25);display:grid;place-items:center;animation:float 5s ease-in-out infinite;background:radial-gradient(circle,rgba(103,232,249,.12),transparent 68%)}.human-orb::before,.human-orb::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(167,139,250,.16);animation:spin 8s linear infinite}.human-orb::before{inset:9px}.human-orb::after{inset:-8px;border-style:dashed;animation-direction:reverse}.human-orb span{font:700 8px 'JetBrains Mono';letter-spacing:.08em;color:var(--cyan)}.life-marquee{margin-top:42px;border-block:1px solid var(--line);overflow:hidden}.life-marquee>div{display:flex;width:max-content;animation:lifeTicker 22s linear infinite;padding:13px 0}.life-marquee span{font:600 10px 'JetBrains Mono';letter-spacing:.12em;color:var(--muted);display:flex;gap:18px;margin-right:18px}.life-marquee b{color:var(--violet)}
-.achievements-section{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}.achievement-track{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.achievement-card{min-height:260px;padding:24px;border:1px solid var(--line);background:var(--panel);position:relative;overflow:hidden;transition:.3s}.achievement-card:hover{transform:translateY(-6px);border-color:rgba(74,222,128,.32)}.achievement-year{font:600 10px 'JetBrains Mono';color:var(--lime)}.achievement-pulse{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(74,222,128,.35);animation:achievementPulse 2s infinite;margin:38px 0 20px}.achievement-card h3{font:600 20px/1.2 'Space Grotesk';margin:0 0 12px}.achievement-card p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}.edu-details{display:block;margin-top:18px;font:500 10px/1.65 'JetBrains Mono';color:var(--muted)}
-@keyframes identityIn{from{opacity:0;transform:translateY(8px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}@keyframes holo{to{transform:rotate(360deg)}}@keyframes lifeTicker{to{transform:translateX(-50%)}}@keyframes achievementPulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.35)}70%{box-shadow:0 0 0 14px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
-@media(max-width:980px){.hero-grid{grid-template-columns:1fr}.profile-layout{grid-template-columns:1fr}.human-grid,.achievement-track{grid-template-columns:repeat(2,1fr)}.hero-visual{width:min(520px,90vw);margin:20px auto 0}.research-grid,.project-grid{grid-template-columns:repeat(2,1fr)}.social-grid{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}.terminal-card{position:relative;top:0}.contact-panel{grid-template-columns:1fr;align-items:start}.footer-grid{grid-template-columns:1fr;text-align:center}.footer-grid>div{justify-content:center}.footer-grid>a{text-align:center}.footer-code{justify-content:center}}
-@media(max-width:760px){.shell{width:min(100% - 28px,1180px)}.profile-id-card{grid-template-columns:1fr}.id-hologram{width:180px}.facts-grid,.human-grid,.achievement-track{grid-template-columns:1fr}.languages-card{grid-column:auto}.identity-switcher{font-size:10px;flex-wrap:wrap}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:20px;flex-direction:column;gap:18px}.nav-links.open{display:flex}.menu-btn{display:grid}.brand-text{display:none}.hero{padding-top:120px}.hero h1{font-size:clamp(46px,14vw,70px)}.hero-lead{font-size:16px}.hero-visual{width:100%}.ticker{margin-top:50px}.stats-grid{grid-template-columns:1fr 1fr}.stat:nth-child(odd){border-left:1px solid var(--line)}.section{padding:90px 0}.research-grid,.project-grid,.education-grid{grid-template-columns:1fr}.project-controls{align-items:stretch;flex-direction:column}.search-box{min-width:0}.filter-row{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter-row button{white-space:nowrap}.timeline-meta{align-items:flex-start;flex-direction:column;gap:5px}.social-grid{grid-template-columns:1fr}.contact-panel{margin-top:60px}.big-mail{white-space:normal}.footer-code{font-size:8px}.floating-chip{font-size:8px}.chip-2{right:0}.chip-4{right:0}}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr}.hero-visual{width:min(520px,90vw);margin:20px auto 0}.research-grid,.project-grid{grid-template-columns:repeat(2,1fr)}.social-grid{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}.terminal-card{position:relative;top:0}.contact-panel{grid-template-columns:1fr;align-items:start}.footer-grid{grid-template-columns:1fr;text-align:center}.footer-grid>div{justify-content:center}.footer-grid>a{text-align:center}.footer-code{justify-content:center}}
+@media(max-width:760px){.shell{width:min(100% - 28px,1180px)}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:20px;flex-direction:column;gap:18px}.nav-links.open{display:flex}.menu-btn{display:grid}.brand-text{display:none}.hero{padding-top:120px}.hero h1{font-size:clamp(46px,14vw,70px)}.hero-lead{font-size:16px}.hero-visual{width:100%}.ticker{margin-top:50px}.stats-grid{grid-template-columns:1fr 1fr}.stat:nth-child(odd){border-left:1px solid var(--line)}.section{padding:90px 0}.research-grid,.project-grid,.education-grid{grid-template-columns:1fr}.project-controls{align-items:stretch;flex-direction:column}.search-box{min-width:0}.filter-row{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter-row button{white-space:nowrap}.timeline-meta{align-items:flex-start;flex-direction:column;gap:5px}.social-grid{grid-template-columns:1fr}.contact-panel{margin-top:60px}.big-mail{white-space:normal}.footer-code{font-size:8px}.floating-chip{font-size:8px}.chip-2{right:0}.chip-4{right:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition-duration:.01ms!important}[data-reveal]{opacity:1;transform:none}.matrix-canvas{display:none}}
 `;
