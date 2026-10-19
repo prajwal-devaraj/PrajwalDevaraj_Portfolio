@@ -45,3 +45,10 @@ On GitHub, set **Settings → Pages → Source → GitHub Actions**.
 - `src/components/Visuals.jsx` — inline visual icon/art system
 - `src/styles/global.css` — cinematic visual system and animations
 - `public/audio/prajwal-intro.m4a` — Prajwal's recorded introduction
+
+
+## Updated section order
+
+01 Opening/Story, 02 Person/Profile, 03 Education, 04 Toolkit (13 universes), 05 Full Cast (10 roles then seasons), 06 Originals, 07 Research, 08 Leadership, 09 Awards, 10 Beyond the Screen, 11 Currently Building, 12 Finale.
+
+No resume PDF or resume menu is included. The floating P Digital Guide appears only after the visitor enters the Digital Universe.

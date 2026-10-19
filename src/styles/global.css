@@ -27,3 +27,59 @@ body{font-size:15px}.compact-section{padding-top:84px;padding-bottom:84px}.secti
 @keyframes scanMove{from{transform:translateY(-50px)}to{transform:translateY(50px)}}
 @media(max-width:1000px){.voice-intro{grid-template-columns:220px 1fr}.social-strip{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}.visual-identities{grid-template-columns:repeat(2,1fr)}.project-overlay h3{max-width:90%}.project-overlay p{max-width:78%}.pictorial-research .research-card{grid-template-columns:120px 1fr}.milestone-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.voice-intro{grid-template-columns:1fr}.voice-art{min-height:220px;border-right:0;border-bottom:1px solid var(--line)}.voice-copy{padding:28px 22px}.social-strip{grid-template-columns:1fr}.pictorial-research .research-card{grid-template-columns:1fr}.research-art{min-height:140px;border-right:0;border-bottom:1px solid var(--line)}.hero-project-grid{grid-template-columns:1fr}.project-overlay h3{font-size:32px;max-width:100%;margin-top:45px}.project-overlay p{max-width:90%}.visual-identities{grid-template-columns:1fr}.milestone-grid{grid-template-columns:1fr}.section-title h2{font-size:38px}.hero h1{font-size:17vw}.project-grid{grid-template-columns:1fr}.nav{height:66px}.voice-section{padding-top:0}}
+
+/* Digital Lab × The Series: original layout, cinematic visual language. */
+:root{--cyan:#ff354d;--violet:#a92344;--warm:#e8d5d9;--line:rgba(255,255,255,.13)}
+body{background:#070608}
+.nav{background:rgba(7,6,8,.92)!important;border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 12px 36px rgba(0,0,0,.45)}
+.nav nav button:hover,.nav nav button:focus-visible{color:#ff4a61}
+.brand{display:flex;align-items:center;gap:10px;min-width:130px}
+.brand-logo{height:47px;width:62px;object-fit:cover;object-position:center;mix-blend-mode:screen}
+.brand-series{font:700 9px 'JetBrains Mono',monospace;letter-spacing:.15em;color:#ccc}
+.series-premiere{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.17em;color:#ff4a61;padding-top:12px}
+.core-center{overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.core-center img{width:85%;height:80%;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 20px rgba(255,255,255,.23))}
+.voice-monogram{display:flex;align-items:center;justify-content:center}
+.voice-monogram img{width:85%;height:85%;object-fit:contain;mix-blend-mode:screen}
+.story-brand-logo{height:90px;max-width:180px;object-fit:contain;margin:0 auto 35px;display:block;mix-blend-mode:screen}
+.career-seasons-header{max-width:var(--max);margin:54px auto 22px;padding:0 28px}
+.career-seasons-header>span,.season-card-top{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.17em;color:#ff4a61}
+.career-seasons-header h3{font-size:clamp(36px,5vw,70px);margin:12px 0 8px;letter-spacing:-.055em}
+.career-seasons-header p{color:#aeb0b8}
+.career-season-grid{max-width:var(--max);margin:auto;padding:0 28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.career-season-card{position:relative;overflow:hidden;min-height:300px;padding:32px;border:1px solid rgba(255,255,255,.11);border-radius:18px;background:radial-gradient(circle at 100% 0,rgba(188,35,63,.2),transparent 60%),linear-gradient(145deg,#191015,#09090c);transition:transform .35s,border-color .35s}
+.career-season-card:hover{transform:translateY(-7px);border-color:rgba(255,64,92,.65)}
+.season-card-top{display:flex;justify-content:space-between}.season-card-top b{font-size:36px;opacity:.2}
+.career-season-card h3{font-size:clamp(29px,3vw,43px);line-height:1.02;letter-spacing:-.04em;margin:32px 0 9px}
+.career-season-card small{font-family:'JetBrains Mono',monospace;color:#ec7585}
+.career-season-card p{color:#b6afb4;font-size:14px;line-height:1.5;margin:20px 0}
+.season-role-list{display:flex;gap:8px;flex-wrap:wrap}.season-role-list span{font-size:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:40px;padding:7px 10px;color:#dbd7d9}
+@media(max-width:800px){.career-season-grid{grid-template-columns:1fr}.nav nav{gap:9px}.nav nav button{font-size:9px}.brand-series{display:none}.brand{min-width:auto}.brand-logo{width:44px;height:40px}}
+@media(max-width:550px){.nav nav{overflow-x:auto;max-width:63vw}.brand-logo{width:36px;height:34px}.nav-contact{font-size:9px;padding:7px}.career-season-card{padding:22px}}
+
+/* Cinematic platinum identity opening — Digital Lab x Netflix */
+.series-welcome{position:fixed;inset:0;z-index:20000;overflow:auto;background:radial-gradient(ellipse at 52% 43%,#220f1b 0,#100a10 45%,#030304 84%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:45px 20px;text-align:center;isolation:isolate;animation:welcomeAppear .7s ease-out both}
+.series-welcome-glow{position:absolute;width:min(80vw,760px);height:min(70vw,650px);left:50%;top:40%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(169,35,68,.17),transparent 72%);pointer-events:none;z-index:-1}
+.series-welcome-kicker{font:700 11px 'JetBrains Mono',monospace;letter-spacing:.32em;color:#e8cdd3;margin-bottom:5px}.series-welcome-kicker span{color:#ed3a57}
+.welcome-visual{position:relative;width:min(86vw,690px);height:min(53vh,430px);display:flex;align-items:center;justify-content:center;margin:0 auto}
+.welcome-orbit{position:absolute;left:50%;top:50%;border:1px solid rgba(235,48,88,.6);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.orbit-outer{width:74%;aspect-ratio:1.25;animation:welcomePulse 5s ease-in-out infinite}.orbit-inner{width:56%;aspect-ratio:1.1;border-color:rgba(255,255,255,.08);animation:welcomePulse 5s ease-in-out -1.6s infinite}
+.welcome-platinum{position:relative;width:90%;max-width:530px;max-height:100%;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 10px 40px rgba(255,255,255,.12));animation:welcomeFloat 7s ease-in-out infinite}
+.welcome-float{position:absolute;background:rgba(34,19,31,.78);border:1px solid rgba(255,170,191,.22);border-radius:13px;padding:13px 18px;box-shadow:0 15px 35px rgba(0,0,0,.4);backdrop-filter:blur(15px);display:flex;flex-direction:column;gap:4px;text-align:left;animation:welcomeFloat 5s ease-in-out infinite}.welcome-float strong{font-size:13px}.welcome-float small{font:700 9px 'JetBrains Mono',monospace;letter-spacing:.13em;color:#bca9b1}.float-left{left:0;top:34%}.float-right{right:0;top:19%;animation-delay:-2s}.float-bottom{right:4%;bottom:10%;animation-delay:-3.4s}
+.series-welcome h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(29px,5vw,70px);letter-spacing:.16em;line-height:1.1;margin:5px 0 13px;background:linear-gradient(160deg,#fff,#a7a6aa 62%,#fafafa);background-clip:text;color:transparent}.series-welcome>p{color:#c3b8be;font-size:clamp(12px,1.5vw,16px);letter-spacing:.09em;margin:0 0 25px}.welcome-enter{border:1px solid rgba(255,255,255,.25);border-radius:6px;background:#e50927;color:#fff;font-weight:800;letter-spacing:.13em;font-size:12px;padding:18px 24px;cursor:pointer;transition:transform .3s,box-shadow .3s,background .3s}.welcome-enter:hover{transform:translateY(-4px);background:#ff2c49;box-shadow:0 12px 40px rgba(229,9,39,.28)}.welcome-enter span{margin-left:13px}.welcome-foot{font:9px 'JetBrains Mono',monospace;color:#777078;letter-spacing:.15em;margin-top:30px}
+@keyframes welcomeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes welcomePulse{0%,100%{opacity:.5;scale:1}50%{opacity:1;scale:1.05}}@keyframes welcomeAppear{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:blur(0)}}
+@media(max-width:640px){.series-welcome{padding:24px 14px}.welcome-visual{height:340px;width:96vw}.welcome-float{padding:8px 10px;border-radius:8px;max-width:145px}.welcome-float strong{font-size:9px}.welcome-float small{font-size:7px}.float-left{top:35%}.float-right{top:15%;right:1%}.float-bottom{bottom:8%;right:2%}.series-welcome h1{letter-spacing:.08em}.welcome-enter{font-size:10px;padding:15px 14px}}
+@media(prefers-reduced-motion:reduce){.series-welcome,.welcome-platinum,.welcome-float,.welcome-orbit{animation:none}}
+
+/* Entrance title — complete professional identity without floating badges */
+.series-welcome .welcome-roles{max-width:960px;margin:0 auto 28px;line-height:1.85;text-wrap:balance;font-size:clamp(12px,1.35vw,17px);letter-spacing:.045em;color:#ded1d8;padding:0 14px}
+@media(max-width:640px){.series-welcome .welcome-roles{font-size:12px;line-height:1.7;max-width:440px}.welcome-visual{height:min(44vh,340px)}}
+
+/* All-skills cinematic toolkit overview */
+.toolkit-tally {display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin:0 auto 24px;max-width:1200px;padding:18px 22px;border:1px solid rgba(234,40,62,.25);border-radius:18px;background:linear-gradient(100deg,rgba(120,9,30,.2),rgba(5,9,20,.65));color:#ececf2}
+.toolkit-tally strong {font-size:1.12rem;letter-spacing:.04em}
+.toolkit-tally span {font-size:.9rem;color:#d6d4de}
+.toolkit-tally small {font-size:.72rem;color:#acaab9}
+#about,#profile,#education,#skills,#journey,#projects,#research,#human,#voices,#building,#contact {scroll-margin-top:100px}
+
+/* City and region are kept separate from company names in the Full Cast timeline. */
+.timeline-location { font-size: .85rem; opacity: .7; margin-top: .15rem; margin-bottom: .55rem; }

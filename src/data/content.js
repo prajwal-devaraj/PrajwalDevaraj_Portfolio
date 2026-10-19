@@ -1,7 +1,7 @@
 export const profile = {
   name: "Prajwal Devaraj",
   firstName: "Prajwal",
-  email: "pdevaraj001@gmail.com",
+  email: "prajwaldevaraj1601@gmail.com",
   location: "United States",
   roots: "Bangalore, Karnataka, India",
   degree: "M.S. Computer Science — Kent State University",
@@ -30,83 +30,23 @@ export const identities = [
 ];
 
 export const experience = [
-  {
-    role: "Software Engineer Intern",
-    org: "Greenhouse Research · Kent State University",
-    period: "May 2026 — Aug 2026",
-    text: "Built greenhouse monitoring workflows around IoT sensor data, backend storage, dashboards, alerts and testing.",
-    tags: ["IoT", "Backend", "Data", "Monitoring", "Testing", "Research"]
-  },
-  {
-    role: "Graduate Research Assistant",
-    org: "Kent State University",
-    period: "May 2025 — May 2026",
-    text: "Applied AI/ML research across genomics and medical imaging: data pipelines, modeling, training, evaluation and research documentation.",
-    tags: ["AI/ML", "Healthcare", "Research", "GPU Computing", "Experimentation"]
-  },
-  {
-    role: "Undergraduate Teaching Assistant",
-    org: "Kent State University",
-    period: "Sep 2025 — May 2026",
-    text: "Supported Operating Systems and DBMS through office hours, grading, exams and explanations of difficult systems/database concepts.",
-    tags: ["Teaching", "Operating Systems", "DBMS", "Communication"]
-  },
-  {
-    role: "Student Employee · Head Cashier · Administrative Support · Student Ambassador",
-    org: "Kent State University Bookstore · Barnes & Noble College",
-    period: "Aug 2024 — May 2026",
-    text: "Handled store systems, inventory, high-volume operations, troubleshooting and training; later represented the bookstore as a Student Ambassador.",
-    tags: ["Operations", "Leadership", "Customer Experience", "Systems"]
-  },
-  {
-    role: "Student Employee",
-    org: "Commerce Café · Kent State University Culinary Services",
-    period: "Aug 2024 — Feb 2026",
-    text: "Handled opening/closing, inventory, service, safety standards and new-employee support in a fast-paced café.",
-    tags: ["Teamwork", "Operations", "Service"]
-  },
-  {
-    role: "Student Catering Employee",
-    org: "Kent State University Culinary Services",
-    period: "May 2025 — Aug 2025",
-    text: "Supported major university and VIP events, sometimes coordinating crews during high-pressure service windows.",
-    tags: ["Leadership", "Events", "Operations"]
-  },
-  {
-    role: "Administrator",
-    org: "Sri Guruvandana Global Pre-School",
-    period: "Mar 2020 — Jul 2023",
-    text: "Managed school operations, planning, admissions, parent communication and events while also teaching basic computer skills.",
-    tags: ["Administration", "Education", "Leadership", "Communication"]
-  },
-  {
-    role: "Software Engineer Intern",
-    org: "Technofly Solutions",
-    period: "Aug 2022 — Sep 2022",
-    text: "Contributed frontend, backend and database work to a government bus-transport management project.",
-    tags: ["Python", "Web", "Backend", "Database"]
-  },
-  {
-    role: "Software Engineer Intern",
-    org: "Gowri Software Solutions Pvt. Ltd.",
-    period: "Dec 2020 — Jan 2021",
-    text: "Worked across frontend, backend, database, debugging and testing in an early software-development internship.",
-    tags: ["Software Development", "Debugging", "Testing"]
-  },
-  {
-    role: "Teacher Training Intern",
-    org: "Edsmart Edu Services Pvt. Ltd.",
-    period: "May 2022",
-    text: "Teacher training focused on lesson development, communication and adapting to different learners.",
-    tags: ["Teaching", "Communication"]
-  },
-  {
-    role: "Sponsorship Team Member",
-    org: "College Fest / Campus Event Team",
-    period: "College years",
-    text: "Spoke directly with potential sponsors, presented the college fest and helped pursue funding and partnerships.",
-    tags: ["Sponsorship", "Negotiation", "Outreach", "Communication"]
-  }
+ {role:"Software Development Engineer",org:"Capital One",location:"Kent, OH",period:"Jun 2025 – Present",text:"Java and Spring Boot microservices, secure banking and payments APIs, SQL optimization, AWS deployments, CI/CD and production observability.",tags:["Java","Spring Boot","AWS","REST APIs"]},
+ {role:"Software Engineer",org:"IBM",location:"Bengaluru, India",period:"Nov 2022 – Jul 2024",text:"Built and maintained enterprise Java/Spring Boot services, REST APIs and relational databases; supported testing, code reviews and cloud modernization.",tags:["Java","Spring Boot","SQL","Docker"]},
+ {role:"Software Engineer Apprentice",org:"Greenhouse, Kent State University",location:"Ohio",period:"May 2026 – Aug 2026",text:"IoT greenhouse monitoring, data ingestion, backend services, sensor dashboards, automated alerts and Python testing.",tags:["IoT","Python","APIs","Data"]},
+ {role:"Graduate Research Assistant",org:"Kent State University",location:"Kent, OH",period:"May 2025 – May 2026",text:"Biomedical ML research on ClinVar conflict prediction and endoscopy image analysis, covering pipelines, experiments, training and evaluation.",tags:["PyTorch","ML","Biomedical AI"]},
+ {role:"Undergraduate Teaching Assistant",org:"Kent State University",location:"Kent, OH",period:"Sep 2025 – May 2026",text:"Subjects: Operating Systems and Database Management Systems. Supported student learning, grading and technical explanations.",tags:["Operating Systems","DBMS","Teaching"]},
+ {role:"Software Engineer Intern",org:"Technofly Solutions",location:"Bangalore, Karnataka, India",period:"Aug 2022 – Sep 2022",text:"Contributed software and database functionality to a bus transportation management application.",tags:["Backend","SQL","Transport"]},
+ {role:"Software Engineer Intern",org:"Gowri Software Solutions Pvt. Ltd.",location:"Bangalore, Karnataka, India",period:"Dec 5, 2020 – Jan 2, 2021",text:"Early software engineering work across frontend, backend, databases, debugging and testing.",tags:["Frontend","Backend","Testing"]},
+ {role:"Administrator",org:"Sri Guruvandana Global Pre-School",location:"Bangalore, Karnataka, India",period:"Mar 2020 – Jul 2023",text:"Managed school operations, admissions, planning, communications and events while supporting basic computer education.",tags:["Administration","Education","Leadership"]},
+ {role:"Student Employee",org:"Kent State University Bookstore / Barnes & Noble College",location:"Kent, OH",period:"Aug 2024 – May 2026",text:"Supported high-volume bookstore operations, inventory, customer experience, retail systems and student engagement.",tags:["Operations","Service","Leadership"]},
+ {role:"Student Employee",org:"Commerce Café, Culinary Services, Kent State University",location:"Kent, OH",period:"Aug 2024 – Feb 2026",text:"Worked across service operations, inventory, safety and team support; received recognition for contributions.",tags:["Operations","Teamwork","Service"]}
+];
+
+export const careerSeasons = [
+ {label:'SEASON 01',title:'Origins & Foundations',period:'2020 — 2023',story:'Learning to build, lead and take responsibility.',roles:['Gowri Software Solutions Pvt. Ltd.','Technofly Solutions','Sri Guruvandana Global Pre-School']},
+ {label:'SEASON 02',title:'Enterprise Engineering',period:'2022 — 2024',story:'Production systems, APIs, and enterprise-scale software.',roles:['IBM']},
+ {label:'SEASON 03',title:'Research & Campus Life',period:'2024 — 2026',story:'Research, teaching, hands-on engineering and people-first work.',roles:['Kent State University','Kent State Bookstore','Commerce Café','Greenhouse']},
+ {label:'SEASON 04',title:'Building at Scale',period:'2025 — Present',story:'Secure backend services, cloud platforms and the next chapter.',roles:['Capital One']}
 ];
 
 export const research = [
@@ -180,12 +120,19 @@ export const testimonials = [
 ];
 
 export const skillGroups = {
-  Software: ["Python", "Java", "C", "C++", "C#", "JavaScript", "TypeScript", "SQL", "Go", "Kotlin", "React", "Next.js", "FastAPI", "Flask", "Django", "Node.js", "REST APIs", "Microservices"],
-  AI: ["PyTorch", "TensorFlow", "scikit-learn", "Computer Vision", "Deep Learning", "RAG", "LLMs", "Agentic AI", "LangChain", "LangGraph", "OpenCV", "SHAP", "MLflow", "Multimodal AI"],
-  Data: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Spark", "PySpark", "Airflow", "Hive", "Trino", "ETL", "Data Pipelines", "Analytics", "Data Modeling"],
-  Systems: ["Distributed Systems", "System Design", "Event-Driven Architecture", "Caching", "Queues", "Fault Tolerance", "High Availability", "Linux", "Networking", "Observability"],
-  Cloud: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform", "GitHub Actions", "CI/CD", "Serverless", "Cloud Architecture"],
-  Research: ["Experimental Design", "Dataset Preparation", "Model Benchmarking", "Evaluation", "Literature Review", "Reproducible Experiments", "Multimodal Research", "AI Research"]
+  "Programming Languages": ["Python", "Java", "JavaScript", "TypeScript", "SQL", "C", "C++", "C#", "Go", "Kotlin", "Bash", "Shell Scripting", "HTML5", "CSS3"],
+  "Backend & APIs": ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "FastAPI", "Flask", "Django", "Django REST Framework", "Node.js", "Express.js", "REST APIs", "GraphQL", "gRPC", "Microservices", "OpenAPI", "Swagger"],
+  "Frontend & UX": ["React", "Next.js", "Redux", "Tailwind CSS", "Bootstrap", "Material UI", "Responsive Design", "Single-Page Applications", "UI/UX"],
+  "Databases & Caching": ["PostgreSQL", "MySQL", "Oracle", "SQL Server", "MongoDB", "Redis", "DynamoDB", "SQLite", "SQL Optimization", "Schema Design", "Indexing", "Transactions", "SQLAlchemy"],
+  "Cloud Platforms": ["AWS", "EC2", "S3", "Lambda", "RDS", "ECS", "EKS", "SQS", "SNS", "CloudWatch", "API Gateway", "IAM", "Azure", "Azure Functions", "Azure App Service", "Azure SQL", "Azure DevOps", "AKS", "GCP"],
+  "DevOps & Infrastructure": ["Docker", "Docker Compose", "Kubernetes", "Terraform", "GitHub Actions", "Jenkins", "GitLab CI/CD", "Azure Pipelines", "CI/CD", "Linux", "Git", "GitHub", "GitLab", "Maven", "Gradle", "npm", "Infrastructure as Code"],
+  "AI & Machine Learning": ["PyTorch", "TensorFlow", "scikit-learn", "Deep Learning", "Machine Learning", "Computer Vision", "OpenCV", "NLP", "CNN", "Anomaly Detection", "Regression", "Classification", "Clustering", "MLflow", "Model Evaluation", "SHAP"],
+  "LLMs & Agentic AI": ["LLMs", "Generative AI", "RAG", "Embeddings", "Vector Search", "Agentic Workflows", "Multi-Agent Systems", "LangChain", "LangGraph", "CrewAI", "AutoGen", "MCP", "Tool Calling", "Prompt Engineering", "Guardrails", "Ragas", "LangSmith"],
+  "Data Engineering": ["Apache Spark", "PySpark", "Airflow", "Hive", "Trino", "dbt", "ETL", "ELT", "Data Modeling", "Data Pipelines", "Pandas", "NumPy", "Data Analytics", "Streaming Ingestion"],
+  "Architecture & Distributed Systems": ["Object-Oriented Design", "SOLID", "Design Patterns", "System Design", "Distributed Systems", "Event-Driven Architecture", "Apache Kafka", "RabbitMQ", "WebSockets", "Caching", "Load Balancing", "Fault Tolerance", "Scalability", "Observability", "Monitoring"],
+  "Testing & Security": ["JUnit", "Mockito", "PyTest", "Unit Testing", "Integration Testing", "Selenium", "Postman", "SonarQube", "TDD", "OAuth 2.0", "JWT", "RBAC", "OWASP Top 10", "API Security", "Encryption", "Secure Coding"],
+  "Robotics & Systems": ["ROS 2", "Sensor Fusion", "Embedded Linux", "Multithreading", "Computer Graphics", "IoT Monitoring", "Real-Time Data", "Networking", "TCP/IP", "POSIX"],
+  "Collaboration & Research": ["Agile", "Scrum", "Kanban", "Jira", "Confluence", "Code Review", "Documentation", "Teaching", "Team Leadership", "Research Design", "Dataset Preparation", "Experiment Tracking", "Benchmarking", "Technical Writing"]
 };
 
 export const milestones = [
